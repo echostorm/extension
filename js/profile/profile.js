@@ -71,12 +71,15 @@ jQuery(document).ready(function ($) {
     function showComments(cb) {
         var totalComments = 0;
         var sumOfRatings = 0;
-
         comments.on().map(function (data) {
             totalComments++;
             sumOfRatings += data.stars;
-            var showComment = '<div class="newComment"><div class="rating"></div><p>' + data.comment + '</p><p class="commentID" >Submitted by : ' + data.senderID + '</p></div>';
-            $('#profileComments').prepend(showComment);
+            gun.get(data.senderID).path('profilePicURL').val(function (result) {
+                var showComment = '<div class="newComment">\
+<div class="rating"></div><ul><li class="commentText">' + data.comment + '</li>\
+<li class="commentImg"><img src="' + result + '" /></li><ul>';
+                $('#profileComments').prepend(showComment);
+            });
             $("#profileComments .rating").rateYo({
                 starWidth: "20px",
                 readOnly: true,

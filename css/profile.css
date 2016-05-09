@@ -122,8 +122,29 @@ p {
     line-height: 20px;
 }
 
-.commentID {
-    word-wrap: break-word;
+#col-right .newComment ul {
+    width: 100%;
+}
+
+#col-right .newComment ul li {
+    display: inline-block;
+    vertical-align: top;
+}
+
+#col-right li.commentText {
+    width: 70%;
+}
+
+#col-right li.commentImg {
+    width: 20%;
+    height: auto;
+}
+
+#col-right li.commentImg img {
+    width: 70px;
+    height: auto;
+    border: 1px solid;
+    margin-left: 20px
 }
 
 a {
