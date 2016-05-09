@@ -24,13 +24,9 @@ var Toolbar = {
         jQuery('#gmc-toolbar-container>ul>li').off('click').css("opacity", "0.5");
     },
     showSelfIcon: function () {
-        $('.gmc-profile-self').animate({
-            width: 'toggle'
-        }, 350);
+        $('.gmc-profile-self').show('slow');
     },
     showAuthorIcon: function () {
-        $('.gmc-profile-author').animate({
-            width: 'toggle'
-        }, 350);
+        $('.gmc-profile-author').show('slow');
     }
 }
