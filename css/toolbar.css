@@ -1,0 +1,375 @@
+.gmc-down {
+    bottom: 0px;
+}
+
+.gmc-left {
+    left: -255px;
+}
+
+
+/* extension profile left */
+
+#gmc-profile {
+    display: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #272727;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    position: fixed;
+    z-index: 99999;
+    bottom: 10%;
+    padding: 5px 5px 5px 0;
+    width: 250px;
+}
+
+#gmc-profile h2 {
+    margin: 0;
+    font-size: 18px;
+    padding: 5px;
+    background: #0077b4;
+    color: #fff;
+    font-weight: 100;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.gmc-profile-inner {
+    background: #fff;
+    color: #272727;
+    text-align: center;
+}
+
+.gmc-profile-label {
+    position: absolute;
+    display: block;
+    top: calc(50% - 20px);
+    right: -40px;
+    width: 40px;
+    height: 40px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background: #272727 url(chrome-extension://__MSG_@@extension_id__/images/profileicon.png) no-repeat center center;
+    z-index: 99999;
+}
+
+.gmc-author-score {
+    padding: 10px;
+    font-weight: bold;
+    border-bottom: 1px solid rgb(172, 172, 172);
+}
+
+#gmc-profile .gmc-score,
+#gmc-profile .gmc-red {
+    color: #ff0000;
+}
+
+#gmc-profile .gmc-thank-you {
+    font-weight: 500;
+    background-color: #ff0000;
+    color: #fff;
+    padding: 10px;
+    font-size: 14px;
+    display: none;
+}
+
+#gmc-profile .gmc-account-number {
+    background: #e9e9e9;
+    padding: 20px;
+    font-weight: bold;
+}
+
+#gmc-profile .gmc-account-number span {
+    font-weight: 200;
+    display: block;
+    /*background: url(chrome-extension://__MSG_@@extension_id__/images/key.png) no-repeat left center;*/
+    word-wrap: break-word;
+    /*padding-left: 25px;
+    */
+}
+
+.gmc-profile-inner li {
+    background: #e9e9e9;
+    margin: 1px 0;
+    padding: 8px;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.gmc-profile-inner ul span {
+    font-weight: bold;
+}
+
+#gmc-profile {
+    display: block;
+}
+
+.gmc-view-profile {
+    display: inline-block;
+    background: #00689e;
+    color: #fff;
+    line-height: 40px;
+    padding: 0 20px;
+    margin: 20px;
+    border: none;
+    font-size: 14px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-decoration: none;
+}
+
+.gmc-view-profile:visited {
+    color: #fff;
+}
+
+.gmc-view-profile:hover {
+    cursor: pointer;
+    -webkit-box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 1);
+}
+
+#gmc-profile .gmc-flagged {
+    padding: 10px;
+    font-size: 12px;
+    color: #fff;
+    background: #ff0000;
+    display: none;
+}
+
+#gmc-profile .gmc-flagged img {
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.gmc-profile-pic {
+    border-radius: 50%;
+    display: block;
+    width: 115px;
+    height: auto;
+    margin: 20px auto;
+    border: 7px solid #acacac;
+}
+
+
+/* toolbar bottom right */
+
+#gmc-toolbar {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    position: fixed;
+    z-index: 99999;
+    right: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#gmc-toolbar ol,
+#gmc-profile ol,
+#gmc-profile ul,
+#gmc-toolbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#gmc-toolbar-container {
+    background: #272727;
+    padding: 5px 5px 0px 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    clear: both;
+}
+
+.gmc-toolbar-label {
+    float: right;
+    margin-right: 15px;
+    width: 30px;
+    height: 30px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: #272727 url(chrome-extension://__MSG_@@extension_id__/images/close.png) no-repeat center center;
+    color: #fff;
+}
+
+#gmc-toolbar ul li {
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+#gmc-toolbar .gmc-scr-label {
+    background: #ededed;
+    color: #272727;
+    /*font-weight: bold;*/
+    text-transform: uppercase;
+    line-height: 50px;
+    padding: 0 10px;
+    font-size: 12px;
+}
+
+#gmc-toolbar .gmc-scr-value,
+#gmc-toolbar .gmc-item-score {
+    background: #fff;
+    color: #272727;
+    font-weight: bold;
+    line-height: 50px;
+    padding: 0 10px;
+}
+
+#gmc-toolbar .gmc-vote-down {
+    background: #00689e url(chrome-extension://__MSG_@@extension_id__/images/minus.png) no-repeat center center;
+    height: 50px;
+    width: 50px;
+}
+
+#gmc-toolbar .gmc-vote-down:hover {
+    -webkit-box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 1);
+}
+
+#gmc-toolbar .gmc-vote-up {
+    background: #ff0000 url(chrome-extension://__MSG_@@extension_id__/images/plus.png) no-repeat center center;
+    height: 50px;
+    width: 50px;
+}
+
+#gmc-toolbar .gmc-vote-up:hover {
+    -webkit-box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 1);
+}
+
+#gmc-toolbar .gmc-profile-self {
+    background: #fff url(chrome-extension://__MSG_@@extension_id__/images/profile.png) no-repeat center center;
+    height: 50px;
+    width: 50px;
+}
+
+#gmc-toolbar .gmc-profile-self img,
+#gmc-toolbar .gmc-profile-author img {
+    width: 100%;
+    height: 100%;
+}
+
+
+/*
+#gmc-toolbar .gmc-profile-self img:hover {
+    -webkit-box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 1);
+}*/
+
+#gmc-toolbar .gmc-profile-author {
+    background: #fff url(chrome-extension://__MSG_@@extension_id__/images/profile.png) no-repeat center center;
+    height: 50px;
+    width: 50px;
+    display: none;
+}
+
+
+/*
+#gmc-toolbar .gmc-profile-author img:hover {
+    -webkit-box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 1);
+}*/
+
+
+/* 'Give Me Credit' widget css */
+
+gmc-widget {
+    color: red;
+}
+
+#gmc-widget {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 20px 0;
+    display: inline-block;
+    padding: 5px;
+    background: #272727;
+    border-radius: 5px;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+#gmc-widget .gmc {
+    display: inline-block;
+    height: 45px;
+    line-height: 45px;
+    padding: 0 10px;
+    font-size: 12px;
+    color: #fff;
+    background: #ff0000;
+    vertical-align: bottom;
+    cursor: pointer;
+}
+
+#gmc-widget .gmc:hover {
+    -webkit-box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 1);
+}
+
+#gmc-widget .gmc-amount {
+    background: #e9e9e9;
+    display: inline-block;
+    height: 45px;
+    line-height: 45px;
+    padding: 0 10px;
+    font-size: 16px;
+    vertical-align: bottom;
+    color: #272727;
+    font-weight: bold;
+}
+
+#gmc-widget .gmc-arrows {
+    background: #0077b4;
+    display: inline-block;
+    height: 45px;
+    width: 45px;
+    line-height: 45px;
+    vertical-align: bottom;
+}
+
+#gmc-widget .gmc-arrow-up {
+    background: url(chrome-extension://__MSG_@@extension_id__/images/arrowup.jpg) no-repeat center center;
+    border-bottom: 1px solid #fff;
+}
+
+#gmc-widget .gmc-arrow-down {
+    background: url(chrome-extension://__MSG_@@extension_id__/images/arrowdown.jpg) no-repeat center center;
+}
+
+#gmc-widget .gmc-arrow-up,
+#gmc-widget .gmc-arrow-down {
+    display: block;
+    height: 22px;
+    width: 22px;
+    margin: auto;
+    cursor: pointer;
+}
+
+#gmc-widget .gmc-message {
+    display: none;
+}
+
+#gmc-widget .gmc-message p {
+    line-height: 0;
+}
+
+#gmc-widget .gmc-message textarea {
+    width: 162px;
+    padding: 10px;
+    margin-bottom: 0;
+    height: 70px;
+    display: block;
+    font-size: 12px;
+    border-radius: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    resize: vertical;
+}

@@ -1,0 +1,276 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    line-height: 20px;
+    background: #fff;
+    /*background: #fff url(../images/left-col-bg.gif) repeat-y;*/
+}
+
+#container {
+    width: 100%;
+}
+
+b {
+    font-weight: bold;
+}
+
+i {
+    font-style: italic;
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #0077b4;
+    text-transform: capitalize;
+    font-size: 24px;
+}
+
+h2 {
+    background: #0077b4;
+    padding: 20px;
+    color: #fff;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 1px;
+}
+
+#col-right h3,
+#gmc-profile-content h3 {
+    border-top: 1px solid #d1d1d1;
+    border-bottom: 1px solid #d1d1d1;
+    color: #6e6e6e;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+h4 {
+    color: #6e6e6e;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+#gmc-profile-content h4 {
+    margin-bottom: 20px;
+}
+
+h5 {
+    margin-top: 10px;
+    color: #0077b4;
+}
+
+p {
+    margin-bottom: 10px;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+a {
+    color: #ff0000;
+}
+
+#col-left {
+    /*background: #272727;*/
+    /*vertical-align: top;
+    display: inline-block;*/
+    float: left;
+    width: 250px;
+    min-height: 400px;
+}
+
+#col-left-inner {
+    padding: 20px;
+    overflow: hidden;
+}
+
+#col-left h3 {
+    color: #fff;
+    padding: 10px;
+    font-size: 20px;
+    background: #0077b4;
+    margin: 0;
+    font-weight: 500;
+}
+
+a.home {
+    display: block;
+    cursor: pointer;
+}
+
+#col-left ul {
+    display: block;
+    margin-top: 20px;
+}
+
+#col-left ul li {
+    border-bottom: 1px solid #6e6e6e;
+    display: block;
+    text-align: left;
+}
+
+#col-left ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 0;
+    font-size: 14px;
+    text-align: left;
+    display: block;
+    cursor: pointer;
+}
+
+#col-left ul li a i {
+    width: 30px;
+}
+
+i.fa.fa-graduation-cap {
+    font-size: 12px;
+}
+
+#col-left .fa:before,
+h4 .fa:before {
+    margin-right: 10px;
+}
+
+#col-left ul li a:hover {
+    color: #ff0000;
+}
+
+#col-left ul li a.active {
+    color: #ff0000;
+}
+
+#col-right {
+    background: #fff;
+    overflow: auto;
+    /*vertical-align: top;
+    display: inline-block;*/
+    padding: 20px;
+}
+
+#col-right ul.tabs {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+#col-right ul.tabs li {
+    background: none;
+    color: #222;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+#col-right ul.tabs li.current {
+    background: #ededed;
+    color: #222;
+}
+
+.tab-content {
+    display: none;
+    background: #ededed;
+    padding: 15px;
+}
+
+.tab-content.current {
+    display: inherit;
+}
+
+#col-right ul {
+    margin: 20px 0;
+    list-style-type: square;
+}
+
+#col-right ul li {
+    display: block;
+    padding: 5px;
+}
+
+#pages-container {
+    margin-top: 20px;
+}
+
+#pages {
+    clear: right;
+}
+
+strong {
+    font-weight: bold;
+}
+
+.read-more {
+    background: #00689e;
+    color: #fff;
+    padding: 10px 15px;
+    margin: 10px 0 20px 0px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
+/***** grid *******/
+
+
+/*  SECTIONS  */
+
+.section {
+    clear: both;
+    padding: 0px;
+    margin: 0px;
+}
+
+.section img {
+    width: 90%;
+    border: 7px solid #acacac;
+    margin: 1%;
+}
+
+#accordion {
+    width: 100%;
+}
+
+#accordion li a {
+    display: block;
+    padding: 10px 15px;
+    background: #e5e5e5;
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+}
+
+#accordion li a:hover,
+#accordion li a.active {
+    background: #0077b4;
+    color: #fff;
+}
+
+#accordion li ul,
+#accordion div {
+    display: none;
+}
+
+#accordion div {
+    padding: 20px;
+    background: #ececec;
+    border-bottom: 1px dotted #ccc;
+}
+
+#accordion li ul li a {
+    padding: 10px 25px;
+    background: #ececec;
+    border-bottom: 1px dotted #ccc;
+}

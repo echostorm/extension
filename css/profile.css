@@ -1,0 +1,411 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #e5e5e5;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+#container {
+    margin: auto;
+    max-width: 850px;
+    overflow-y: auto;
+    height: 500px;
+    background: #fff url(chrome-extension://__MSG_@@extension_id__/images/left-col-bg.gif) repeat-y;
+}
+
+b {
+    font-weight: bold;
+}
+
+i {
+    font-style: italic;
+}
+
+.edit {
+    margin: 10px 0;
+    /*text-align: center;*/
+}
+
+.enterImageURL p {
+    color: #fff;
+    margin-top: 15px;
+}
+
+.enterImageURL input {
+    width: 100%;
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.save,
+.cancel {
+    padding: 2px 8px;
+    margin-right: 5px;
+    color: #fff;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.save {
+    background: #ff0000;
+}
+
+.cancel {
+    background: #0077b4;
+}
+
+.edit i {
+    margin-right: 10px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #0077b4;
+    text-transform: capitalize;
+    font-size: 24px;
+}
+
+h2 {
+    background: #0077b4;
+    padding: 20px;
+    color: #fff;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 1px;
+}
+
+iframe {
+    margin: 20px 0;
+}
+
+#col-right h3,
+#gmc-profile-content h3 {
+    border-top: 1px solid #d1d1d1;
+    border-bottom: 1px solid #d1d1d1;
+    color: #6e6e6e;
+    padding: 10px;
+}
+
+h4 {
+    color: #6e6e6e;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+#gmc-profile-content h4 {
+    margin-bottom: 20px;
+}
+
+h5 {
+    margin-top: 10px;
+    color: #0077b4;
+}
+
+p {
+    margin-bottom: 10px;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+a {
+    color: #ff0000;
+}
+
+
+/* new nav */
+
+#col-left ul.tabs {
+    display: block;
+    margin-top: 20px;
+    list-style: none;
+}
+
+#col-left ul.tabs li {
+    color: #fff;
+    padding: 10px 0;
+    font-size: 14px;
+    text-align: left;
+    display: block;
+    cursor: pointer;
+}
+
+#col-left ul.tabs li.current {
+    color: #ff0000;
+}
+
+#col-right .tab-content {
+    display: none;
+    padding: 15px;
+}
+
+#col-right .tab-content.current {
+    display: inherit;
+}
+
+
+/**** end new nav ***/
+
+#col-left {
+    background: #272727;
+    float: left;
+    text-align: center;
+    width: 250px;
+}
+
+#col-left-inner {
+    padding: 0 20px 20px 20px;
+    overflow: hidden;
+}
+
+#col-left h3 {
+    color: #fff;
+    padding: 10px;
+    font-size: 20px;
+    background: #0077b4;
+    margin: 0;
+    font-weight: 500;
+}
+
+#score {
+    background: #ff0000;
+    padding: 10px;
+    color: #fff;
+}
+
+a.home {
+    display: block;
+    cursor: pointer;
+}
+
+#profile-pic img {
+    border-radius: 50%;
+    display: block;
+    width: 135px;
+    height: auto;
+    margin: 20px auto 0 auto;
+    border: 7px solid #acacac;
+}
+
+a.btn {
+    display: none;
+}
+
+#col-left ul {
+    display: block;
+    margin-top: 20px;
+}
+
+#col-left ul li {
+    border-bottom: 1px solid #6e6e6e;
+    display: block;
+    text-align: left;
+}
+
+#col-left ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 0;
+    font-size: 14px;
+    text-align: left;
+    display: block;
+    cursor: pointer;
+}
+
+#col-left ul li a i {
+    width: 30px;
+}
+
+i.fa.fa-graduation-cap {
+    font-size: 12px;
+}
+
+#col-left .fa:before,
+h4 .fa:before {
+    margin-right: 10px;
+}
+
+#col-left ul li a:hover {
+    color: #ff0000;
+}
+
+#col-left ul li a.active {
+    color: #ff0000;
+}
+
+#col-right {
+    background: #fff;
+    overflow: auto;
+    /*display: inline-block;
+    width: 530px;*/
+    padding: 30px;
+}
+
+.profile-pic-van {
+    float: right;
+    margin-left: 20px;
+    border: 1px solid #b6b6b6;
+}
+
+#col-right ul {
+    margin: 20px 0;
+    list-style-type: square;
+}
+
+#col-right ul li {
+    display: block;
+    padding: 5px;
+}
+
+#gmc-footer {
+    background: #ededed;
+    border-top: 1px solid #D6D6D6;
+    color: #272727;
+    position: fixed;
+    bottom: 0;
+    height: 30px;
+    width: 100%;
+    text-align: center;
+}
+
+#gmc-footer li {
+    line-height: 30px;
+    display: inline-block;
+    padding: 0 20px;
+    font-size: 12px;
+    border-right: 1px solid #D6D6D6;
+}
+
+#gmc-footer li:last-child {
+    border: none
+}
+
+#gmc-footer [contenteditable]:hover,
+#gmc-footer [contenteditable]:focus {
+    font-size: 14px;
+}
+
+[contenteditable]:focus {
+    padding: 5px;
+}
+
+[contenteditable]:focus:after {
+    content: '';
+}
+
+#pages-container {
+    overflow: hidden;
+}
+
+
+/*#content {
+  height: 280px;
+  
+}*/
+
+#col-right i.fa.fa-floppy-o {
+    margin: 10px;
+    font-size: 20px;
+    display: none;
+    color: #ff0000;
+    float: right;
+    cursor: pointer;
+}
+
+#pages {
+    clear: right;
+    overflow-y: auto;
+    height: 340px;
+}
+
+strong {
+    font-weight: bold;
+}
+
+.read-more {
+    background: #00689e;
+    color: #fff;
+    padding: 10px 15px;
+    margin: 10px 0 20px 0px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.rating {
+    padding: 20px 0;
+}
+
+.newComment {
+    margin: 10px 0;
+    padding: 10px;
+    background: #ededed;
+}
+
+textarea.comment {
+    padding: 10px;
+    border: 1px solid #ededed;
+    border-radius: 5px;
+    width: 80%;
+}
+
+button.submitComment {
+    background: #00689e;
+    color: #fff;
+    padding: 10px 15px;
+    margin: 10px 0 20px 0px;
+    border: none;
+    font-size: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#accordion {
+    width: 100%;
+}
+
+#accordion li a {
+    display: block;
+    padding: 10px 15px;
+    background: #e5e5e5;
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+}
+
+#accordion li a:hover,
+#accordion li a.active {
+    background: #0077b4;
+    color: #fff;
+}
+
+#accordion li ul,
+#accordion div {
+    display: none;
+}
+
+#accordion div {
+    padding: 20px;
+    background: #ececec;
+    border-bottom: 1px dotted #ccc;
+}
+
+#accordion li ul li a {
+    padding: 10px 25px;
+    background: #ececec;
+    border-bottom: 1px dotted #ccc;
+}

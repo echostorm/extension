@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/jquery-2.2.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#col-right ul.tabs li').click(function () {
+                var tab_id = $(this).attr('data-tab');
+
+                $('#col-right ul.tabs li').removeClass('current');
+                $('col-right .tab-content').removeClass('current');
+
+                $(this).addClass('current');
+                $("col-right #" + tab_id).addClass('current');
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <div id="col-left">
+            <div id="col-left-inner">
+                <h1>Welcome to GiveMeCredit!</h1>
+                <p>If you want someone to give you credit, simply paste your unique id next to something you would like credit for. Your link will look something like this :- http://gmc@MYUNIQUEIDXYZ123. The browser plugin will automatically convert it to a widget like so:- </p>
+                <a href="http://gmc@040c594d651f04f28ddecd2a8a0c964f89530091b9a4e300a3ddc8ba5c06680f6b5b1e3a4d033d225b72d97299b7ee726f6744a34ffac23f373a60db44923244a0">http://gmc@040c594d651f04f28ddecd2a8a0c964f89530091b9a4e300a3ddc8ba5c06680f6b5b1e3a4d033d225b72d97299b7ee726f6744a34ffac23f373a60db44923244a0</a>
+                <br />
+                <!-- <ul>
+                    <li>
+                        <a href="about" class="active">Welcome</a>
+                    </li>
+                    <li>
+                        <a href="comments">How it works</a>
+                    </li>
+                    <li>
+                        <a href="items">To do</a>
+                    </li>
+                </ul>-->
+            </div>
+            <!--col-left-inner-->
+        </div>
+        <!--col-left-->
+
+        <div id="col-right">
+            <h2>This app is under construction. The goal is to make alternative currencies more accessible. It is open-source and not-for-profit. If you are a developer and would like to help out, I would really appreciate it. You can contact me at:- glen_simister@yahoo.co.uk</h2>
+
+            <ul class="tabs">
+                <li class="tab-link current" data-tab="tab-1">Step 1</li>
+                <li class="tab-link" data-tab="tab-2">Step 2</li>
+                <li class="tab-link" data-tab="tab-3">Step 3</li>
+                <li class="tab-link" data-tab="tab-4">Step 4</li>
+                <li class="tab-link" data-tab="tab-5">Step 5</li>
+                <li class="tab-link" data-tab="tab-6">Step 6</li>
+                <li class="tab-link" data-tab="tab-7">Step 7</li>
+                <li class="tab-link" data-tab="tab-8">Step 8</li>
+            </ul>
+
+            <div id="pages-container">
+                <! ---------------- tab ---------------->
+                <div id="tab-1" class="tab-content current">
+                    <h3>STEP 1:</h3>
+                    <p>Click on the icon (top right) and register.</p>
+                    <p>The registration process simply generates a pair of keys (similar to a username and password). You will need to provide a url to your profile picture. I have pre-populated the form for testing purposes.</p>
+                </div>
+
+                <! ---------------- tab ---------------->
+                <div id="tab-2" class="tab-content">
+                    <h3>STEP 2:</h3>
+                    <p>Login</p>
+                </div>
+                <! ---------------- tab ---------------->
+                <div id="tab-3" class="tab-content">
+                    <h3>STEP 3:</h3>
+                    <p>Click on the profile picture on the toolbar and edit your info. For testing purposes, give yourself a comment also.</p>
+                </div>
+                <! ---------------- tab ---------------->
+                <div id="tab-4" class="tab-content">
+                    <h3>STEP 4:</h3>
+                    <p>Earn a Silver Credit by rating this page using the toolbar below.</p>
+                    <p>You can check the console to see the verification process. Each time you do anything such as setup an account, vote or give credit to someone, a new signature is created. However, for transactions, this signature will be the transactionID. I did it this way in order to reduce the transaction size. It may take a few seconds to create the signature. It's sort of like a 'proof-of-work' as it must find a signature where the last x number of characters must match the first x number of characters.</p>
+                </div>
+                <! ---------------- tab ---------------->
+                <div id="tab-5" class="tab-content">
+                    <h3>STEP 5:</h3>
+                    <p>Give someone credit. For testing purposes, setup a new account but don't login! Instead copy the public key from the login form, go to the index.html file and paste the public key i.e. http://gmc@[paste here]. You can now give credit from your logged in account to the new account.</p>
+                    <p>NOTE: You can use the following url for the profile picture :- http://pic.1fotonin.com/data/wallpapers/59/WDF_1048452.jpg</p>
+                </div>
+                <! ---------------- tab ---------------->
+                <div id="tab-6" class="tab-content">
+                    <h3>STEP 6:</h3>
+                    <p>Ask other users to give you a profile reference. This is not necessary for testing puposes. However, once the app is in production, you will need a profile score of >= 3.5. Also, you will need at least 3 references in order to be given Gold Credits. And each reference must have a profile score of >= 3.5. This is 1 level deep. As the network grows, this will drop to 2 levels deep. By that i mean you will need 3 references with a score of >= 3.5, and those 3 references will each need 3 references of >= 3.5. It could go deeper still. The whole point is to ensure that users cannot create a network of accounts and give themselves credits.</p>
+                </div>
+                <! ---------------- tab ---------------->
+                <div id="tab-7" class="tab-content">
+                    <h3>STEP 7:</h3>
+                    <p>Copy your profile link (given to you after registration) and paste it next to something you want credit for.</p>
+                </div>
+                <! ---------------- tab ---------------->
+                <div id="tab-8" class="tab-content">
+                    <h3>STEP 8:</h3>
+                    <p>Ask people to give you credit!</p>
+                </div>
+
+
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+
+
+
+</body>
+
+</html>

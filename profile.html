@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Bob Smith</title>
+    <script src="js/jquery-2.2.1.min.js"></script>
+    <script src="js/gun.js"></script>
+    <script src="js/getGun.js"></script>
+    <script src="js/verify.js"></script>
+    <script src="js/tables.js"></script>
+    <script src="js/profile/editContent.js"></script>
+    <script src="js/profile/animate.js"></script>
+    <script src="js/profile/jquery.rateyo.min.js"></script>
+    <script src="js/profile/profile.js"></script>
+    <script src="js/profile/mobileMenu.js"></script>
+    <script src="js/profile/jquery.classyedit.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/mediaqueries.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.classyedit.css" />
+    <link rel="stylesheet" href="css/jquery.rateyo.css">
+</head>
+
+<body>
+    <div id="container">
+        <div id="col-left">
+            <div id="name">
+                <h3>Glen Simister</h3>
+            </div>
+            <div id="profileStars"></div>
+            <!--<div id="score"><span>100%</span> Positive Feedback</div>-->
+            <div id="col-left-inner">
+                <div id="profile-pic">
+                    <!--<a href="home">-->
+                    <img/>
+                    <!--</a>-->
+                </div>
+                <a class="btn">MENU</a>
+
+                <ul class="tabs">
+                    <li class="tab-link current" data-tab="tab-1">
+                        <i class="fa fa-home"></i>About</li>
+                    <li class="tab-link" data-tab="tab-2">
+                        <i class="fa fa-commenting-o"></i>Comments</li>
+                    <li class="tab-link" data-tab="tab-3">
+                        <i class="fa fa-file-text-o"></i>Items</li>
+                </ul>
+
+                <!--
+                <ul>
+                    <li>
+                        <a href="about" class="active"><i class="fa fa-home"></i>About</a>
+                    </li>
+                    <li>
+                        <a href="comments"><i class="fa fa-commenting-o"></i>Comments</a>
+                    </li>
+                    <li>
+                        <a href="items"><i class="fa fa-file-text-o"></i>Items</a>
+                    </li>
+                </ul> -->
+            </div>
+            <!--col-left-inner-->
+        </div>
+        <div id="col-right">
+            <div id="pages-container">
+                <div id="tab-1" class="tab-content current">
+                    <h1>About</h1>
+
+                    <textarea class='classy-editor'>
+                        <div class="aboutText"></div>
+                    </textarea>
+                </div>
+                <div id="tab-2" class="tab-content">
+                    <h1>Comments / References</h1>
+                    <textarea class="comment">Please enter your comment here...
+                    </textarea>
+                    <div id="rating"></div>
+                    <p>
+                        <button class="submitComment">Submit</button>
+                    </p>
+                    <div id="profileComments">
+                    </div>
+
+                </div>
+                <div id="tab-3" class="tab-content">
+                    <h1>Items</h1>
+                    <p>These are the items which this user has been given credits for:-</p>
+                    <ul>
+                        <li>
+                            <a href="http:www.givemecredit.org">GiveMeCredit.org</a> - Some description here
+                            <p>Item score: 100%
+                                <br />Credits received: 5</p>
+                        </li>
+                        <li>
+                            <a href="http:www.anotherwebsite.org">Anothersite.com</a> - Some description here
+                            <p>Item score: 100%
+                                <br />Credits received: 5</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--pages-container-->
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <div id="gmc-footer">
+        <ul>
+            <li class="email" contenteditable="true">Email: <span></span></li>
+            <li class="regDate">Member since: <span></span></li>
+            <li class="creditsRecieved">Credits recieved: ©10</li>
+        </ul>
+    </div>
+</body>
+
+</html>

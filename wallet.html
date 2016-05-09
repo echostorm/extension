@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <link href="css/toolbar.css" rel="stylesheet" type="text/css">
+    <link href="css/wallet.css" rel="stylesheet" type="text/css">
+    <!--you might not need animate.css on the wallet -->
+    <link href="css/animate.css" rel="stylesheet" type="text/css">
+    <script src="js/gun.js"></script>
+    <script src="js/getGun.js"></script>
+    <script src="js/jquery-2.2.1.min.js"></script>
+    <script src="js/verify.js"></script>
+    <script src="js/jsrsasign-latest-all-min.js"></script>
+    <script src="js/keys.js"></script>
+    <script src="js/tables.js"></script>
+    <script src="js/wallet/wallet.js"></script>
+    <script src="js/wallet/getVanityKeys.js"></script>
+</head>
+
+<body>
+    <div id="gmc-wallet">
+        <ul class="tabs">
+            <li class="tab-link current" data-tab="tab-1">Register</li>
+            <li class="tab-link" data-tab="tab-2">Login</li>
+            <li class="tab-link" data-tab="tab-3">Account Details</li>
+            <li class="tab-link" data-tab="tab-4">Wallet</li>
+        </ul>
+
+        <div id="tab-1" class="tab-content current">
+            <h1>Register</h1>
+            <p>Profile Picture URL:</p>
+            <p>
+                <input type="url" value="http://pic.1fotonin.com/data/wallpapers/59/WDF_1048495.jpg" class="ppURL" />
+            </p>
+            <p>Name:</p>
+            <p>
+                <input type="text" value="Mike Smith" class="name" />
+            </p>
+            <p>Email:</p>
+            <p>
+                <input type="email" value="mike@gmail.com" class="email" />
+            </p>
+            <!-- <h4>Tell everyone about yourself.<br />NOTE: You can edit this information later.</h4>-->
+            <p>
+                <button class="register">Submit</button>
+            </p>
+        </div>
+
+        <div id="tab-2" class="tab-content">
+            <h1>Login</h1>
+            <p>Public Key:</p>
+            <input type="text" class="pubKey" />
+            <p>Private Key:</p>
+            <input type="text" class="prvKey" />
+            <p>
+                <input type="submit" class="submitLogin" value="Login" />
+            </p>
+        </div>
+
+
+        <div id="tab-3" class="tab-content">
+            <h1>Account Details</h1>
+            <h3 class="copyInfoMsg">Please copy these details to a safe location</h3>
+            <div id="keyPair">
+                <h4>Public Key</h4>
+                <div class="newPubKey"></div>
+                <h4>Private Key</h4>
+                <div class="newPrvKey"></div>
+                <h4>GiveMeCredit link</h4>
+                <div class="gmcLink"></div>
+            </div>
+        </div>
+
+
+        <div id="tab-4" class="tab-content">
+            <h1>Send Money</h1>
+            <div class="gmc-wallet-balance">Account balance: ©<span>0</span></div>
+            <div class="sendError"></div>
+            <p>Send to:</p>
+            <input class="recipientID" type="text" />
+            <p>Amount:</p>
+            <span class="creditSymbol">©</span>
+            <input class="sendAmount" type="text" />
+            <p>
+                <button class="sendCredits">Send</button>
+            </p>
+        </div>
+    </div>
+
+    <!-- gmc-wallet -->
+
+</body>
+
+</html>

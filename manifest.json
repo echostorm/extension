@@ -1,0 +1,85 @@
+{
+    "name": "GiveMeCredit",
+    "version": "0.0.1",
+    "manifest_version": 2,
+    "description": "A monetary system where trust has to be earned, and value has to proven",
+    "homepage_url": "http://www.givemecredit.org",
+    "icons": {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+    },
+    "browser_action": {
+        "default_icon": "icons/icon19.png",
+        "default_title": "Wallet",
+        "default_popup": "wallet.html"
+    },
+
+    "permissions": [
+    "tabs", "<all_urls>", "background", "storage"
+  ],
+    "web_accessible_resources": [
+       "images/plus.png",
+       "images/minus.png",
+       "images/arrowdown.jpg",
+       "images/arrowup.jpg",
+       "images/close.png",
+       "images/profileicon.png",
+       "images/profile.png",
+       "images/key.png",
+       "images/bold.png",
+       "images/break.png",
+       "images/bullet.png",
+       "images/expand.png",
+        "images/href.png",
+        "images/html.png",
+        "images/italic.png",
+        "images/left-col-bg.gif",
+        "images/profilepic.jpg",
+        "images/toolbar.png",
+        "images/underline.png",
+        "images/widget-loader.gif"
+     ],
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": true
+    },
+    "content_scripts": [
+        {
+            "matches": [
+        "<all_urls>"
+      ],
+            "css": [
+        "css/reset.css",
+        "css/toolbar.css"
+      ],
+            "js": [
+        "js/gun.js",
+        "js/getGun.js",
+        "js/jquery-2.2.1.min.js",
+        "js/jquery.initialize.js",
+        "js/html.js",
+        "js/jsrsasign-latest-all-min.js",
+        "js/tables.js",
+        "js/main.js",
+        "js/verify.js",
+        "js/toolbar.js",
+        "js/widget.js",
+        "js/give.js",
+        "js/vote.js",
+        "js/percentage.js",
+        "js/keys.js",
+        "js/countRecords.js",
+        "js/wallet/wallet.js",
+        "js/wallet/getVanityKeys.js",
+        "js/profile/accordion.js",
+        "js/profile/animate.js",
+        "js/profile/editContent.js",
+        "js/profile/mobileMenu.js",
+        "js/profile/jquery.classyedit.js",
+        "js/profile/profile.js",
+        "js/profile/jquery.rateyo.min.js"
+      ]
+    }
+    ]
+}

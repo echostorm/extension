@@ -1,0 +1,124 @@
+#gmc-wallet {
+    width: 400px;
+    text-align: center;
+}
+
+#keyPair {
+    padding: 10px 20px 20px 20px;
+    word-break: break-all;
+    background: #fff;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 0.19);
+    box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 0.19);
+}
+
+button.createKeys {
+    line-height: 25px;
+    padding: 0 25px;
+    font-size: 12px;
+    color: #fff;
+    background: #ff0000;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+#gmc-wallet h1 {
+    margin: 0;
+    font-size: 18px;
+    padding: 10px;
+    background: #0077b4;
+    color: #fff;
+    font-weight: 100;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#gmc-wallet input[type="text"],
+#gmc-wallet input[type="email"],
+#gmc-wallet input[type="url"] {
+    padding: 5px;
+    width: 50%;
+}
+
+#gmc-wallet .gmc-wallet-balance {
+    margin: 0;
+    font-size: 14px;
+    padding: 10px;
+    background: #ff0000;
+    color: #fff;
+}
+
+#gmc-wallet input.sendAmount {
+    width: 20%;
+}
+
+#gmc-wallet .creditSymbol {
+    padding: 5px;
+    background: #272727;
+    color: #fff;
+    font-weight: bold;
+}
+
+#gmc-wallet textarea.about {
+    width: 70%;
+    padding: 20px;
+    height: 180px;
+}
+
+#gmc-wallet button.sendCredits,
+#gmc-wallet button.register,
+#gmc-wallet .submitLogin {
+    display: inline-block;
+    background: #00689e;
+    color: #fff;
+    line-height: 30px;
+    padding: 0 20px;
+    margin: 10px;
+    border: none;
+    font-size: 14px;
+    border-radius: 5px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#gmc-wallet .sendError {
+    color: #ff0000;
+    padding-top: 10px;
+}
+
+#gmc-wallet button.register {
+    margin: 0
+}
+
+#gmc-wallet h3.copyInfoMsg {
+    color: #ff0000;
+}
+
+#gmc-wallet ul.tabs {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+#gmc-wallet ul.tabs li {
+    background: none;
+    color: #222;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+#gmc-wallet ul.tabs li.current {
+    background: #ededed;
+    color: #222;
+}
+
+#gmc-wallet .tab-content {
+    display: none;
+    background: #ededed;
+    padding: 15px;
+}
+
+#gmc-wallet .tab-content.current {
+    display: inherit;
+}

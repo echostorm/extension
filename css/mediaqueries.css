@@ -1,0 +1,53 @@
+@media only screen and (max-width: 850px) {
+    #col-left,
+    #col-right {
+        width: auto;
+        float: none;
+    }
+    #col-right {
+        display: block;
+    }
+    #container {
+        margin: 0;
+    }
+    #col-left ul {
+        display: none;
+    }
+    a.btn {
+        display: block;
+        width: 55px;
+        background: #ff0000 url(../images/expand.png) left center no-repeat;
+        padding: 10px 10px 10px 30px;
+        color: #fff;
+    }
+    #edit {
+        float: none;
+        display: block;
+        margin-bottom: 0px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .profile-pic-van {
+        display: none;
+    }
+    .scr-label {
+        display: none;
+    }
+}
+
+
+/* maybe delete these styles if they are not going to be used */
+
+@media only screen and (max-width: 480px) {
+    .col {
+        margin: 1% 0 1% 0%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .span_2_of_2,
+    .span_1_of_2 {
+        width: 100%;
+    }
+}
