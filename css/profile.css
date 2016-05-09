@@ -122,6 +122,10 @@ p {
     line-height: 20px;
 }
 
+.commentID {
+    word-wrap: break-word;
+}
+
 a {
     color: #ff0000;
 }

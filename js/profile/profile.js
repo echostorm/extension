@@ -75,8 +75,7 @@ jQuery(document).ready(function ($) {
         comments.on().map(function (data) {
             totalComments++;
             sumOfRatings += data.stars;
-
-            var showComment = '<div class="newComment"><div class="rating"></div><p>' + data.comment + '</p><p>Submitted by ' + data.senderID + '</p></div>';
+            var showComment = '<div class="newComment"><div class="rating"></div><p>' + data.comment + '</p><p class="commentID" >Submitted by : ' + data.senderID + '</p></div>';
             $('#profileComments').prepend(showComment);
             $("#profileComments .rating").rateYo({
                 starWidth: "20px",
@@ -91,12 +90,14 @@ jQuery(document).ready(function ($) {
         var newComment = $('textarea.comment').val();
         var stars = $("#rating").rateYo("option", "rating");
         var commentsJSON = tables.get_comments_JSON();
-        commentsJSON.senderID = 'xyz123';
         commentsJSON.recipientID = '123xyz';
         commentsJSON.comment = newComment;
         commentsJSON.stars = stars;
-        commentsJSON.senderSig = null;
-        comments.set(gun.put(commentsJSON));
+        chrome.storage.local.get('user', function (data) {
+            commentsJSON.senderID = data.user.usrPubKey;
+            commentsJSON.senderSig = getVanityKeys.getVanitySig(commentsJSON, data.user.usrPrvKey, 1);
+            comments.set(gun.put(commentsJSON));
+        });
     });
 
     // page routing
