@@ -43,30 +43,25 @@ var verify = {
 
         ric.on().map(function (data) {
             var ric = {
-                    url: data.url,
-                    isUpVote: data.isUpVote,
-                    senderID: data.senderID,
-                    transactionID: data.transactionID,
-                    checkerID: data.checkerID
-                }
-                // where is riu coming from? 
+                url: data.url,
+                isUpVote: data.isUpVote,
+                senderID: data.senderID,
+                transactionID: data.transactionID,
+                checkerID: data.checkerID
+            }
+
             var isValid = keys.checkSig(ric, data.checkerID);
+
             if (isValid) {
                 var valid = tables.get_vri_JSON();
                 valid.transactionID = data.transactionID;
                 valid.isValid = true;
                 vri.set(gun.put(valid));
-                console.log(data);
-                console.log("This transaction has a valid signature.");
-                console.log("It has been checked by " + data.checkerID);
-                console.log("...and has been written to the 'rated_item_confirmed' table");
+                //console.log(data);
+                //console.log("This transaction has a valid signature.");
+                //console.log("It has been checked by " + data.checkerID);
+                //console.log("...and has been written to the 'rated_item_confirmed' table");
             }
-            /*
-            get transaction by ID test
-            gun.get(data.transactionID).val(function (trans) {
-                console.log("get transaction by key...");
-                console.log(trans);
-            });*/
         });
 
         /*vri.on().map(function (data) {

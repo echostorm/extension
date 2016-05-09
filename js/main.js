@@ -11,10 +11,8 @@ $(document).ready(function () {
     - if link matches criteria replace it with widget and show profile tab
     */
 
-    /*$('.gmc-profile-self img').attr("src", "http://pic.1fotonin.com/data/wallpapers/59/WDF_1048495.jpg");*/
-
     countRecords.userSilver();
-
+    //scb node is set in countRecords.js
     scb.on().map(function (data) {
         // TO DO: check userID first
         $('.gmc-scr-value').html(data.balance);
