@@ -76,7 +76,7 @@ jQuery(document).ready(function ($) {
             sumOfRatings += data.stars;
             gun.get(data.senderID).path('profilePicURL').val(function (result) {
                 var showComment = '<div class="newComment">\
-<div class="rating"></div><ul><li class="commentText">' + data.comment + '</li>\
+<div class="rating"></div><ul><li class="commentText">' + data.comment + "<br />Sender: " + data.senderID + '</li>\
 <li class="commentImg"><img src="' + result + '" /></li><ul>';
                 $('#profileComments').prepend(showComment);
             });
