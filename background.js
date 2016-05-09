@@ -4,7 +4,7 @@ chrome.storage.local.clear();*/
 // don't store data this way. Add a callback function to addListener instead. 
 var profileKey = "";
 
-chrome.runtime.onMessage.addListener(function (request) {
+chrome.runtime.onMessage.addListener(function (request, sendResponse) {
 
     if (request.type == 'balance') {
         var silverCredBalance = {

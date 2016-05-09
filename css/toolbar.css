@@ -244,6 +244,7 @@
     background: #fff url(chrome-extension://__MSG_@@extension_id__/images/profile.png) no-repeat center center;
     height: 50px;
     width: 50px;
+    display: none;
 }
 
 #gmc-toolbar .gmc-profile-self img,

@@ -41,9 +41,7 @@ $(document).ready(function () {
     if (Widget.$linkContainingKey.length) {
         Widget.author();
         Widget.createWidget();
-        $('.gmc-profile-author').animate({
-            width: 'toggle'
-        }, 350);
+        Toolbar.showAuthorIcon();
 
         $('.gmc-profile-author img').attr("src", "http://pic.1fotonin.com/data/wallpapers/59/WDF_1048452.jpg");
 
@@ -81,6 +79,13 @@ $(document).ready(function () {
     });
 
     /* show users profile in popup (background.js) */
+
+    chrome.runtime.onMessage.addListener(function (request) {
+        if (request.type == "showSelfIcon") {
+            Toolbar.showSelfIcon();
+        }
+    });
+    //Toolbar.showSelfIcon(); // this needs to be triggered after registration
 
     $('.gmc-profile-self').on('click', function () {
         chrome.storage.local.get('user', function (result) {

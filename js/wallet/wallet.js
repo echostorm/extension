@@ -24,6 +24,14 @@ $(document).ready(function () {
         $('.tab-content').removeClass('current');
         $("li[data-tab='tab-2']").addClass('current');
         $("#tab-2").addClass('current');
+        chrome.tabs.query({
+            active: true,
+            currentWindow: true
+        }, function (tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {
+                type: "showSelfIcon"
+            });
+        });
     });
 
     /* get login details and send to background.js where they will be entered into chrome localstorage */
