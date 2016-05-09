@@ -11,7 +11,7 @@ $(document).ready(function () {
     - if link matches criteria replace it with widget and show profile tab
     */
 
-    $('.gmc-profile-self img').attr("src", "http://pic.1fotonin.com/data/wallpapers/59/WDF_1048495.jpg");
+    /*$('.gmc-profile-self img').attr("src", "http://pic.1fotonin.com/data/wallpapers/59/WDF_1048495.jpg");*/
 
     countRecords.userSilver();
 
@@ -82,6 +82,7 @@ $(document).ready(function () {
 
     chrome.runtime.onMessage.addListener(function (request) {
         if (request.type == "showSelfIcon") {
+            $('.gmc-profile-self img').attr("src", request.profilePicURL);
             Toolbar.showSelfIcon();
         }
     });

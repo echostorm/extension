@@ -29,7 +29,8 @@ $(document).ready(function () {
             currentWindow: true
         }, function (tabs) {
             chrome.tabs.sendMessage(tabs[0].id, {
-                type: "showSelfIcon"
+                type: "showSelfIcon",
+                profilePicURL: data.profilePicURL
             });
         });
     });
