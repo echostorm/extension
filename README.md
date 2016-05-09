@@ -1,6 +1,6 @@
 <h1>Welcome!</h1>
 <h2>GiveMeCredit is a cryptocurrency where you must earn trust and contribute value in order for money (credits) to be created.</h2>
-<h3>Please clone the repo and load the extension into chrome i.e. chrome://extensions/ >> 'Load unpacked extension'. Then open the index.html file to see a demo + further instructions.</h3>
+<h3>Please clone the repo and load the extension into chrome by visiting chrome://extensions/ and then click 'Load unpacked extension'. Then, once enabled, open the index.html file in your browser to see a demo + further instructions.</h3>
 
 <h4>STEP 1:</h4>
 <p>Click on the icon (top right) and register.</p>
