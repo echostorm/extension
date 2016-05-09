@@ -11,17 +11,46 @@ $(document).ready(function () {
     - if link matches criteria replace it with widget and show profile tab
     */
 
-    countRecords.userSilver();
-    //scb node is set in countRecords.js
-    scb.on().map(function (data) {
-        // TO DO: check userID first
-        $('.gmc-scr-value').html(data.balance);
+    countSilverCredits(function (count) {
+        $('.gmc-scr-value').html(count);
         // send to background script so that wallet.js can check the balance
         chrome.runtime.sendMessage({
             type: 'balance',
-            balance: data.balance
+            balance: count
         });
     });
+
+    //countRecords.userSilver();
+    chrome.runtime.onMessage.addListener(function (request) {
+        if (request.type == "userIsLoggedIn") {
+            countSilverCredits(function (count) {
+                $('.gmc-scr-value').html(count);
+                // send to background script so that wallet.js can check the balance
+                chrome.runtime.sendMessage({
+                    type: 'balance',
+                    balance: count
+                });
+            });
+        }
+    });
+
+    function countSilverCredits(cb) {
+        var count = 0;
+        chrome.storage.local.get('user', function (result) {
+            riu.on().map(function (data) {
+                if (data.senderID == result.user.usrPubKey) {
+                    count++;
+                    cb(count);
+                }
+            });
+        });
+    }
+
+
+    //scb node is set in countRecords.js
+    //scb.on().map(function (data) {
+    // TO DO: check userID first
+    //});
 
     Percentage.getPagePercentage(function (percentage, countMatched) {
         var $itemScore = jQuery('.gmc-item-score span');
@@ -79,11 +108,25 @@ $(document).ready(function () {
     /* show users profile in popup (background.js) */
 
     chrome.runtime.onMessage.addListener(function (request) {
+        if (request.type == 'setUserData') {
+            ud.set(gun.put(request.data).key(request.key));
+        }
+
         if (request.type == "showSelfIcon") {
             $('.gmc-profile-self img').attr("src", request.profilePicURL);
             Toolbar.showSelfIcon();
         }
     });
+
+    chrome.storage.local.get('user', function (result) {
+        ud.on().map(function (data) {
+            if (data.userID == result.user.usrPubKey) {
+                $('.gmc-profile-self img').attr("src", data.profilePicURL);
+                Toolbar.showSelfIcon();
+            }
+        });
+    })
+
     //Toolbar.showSelfIcon(); // this needs to be triggered after registration
 
     $('.gmc-profile-self').on('click', function () {

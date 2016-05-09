@@ -19,7 +19,18 @@ $(document).ready(function () {
         data.about = aboutText;
         data.regDate = new Date().getTime();
         data.userSig = getVanityKeys.getVanitySig(data, vanity.prvkey, 1);
-        ud.set(gun.put(data).key(vanity.pubkey));
+
+        chrome.tabs.query({
+            active: true,
+            currentWindow: true
+        }, function (tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {
+                type: "setUserData",
+                data: data,
+                key: vanity.pubkey
+            });
+        });
+        //ud.set(gun.put(data).key(vanity.pubkey));
         $('ul.tabs li').removeClass('current');
         $('.tab-content').removeClass('current');
         $("li[data-tab='tab-2']").addClass('current');
@@ -38,6 +49,15 @@ $(document).ready(function () {
             prvKey: prvKey,
             date: date
         });
+        chrome.tabs.query({
+            active: true,
+            currentWindow: true
+        }, function (tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {
+                type: "userIsLoggedIn"
+            });
+        });
+
         $('ul.tabs li').removeClass('current');
         $('.tab-content').removeClass('current');
         $("li[data-tab='tab-3']").addClass('current');

@@ -18,7 +18,6 @@ var vote = {
             data.transactionID = getVanityKeys.getVanitySig(data, result.user.usrPrvKey, 1);
             console.log("Vanity signature generated. Sending transaction for verification...");
             riu.set(gun.put(data).key(data.transactionID));
-            countRecords.userSilver();
         });
     }
 }
