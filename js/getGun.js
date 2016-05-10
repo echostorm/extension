@@ -2,7 +2,7 @@
 localStorage.clear();
 //chrome.storage.local.clear();
 
-var gun = new Gun( /*'http://localhost:8080'*/ );
+var gun = new Gun( /*'http://gunjs.herokuapp.com/gun'*/ );
 var riu = gun.get('rated_item_unconfirmed');
 var ric = gun.get('rated_item_confirmed');
 var vri = gun.get('valid_rated_item');
