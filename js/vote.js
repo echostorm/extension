@@ -13,11 +13,16 @@ var vote = {
         data.url = pageURL;
         data.isUpVote = score;
         chrome.storage.local.get('user', function (result) {
-            data.senderID = result.user.usrPubKey;
-            //IMPORTANT : the transactionID is the signature
-            data.transactionID = getVanityKeys.getVanitySig(data, result.user.usrPrvKey, 1);
-            console.log("Vanity signature generated. Sending transaction for verification...");
-            riu.set(gun.put(data).key(data.transactionID));
+            var isEmpty = jQuery.isEmptyObject(result);
+            if (!isEmpty) {
+                data.senderID = result.user.usrPubKey;
+                //IMPORTANT : the transactionID is the signature
+                data.transactionID = getVanityKeys.getVanitySig(data, result.user.usrPrvKey, 1);
+                console.log("Vanity signature generated. Sending transaction for verification...");
+                riu.set(gun.put(data).key(data.transactionID));
+            } else {
+                console.log("You are not logged in");
+            }
         });
     }
 }
