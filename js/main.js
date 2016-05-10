@@ -20,8 +20,6 @@ $(document).ready(function () {
         });
     });
 
-    //countRecords.userSilver();
-
     function countSilverCredits(cb) {
         var count = 0;
         chrome.storage.local.get('user', function (result) {
