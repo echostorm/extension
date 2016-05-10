@@ -3,7 +3,7 @@
 <h3>Please clone the repo and load the extension into chrome by visiting chrome://extensions/ and then click 'Load unpacked extension'. Then, once enabled, open the index.html file in your browser to see a demo + further instructions.</h3>
 
 <p>If it is installed, you shouls also see the following widget:-</p>
-<p>http://gmc@0442596f6fbb99b9f9ff25dc4f7f19aa37618e71a47a98eee9bb9d5f9cedaf7e9255742094d3f9e984b9bff78751aff4529348e6fbdeeacddb66d8cf08ccbd7210</p>
+<p><a href="">http://gmc@0442596f6fbb99b9f9ff25dc4f7f19aa37618e71a47a98eee9bb9d5f9cedaf7e9255742094d3f9e984b9bff78751aff4529348e6fbdeeacddb66d8cf08ccbd7210</a></p>
 
 <h4>STEP 1:</h4>
 <p>Click on the icon (top right) and register.</p>
