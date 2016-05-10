@@ -131,14 +131,14 @@ var verify = {
 
     // verify user data
     verifyUd: function () {
-        ud.on(function (data) {
+        /*ud.on(function (data) {
             console.log(data);
-        });
+        });*/
     },
     // verify transaction unconfirmed
     verifyTu: function () {
-        tu.on(function (data) {
-            //console.log(data);
-        });
+        //tu.on(function (data) {
+        //console.log(data);
+        //});
     }
 }

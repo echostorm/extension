@@ -41,7 +41,9 @@
         "images/widget-loader.gif"
      ],
     "background": {
-        "scripts": ["background.js"],
+        "scripts": [
+        "background.js"
+        ],
         "persistent": true
     },
     "content_scripts": [

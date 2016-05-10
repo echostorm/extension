@@ -107,9 +107,16 @@ $(document).ready(function () {
 
     /* show users profile in popup (background.js) */
 
-    chrome.runtime.onMessage.addListener(function (request) {
+    chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         if (request.type == 'setUserData') {
             ud.set(gun.put(request.data).key(request.key));
+        }
+
+        /* This isn't working. It should be coming from the background script */
+        if (request.type == 'edit') {
+            chrome.storage.local.get('user', function (data) {
+                gun.get(data.user.usrPubKey).path('about').put(request.aboutText);
+            });
         }
 
         if (request.type == "showSelfIcon") {
@@ -125,29 +132,45 @@ $(document).ready(function () {
                 Toolbar.showSelfIcon();
             }
         });
-    })
+    });
 
     //Toolbar.showSelfIcon(); // this needs to be triggered after registration
 
     $('.gmc-profile-self').on('click', function () {
         chrome.storage.local.get('user', function (result) {
-            chrome.runtime.sendMessage({
-                type: 'self',
-                userID: result.user.usrPubKey
-                    /* this userID is for testing. 
-                    it needs to be changed in wallet.js also */
+            ud.on().map(function (data) {
+                if (data.userID == result.user.usrPubKey) {
+                    var date = new Date(data.regDate);
+                    date = date.toString();
+                    chrome.runtime.sendMessage({
+                        type: 'showProfile',
+                        name: data.name,
+                        about: data.about,
+                        regDate: date,
+                        email: data.email,
+                        profilePicURL: data.profilePicURL
+                    });
+                }
             });
         });
-
     });
 
     /* show authors profile in popup (background.js). To do: send account number to background.js and past it to profile.js so that correct profile record can be retrived. */
 
     $('.gmc-profile-author').on('click', function () {
-        chrome.runtime.sendMessage({
-            type: 'author',
-            //userID: 'Bob Brown'
-            userID: Widget.getAddress()
+        chrome.storage.local.get('user', function (result) {
+            ud.on().map(function (data) {
+                if (data.userID == Widget.getAddress()) {
+                    chrome.runtime.sendMessage({
+                        type: 'showProfile',
+                        name: data.name,
+                        about: data.about,
+                        regDate: data.regDate,
+                        email: data.email,
+                        profilePicURL: data.profilePicURL
+                    });
+                }
+            });
         });
     });
 

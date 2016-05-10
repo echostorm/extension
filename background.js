@@ -1,10 +1,20 @@
 /*localStorage.clear();
 chrome.storage.local.clear();*/
 
-// don't store data this way. Add a callback function to addListener instead. 
-var profileKey = "";
-
 chrome.runtime.onMessage.addListener(function (request, sendResponse) {
+
+    if (request.type == 'editAboutText') {
+
+        chrome.tabs.query({
+            active: true,
+            currentWindow: false
+        }, function (tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {
+                type: "edit",
+                aboutText: request.aboutText
+            });
+        });
+    }
 
     if (request.type == 'balance') {
         var silverCredBalance = {
@@ -43,22 +53,22 @@ chrome.runtime.onMessage.addListener(function (request, sendResponse) {
 
     /* This request is sent by main.js when you click on the profile icon that shows your public profile. */
 
-    if (request.type === 'self') {
-        profileKey = request.userID;
+    if (request.type === 'showProfile') {
         chrome.tabs.create({
-            url: chrome.extension.getURL('profile.html'),
-            active: false
-        }, function (tab) {
-            var w = 851;
-            var h = 500;
-            chrome.windows.create({
-                tabId: tab.id,
-                type: 'popup',
-                focused: true,
-                width: w,
-                height: h
+                url: chrome.extension.getURL('profile.html?name=' + request.name + '&about=' + request.about + '&regDate=' + request.regDate + '&email=' + request.email + '&profilePicURL=' + request.profilePicURL),
+                active: false
+            },
+            function (tab) {
+                var w = 851;
+                var h = 500;
+                chrome.windows.create({
+                    tabId: tab.id,
+                    type: 'popup',
+                    focused: true,
+                    width: w,
+                    height: h
+                });
             });
-        });
     }
 
     /* This request is sent by main.js when you click on the profile icon that shows the authors profile. I need to find out how to pass a message to the popup with the authors account number so that i can retreive the correct record from gunDB */

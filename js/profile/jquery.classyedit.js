@@ -46,9 +46,10 @@
                 $(saveAndCancel).insertBefore($(this).parent());
 
                 $('.save').on('click', function () {
-                    var aboutText = $('.aboutText').html();
-                    chrome.storage.local.get('user', function (data) {
-                        gun.get(data.user.usrPubKey).path('about').put(aboutText);
+                    var aboutText = $('.editor').html();
+                    chrome.runtime.sendMessage({
+                        type: 'editAboutText',
+                        aboutText: aboutText
                     });
 
                     $(".edit").remove();

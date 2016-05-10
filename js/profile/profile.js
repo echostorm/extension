@@ -10,21 +10,45 @@ http://pic.1fotonin.com/data/wallpapers/59/WDF_1048452.jpg
 
 jQuery(document).ready(function ($) {
     $(".classy-editor").ClassyEdit();
-    window.addEventListener('load', function (evt) {
-        chrome.runtime.getBackgroundPage(function (eventPage) {
-            ud.on().map(function (data) {
-                var date = new Date(data.regDate);
-                var date = date.toString();
-                if (data.userID == eventPage.profileKey) {
-                    $('#name h3').html(data.name);
-                    $('.aboutText').html(data.about);
-                    $('.regDate span').html(date);
-                    $('#gmc-footer .email span').html(data.email);
-                    setImage(data.profilePicURL);
-                }
-            });
+    window.addEventListener('load', function (data) {
+        chrome.tabs.getSelected(null, function (tab) {
+            var name = getParameterByName('name', tab.url);
+            var about = getParameterByName('about', tab.url);
+            var regDate = getParameterByName('regDate', tab.url);
+            var email = getParameterByName('email', tab.url);
+            var profilePicURL = getParameterByName('profilePicURL', tab.url);
+            $('#name h3').html(name);
+            $('.editor').html(about);
+            $('.regDate span').html(regDate);
+            $('#gmc-footer .email span').html(email);
+            setImage(profilePicURL);
         });
     });
+
+    function getParameterByName(name, url) {
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    /*chrome.tabs.query({
+        active: true,
+        currentWindow: true
+    }, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {
+            type: "userData"
+        }, function (response) {
+            console.log(response);
+        });
+    });*/
+
+    /*chrome.runtime.sendMessage({
+        type: "getUserData"
+    });*/
+
 
     function setImage(imgURL) {
         var xhr = new XMLHttpRequest();
