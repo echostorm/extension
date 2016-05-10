@@ -68,7 +68,7 @@ jQuery(document).ready(function ($) {
     });
 
     // why doesn't this work on page load????
-    showComments(function (totalComments, sumOfRatings) {
+    /*  showComments(function (totalComments, sumOfRatings) {
         var averageScore = 0;
         if (totalComments != 0) {
             averageScore = sumOfRatings / totalComments;
@@ -110,7 +110,7 @@ jQuery(document).ready(function ($) {
             });
         });
     }
-
+*/
     $('.submitComment').on('click', function () {
         var newComment = $('textarea.comment').val();
         var stars = $("#rating").rateYo("option", "rating");
@@ -136,7 +136,7 @@ jQuery(document).ready(function ($) {
         chrome.storage.local.get('user', function (data) {
             commentsJSON.senderID = data.user.usrPubKey;
             commentsJSON.senderSig = getVanityKeys.getVanitySig(commentsJSON, data.user.usrPrvKey, 1);
-            comments.set(gun.put(commentsJSON));
+            //comments.set(gun.put(commentsJSON));
         });
     });
 

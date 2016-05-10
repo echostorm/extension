@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    verify.verifyRiu();
-    verify.verifyUd();
-    verify.verifyCiu();
+    //verify.verifyRiu();
+    //verify.verifyUd();
+    //verify.verifyCiu();
     /*
     - get current page score
     - display/initialize toolbar
@@ -23,12 +23,17 @@ $(document).ready(function () {
     function countSilverCredits(cb) {
         var count = 0;
         chrome.storage.local.get('user', function (result) {
-            riu.on().map(function (data) {
-                if (data.senderID == result.user.usrPubKey) {
-                    count++;
-                    cb(count);
-                }
-            });
+            var isEmpty = jQuery.isEmptyObject(result);
+            if (!isEmpty) {
+                riu.on().map(function (data) {
+                    if (data.senderID == result.user.usrPubKey) {
+                        count++;
+                        cb(count);
+                    }
+                });
+            } else {
+                console.log("You are not logged in");
+            }
         });
     }
 
@@ -161,36 +166,46 @@ $(document).ready(function () {
     });
 
     chrome.storage.local.get('user', function (result) {
-        ud.on().map(function (data) {
-            if (data.userID == result.user.usrPubKey) {
-                $('.gmc-profile-self img').attr("src", data.profilePicURL);
-                Toolbar.showSelfIcon();
-            }
-        });
+        var isEmpty = $.isEmptyObject(result);
+        if (!isEmpty) {
+            ud.on().map(function (data) {
+                if (data.userID == result.user.usrPubKey) {
+                    $('.gmc-profile-self img').attr("src", data.profilePicURL);
+                    Toolbar.showSelfIcon();
+                }
+            });
+        } else {
+            console.log("you are not logged in");
+        }
     });
 
     //Toolbar.showSelfIcon(); // this needs to be triggered after registration
 
     $('.gmc-profile-self').on('click', function () {
         chrome.storage.local.get('user', function (result) {
-            ud.on().map(function (data) {
-                if (data.userID == result.user.usrPubKey) {
-                    var date = new Date(data.regDate);
-                    var day = date.getDate();
-                    var month = date.getMonth();
-                    var year = date.getFullYear();
-                    var newDate = day + "/" + month + "/" + year;
-                    date = date.toString();
-                    chrome.runtime.sendMessage({
-                        type: 'showProfile',
-                        name: data.name,
-                        about: data.about,
-                        regDate: newDate,
-                        email: data.email,
-                        profilePicURL: data.profilePicURL
-                    });
-                }
-            });
+            var isEmpty = $.isEmptyObject(result);
+            if (!isEmpty) {
+                ud.on().map(function (data) {
+                    if (data.userID == result.user.usrPubKey) {
+                        var date = new Date(data.regDate);
+                        var day = date.getDate();
+                        var month = date.getMonth();
+                        var year = date.getFullYear();
+                        var newDate = day + "/" + month + "/" + year;
+                        date = date.toString();
+                        chrome.runtime.sendMessage({
+                            type: 'showProfile',
+                            name: data.name,
+                            about: data.about,
+                            regDate: newDate,
+                            email: data.email,
+                            profilePicURL: data.profilePicURL
+                        });
+                    }
+                });
+            } else {
+                console.log("you are not logged in");
+            }
         });
     });
 
@@ -198,18 +213,23 @@ $(document).ready(function () {
 
     $('.gmc-profile-author').on('click', function () {
         chrome.storage.local.get('user', function (result) {
-            ud.on().map(function (data) {
-                if (data.userID == Widget.getAddress()) {
-                    chrome.runtime.sendMessage({
-                        type: 'showProfile',
-                        name: data.name,
-                        about: data.about,
-                        regDate: data.regDate,
-                        email: data.email,
-                        profilePicURL: data.profilePicURL
-                    });
-                }
-            });
+            var isEmpty = $.isEmptyObject(result);
+            if (!isEmpty) {
+                ud.on().map(function (data) {
+                    if (data.userID == Widget.getAddress()) {
+                        chrome.runtime.sendMessage({
+                            type: 'showProfile',
+                            name: data.name,
+                            about: data.about,
+                            regDate: data.regDate,
+                            email: data.email,
+                            profilePicURL: data.profilePicURL
+                        });
+                    }
+                });
+            } else {
+                console.log("you are not logged in");
+            }
         });
     });
 
