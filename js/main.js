@@ -21,18 +21,6 @@ $(document).ready(function () {
     });
 
     //countRecords.userSilver();
-    chrome.runtime.onMessage.addListener(function (request) {
-        if (request.type == "userIsLoggedIn") {
-            countSilverCredits(function (count) {
-                $('.gmc-scr-value').html(count);
-                // send to background script so that wallet.js can check the balance
-                chrome.runtime.sendMessage({
-                    type: 'balance',
-                    balance: count
-                });
-            });
-        }
-    });
 
     function countSilverCredits(cb) {
         var count = 0;
@@ -112,6 +100,55 @@ $(document).ready(function () {
             ud.set(gun.put(request.data).key(request.key));
         }
 
+        if (request.type == 'getProfilePicURL') {
+            gun.get(request.senderID).path('profilePicURL').val(function (result) {
+                sendResponse({
+                    profilePicURL: result
+                });
+            });
+        }
+
+        /* This code adds a new comment. It works but i wasn't able to read the comments back to profile.js. For now i have just made the gun calls from profile.js, but i think it would be better to have the all gun calls in one script eventually.
+
+                if (request.type == 'addComment') {
+                    var commentsJSON = tables.get_comments_JSON();
+                    commentsJSON.recipientID = '123xyz';
+                    commentsJSON.comment = request.newComment;
+                    commentsJSON.stars = request.stars;
+                    chrome.storage.local.get('user', function (data) {
+                        commentsJSON.profilePicURL = result;
+                        commentsJSON.senderID = data.user.usrPubKey;
+                        commentsJSON.senderSig = getVanityKeys.getVanitySig(commentsJSON, data.user.usrPrvKey, 1);
+                        comments.set(gun.put(commentsJSON));
+                    });
+
+                    getComments(function (array) {
+                        sendResponse({
+                            array: array
+                        });
+                    });
+
+                    function getComments(cb) {
+                        var array = new Array();
+                        comments.on().map(function (result) {
+                            array.push(result);
+                            console.log(array); //this works but the sendReponse callback doesn't
+                            cb(array);
+                        });
+                    }
+                }*/
+
+        if (request.type == "userIsLoggedIn") {
+            countSilverCredits(function (count) {
+                $('.gmc-scr-value').html(count);
+                // send to background script so that wallet.js can check the balance
+                chrome.runtime.sendMessage({
+                    type: 'balance',
+                    balance: count
+                });
+            });
+        }
+
         /* This isn't working. It should be coming from the background script */
         if (request.type == 'edit') {
             chrome.storage.local.get('user', function (data) {
@@ -141,12 +178,16 @@ $(document).ready(function () {
             ud.on().map(function (data) {
                 if (data.userID == result.user.usrPubKey) {
                     var date = new Date(data.regDate);
+                    var day = date.getDate();
+                    var month = date.getMonth();
+                    var year = date.getFullYear();
+                    var newDate = day + "/" + month + "/" + year;
                     date = date.toString();
                     chrome.runtime.sendMessage({
                         type: 'showProfile',
                         name: data.name,
                         about: data.about,
-                        regDate: date,
+                        regDate: newDate,
                         email: data.email,
                         profilePicURL: data.profilePicURL
                     });

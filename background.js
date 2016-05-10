@@ -3,19 +3,6 @@ chrome.storage.local.clear();*/
 
 chrome.runtime.onMessage.addListener(function (request, sendResponse) {
 
-    if (request.type == 'editAboutText') {
-
-        chrome.tabs.query({
-            active: true,
-            currentWindow: false
-        }, function (tabs) {
-            chrome.tabs.sendMessage(tabs[0].id, {
-                type: "edit",
-                aboutText: request.aboutText
-            });
-        });
-    }
-
     if (request.type == 'balance') {
         var silverCredBalance = {
             'balance': request.balance

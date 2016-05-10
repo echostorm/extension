@@ -25,6 +25,13 @@ jQuery(document).ready(function ($) {
         });
     });
 
+    /*chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+        if (request.type == 'showComments') {
+            console.log("testing");
+            console.log(request.comment);
+        }
+    });*/
+
     function getParameterByName(name, url) {
         name = name.replace(/[\[\]]/g, "\\$&");
         var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
@@ -33,22 +40,6 @@ jQuery(document).ready(function ($) {
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
-
-    /*chrome.tabs.query({
-        active: true,
-        currentWindow: true
-    }, function (tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {
-            type: "userData"
-        }, function (response) {
-            console.log(response);
-        });
-    });*/
-
-    /*chrome.runtime.sendMessage({
-        type: "getUserData"
-    });*/
-
 
     function setImage(imgURL) {
         var xhr = new XMLHttpRequest();
@@ -61,10 +52,6 @@ jQuery(document).ready(function ($) {
         };
         xhr.send();
     }
-
-    ud.on().map(function (data) {
-        console.log(data);
-    });
 
     animate.rotateProfilePic();
     animate.listSlideIn();
@@ -80,6 +67,7 @@ jQuery(document).ready(function ($) {
         $textarea.val('');
     });
 
+    // why doesn't this work on page load????
     showComments(function (totalComments, sumOfRatings) {
         var averageScore = 0;
         if (totalComments != 0) {
@@ -98,24 +86,49 @@ jQuery(document).ready(function ($) {
         comments.on().map(function (data) {
             totalComments++;
             sumOfRatings += data.stars;
-            gun.get(data.senderID).path('profilePicURL').val(function (result) {
-                var showComment = '<div class="newComment">\
-<div class="rating"></div><ul><li class="commentText">' + data.comment + "<br />Sender: " + data.senderID + '</li>\
-<li class="commentImg"><img src="' + result + '" /></li><ul>';
-                $('#profileComments').prepend(showComment);
+
+            chrome.tabs.query({
+                active: true,
+                currentWindow: false
+            }, function (tabs) {
+                chrome.tabs.sendMessage(tabs[0].id, {
+                    type: "getProfilePicURL",
+                    senderID: data.senderID
+                }, function (result) {
+                    console.log(result);
+                    var showComment = '<div class="newComment">\
+    <div class="rating"></div><ul><li class="commentText">' + data.comment + "<br />Sender: " + data.senderID + '</li>\
+    <li class="commentImg"><img src="' + result.profilePicURL + '" /></li><ul>';
+                    $('#profileComments').prepend(showComment);
+                });
+                $("#profileComments .rating").rateYo({
+                    starWidth: "20px",
+                    readOnly: true,
+                    rating: data.stars
+                });
+                cb(totalComments, sumOfRatings);
             });
-            $("#profileComments .rating").rateYo({
-                starWidth: "20px",
-                readOnly: true,
-                rating: data.stars
-            });
-            cb(totalComments, sumOfRatings);
         });
     }
 
     $('.submitComment').on('click', function () {
         var newComment = $('textarea.comment').val();
         var stars = $("#rating").rateYo("option", "rating");
+        /*   
+        I tried sending the query to main.js in order to keep gun call in one place but it was too impractical 
+        chrome.tabs.query({
+            active: true,
+            currentWindow: false
+        }, function (tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {
+                type: "addComment",
+                newComment: newComment,
+                stars: stars
+            }, function (array) {
+                console.log(array);
+                $('#profileComments').prepend(array[0].comment);
+            });
+        }); */
         var commentsJSON = tables.get_comments_JSON();
         commentsJSON.recipientID = '123xyz';
         commentsJSON.comment = newComment;

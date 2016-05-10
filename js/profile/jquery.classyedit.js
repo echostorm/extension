@@ -47,9 +47,14 @@
 
                 $('.save').on('click', function () {
                     var aboutText = $('.editor').html();
-                    chrome.runtime.sendMessage({
-                        type: 'editAboutText',
-                        aboutText: aboutText
+                    chrome.tabs.query({
+                        active: true,
+                        currentWindow: false
+                    }, function (tabs) {
+                        chrome.tabs.sendMessage(tabs[0].id, {
+                            type: "edit",
+                            aboutText: aboutText
+                        });
                     });
 
                     $(".edit").remove();
