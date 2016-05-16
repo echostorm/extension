@@ -7,7 +7,7 @@
 http://pic.1fotonin.com/data/wallpapers/59/WDF_1048495.jpg
 http://pic.1fotonin.com/data/wallpapers/59/WDF_1048452.jpg
 */
-
+localStorage.clear();
 jQuery(document).ready(function ($) {
     $(".classy-editor").ClassyEdit();
     window.addEventListener('load', function (data) {
@@ -57,7 +57,7 @@ jQuery(document).ready(function ($) {
     animate.listSlideIn();
     animate.contentFadeIn();
 
-    $("#rating").rateYo({
+    $("#profileStars").rateYo({
         starWidth: "20px",
         rating: 1.6
     });

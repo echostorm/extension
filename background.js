@@ -1,5 +1,5 @@
-/*localStorage.clear();
-chrome.storage.local.clear();*/
+localStorage.clear();
+//chrome.storage.local.clear();
 
 chrome.runtime.onMessage.addListener(function (request, sendResponse) {
 

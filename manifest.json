@@ -19,6 +19,7 @@
     "tabs", "<all_urls>", "background", "storage"
   ],
     "web_accessible_resources": [
+        "fonts/fontawesome-webfont.woff2",
        "images/plus.png",
        "images/minus.png",
        "images/arrowdown.jpg",
@@ -53,6 +54,7 @@
       ],
             "css": [
         "css/reset.css",
+        "css/font-awesome.min.css",
         "css/toolbar.css"
       ],
             "js": [

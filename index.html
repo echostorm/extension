@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="css/index.css">
     <script src="js/jquery-2.2.1.min.js"></script>
     <script>
+        localStorage.clear();
+        //chrome.storage.local.clear();
         $(document).ready(function () {
             $('#col-right ul.tabs li').click(function () {
                 var tab_id = $(this).attr('data-tab');

@@ -1,6 +1,7 @@
 #gmc-wallet {
     width: 400px;
     text-align: center;
+    color: #666666;
 }
 
 #keyPair {
@@ -28,23 +29,28 @@ button.createKeys {
     margin: 0;
     font-size: 18px;
     padding: 10px;
-    background: #0077b4;
-    color: #fff;
+    border-radius: 5px;
     font-weight: 100;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #1f77b4;
+    color: #fff;
 }
 
 #gmc-wallet input[type="text"],
 #gmc-wallet input[type="email"],
 #gmc-wallet input[type="url"] {
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
     padding: 5px;
     width: 50%;
 }
 
 #gmc-wallet .gmc-wallet-balance {
-    margin: 0;
+    width: 50%;
+    margin: 20px auto 0 auto;
+    border-radius: 5px;
     font-size: 14px;
-    padding: 10px;
+    padding: 5px;
     background: #ff0000;
     color: #fff;
 }
@@ -70,18 +76,21 @@ button.createKeys {
 #gmc-wallet button.register,
 #gmc-wallet .submitLogin {
     display: inline-block;
-    background: #00689e;
-    color: #fff;
-    line-height: 30px;
-    padding: 0 20px;
-    margin: 10px;
-    border: none;
-    font-size: 14px;
     border-radius: 5px;
+    border: 1px solid #d9d9d9;
+    background: #ffffff;
+    background: -moz-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    background: -webkit-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=0) line-height: 30px;
+    padding: 5px 20px;
+    margin: 10px;
+    font-size: 12px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #gmc-wallet .sendError {
+    display: none;
     color: #ff0000;
     padding-top: 10px;
 }
@@ -102,21 +111,43 @@ button.createKeys {
 
 #gmc-wallet ul.tabs li {
     background: none;
-    color: #222;
+    color: #666666;
     display: inline-block;
-    padding: 10px 15px;
+    padding: 5px 15px;
     cursor: pointer;
+    margin-bottom: -1px;
+    border-top: 1px solid #d9d9d9;
+    border-left: 1px solid #d9d9d9;
+    border-right: 1px solid #d9d9d9;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: #ffffff;
+    background: -moz-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    background: -webkit-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=0);
 }
 
 #gmc-wallet ul.tabs li.current {
-    background: #ededed;
-    color: #222;
+    background: #fff;
+    color: #ff0000;
+    /* background: #ffffff;
+    background: -moz-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    background: -webkit-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=0);*/
 }
 
 #gmc-wallet .tab-content {
     display: none;
-    background: #ededed;
+    border-radius: 5px;
+    border: 1px solid #d9d9d9;
     padding: 15px;
+    /*background: #ffffff;
+    background: -moz-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    background: -webkit-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=0);*/
 }
 
 #gmc-wallet .tab-content.current {

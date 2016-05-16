@@ -10,13 +10,13 @@ var Toolbar = {
     },
     toolbarSlideDown: function () {
         jQuery("#gmc-toolbar").animate({
-            "bottom": "-=55px"
+            "bottom": "-=45px"
         }, "fast");
         jQuery("#gmc-toolbar").removeClass('gmc-down');
     },
     toolbarSlideUp: function () {
         jQuery("#gmc-toolbar").animate({
-            "bottom": "+=55px"
+            "bottom": "+=45px"
         }, "fast");
         jQuery("#gmc-toolbar").addClass('gmc-down');
     },

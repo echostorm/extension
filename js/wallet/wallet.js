@@ -116,7 +116,7 @@ $(document).ready(function () {
         var balance = $('.gmc-wallet-balance span').html();
         var newBalance;
         if (amount > balance) {
-            $('.sendError').html("Sorry, you don't have enough funds to send");
+            $('.sendError').show();
         } else {
             $('.sendError').html("Your transaction is being processed!");
             // newBalance will need to be sent back to background and update scb
