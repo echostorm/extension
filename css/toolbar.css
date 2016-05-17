@@ -371,8 +371,8 @@
 #gmc-widget .gmc-arrows {
     display: inline-block;
     height: 40px;
+    width: 25px;
     vertical-align: bottom;
-    padding: 0 0 0 10px;
     color: #1f77b4;
     font-size: 16px;
 }
@@ -382,7 +382,11 @@
     display: block;
     line-height: 20px;
     text-align: center;
-    width: 20px;
+    width: 25px;
     margin: auto;
     cursor: pointer;
+}
+
+#gmc-widget .fa:before {
+    margin: 0 !important;
 }
