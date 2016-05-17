@@ -3,7 +3,7 @@
 <h3>Please clone the repo and load the extension into chrome by visiting chrome://extensions/ and then click 'Load unpacked extension'. Then, once enabled, open the index.html file in your browser to see a demo + further instructions.</h3>
 
 <p>If it is installed, you should also see the following widget (although the app won't work on https sites without being connect to an endpoint that supports https) :-</p>
-<p><a href="">http://gmc@0442596f6fbb99b9f9ff25dc4f7f19aa37618e71a47a98eee9bb9d5f9cedaf7e9255742094d3f9e984b9bff78751aff4529348e6fbdeeacddb66d8cf08ccbd7210</a></p>
+<p><a href="">http://gmc@046efb758f7856ca5395fa2507b1ab5cade7ba7c6ab025428097ee9c1e8419011401bb6180fba219bb172c3e86cf727699b2f51b9c00ccbe4b10fb12bfcf0623d0.com</a></p>
 
 <h4>STEP 1:</h4>
 <p>Click on the icon (top right) and register.</p>
