@@ -11,6 +11,17 @@
      - if link matches criteria replace it with widget and show profile tab
      */
 
+     Percentage.getProfilePercentage(function (totalComments, sumOfRatings) {
+         var averageScore = 0;
+         if (totalComments != 0) {
+             averageScore = sumOfRatings / totalComments;
+             averageScore = averageScore.toFixed(1);
+             if (averageScore < 3.5) {
+                 jQuery('.gmc').off('click').css("opacity", "0.5").text("PROFILE INACTIVE");
+             }
+         }
+     });
+
      countSilverCredits(function (count) {
          $('.gmc-scr-value').html(count);
      });
