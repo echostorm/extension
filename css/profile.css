@@ -125,30 +125,21 @@ p {
     line-height: 20px;
 }
 
-#col-right .newComment ul {
-    width: 100%;
+.newComment {
+    position: relative;
+    margin: 10px 0;
+    padding: 0 20px 20px 20px;
+    border: 1px solid #d9d9d9;
+    background-color: transparent;
 }
 
-#col-right .newComment ul li {
-    display: inline-block;
-    vertical-align: top;
-}
-
-#col-right li.commentText {
-    width: 70%;
-    word-break: break-all;
-}
-
-#col-right li.commentImg {
-    width: 20%;
+.newComment img {
+    width: 50px;
     height: auto;
-}
-
-#col-right li.commentImg img {
-    width: 70px;
-    height: auto;
-    border: 1px solid;
-    margin-left: 20px
+    border: 2px solid #d9d9d9;
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 
 a {
@@ -204,17 +195,27 @@ a.home {
     cursor: pointer;
 }
 
+#profile-pic {
+    width: 145px;
+    height: 145px;
+    overflow: hidden;
+    margin: 20px auto 0 auto;
+}
+
 #profile-pic img {
     border-radius: 50%;
     display: block;
-    width: 135px;
     height: auto;
-    margin: 20px auto 0 auto;
     border: 7px solid #d9d9d9;
+    width: -moz-calc(100% - 14px);
+    width: -webkit-calc(100% - 14px);
+    width: calc(100% - 14px);
 }
 
 a.btn {
     display: none;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
 #col-left ul {
@@ -232,7 +233,7 @@ a.btn {
 /* new nav */
 
 #col-left ul.tabs {
-    display: block;
+    /*display: block;*/
     margin-top: 20px;
     list-style: none;
 }
@@ -396,12 +397,6 @@ strong {
 
 .rating {
     padding: 20px 0;
-}
-
-.newComment {
-    margin: 10px 0;
-    padding: 10px;
-    background: #ededed;
 }
 
 textarea.comment {

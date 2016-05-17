@@ -194,6 +194,7 @@
 }
 
 #gmc-toolbar ul li {
+    list-style: none;
     float: left;
     margin: 0;
     padding: 0;

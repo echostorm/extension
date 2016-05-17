@@ -47,15 +47,18 @@
 
                 $('.save').on('click', function () {
                     var aboutText = $('.editor').html();
-                    chrome.tabs.query({
-                        active: true,
-                        currentWindow: false
-                    }, function (tabs) {
-                        chrome.tabs.sendMessage(tabs[0].id, {
-                            type: "edit",
-                            aboutText: aboutText
+                    chrome.storage.local.get('user', function (result) {
+                        ud.on("child_added", function (snapshot) {
+                            var user = snapshot.val();
+                            if (user.userID == result.user.usrPubKey) {
+                                var id = snapshot.key();
+                                ud.child(id).update({
+                                    about: aboutText
+                                });
+                            }
                         });
                     });
+
 
                     $(".edit").remove();
                 });

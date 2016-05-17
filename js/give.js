@@ -17,7 +17,7 @@ var Give = {
                     trans.senderID = result.user.usrPubKey;
                     trans.transactionID = getVanityKeys.getVanitySig(trans, result.user.usrPrvKey, 2);
                     console.log("Vanity signature generated. Sending transaction for verification...");
-                    ciu.set(gun.put(trans), function () {
+                    ciu.push(trans, function () {
                         $('#gmc-widget .gmc').html("Whoohoo! Thanks!");
                     });
                 });

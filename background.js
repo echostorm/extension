@@ -1,4 +1,4 @@
-localStorage.clear();
+//localStorage.clear();
 //chrome.storage.local.clear();
 
 chrome.runtime.onMessage.addListener(function (request, sendResponse) {
@@ -42,7 +42,7 @@ chrome.runtime.onMessage.addListener(function (request, sendResponse) {
 
     if (request.type === 'showProfile') {
         chrome.tabs.create({
-                url: chrome.extension.getURL('profile.html?name=' + request.name + '&about=' + request.about + '&regDate=' + request.regDate + '&email=' + request.email + '&profilePicURL=' + request.profilePicURL),
+                url: chrome.extension.getURL('profile.html?id=' + request.userID),
                 active: false
             },
             function (tab) {

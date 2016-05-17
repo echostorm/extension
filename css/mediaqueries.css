@@ -10,7 +10,10 @@
     #container {
         margin: 0;
     }
-    #col-left ul {
+    #col-left {
+        height: auto;
+    }
+    #col-left ul.tabs {
         display: none;
     }
     a.btn {
@@ -28,26 +31,7 @@
 }
 
 @media only screen and (max-width: 500px) {
-    .profile-pic-van {
-        display: none;
-    }
     .scr-label {
         display: none;
-    }
-}
-
-
-/* maybe delete these styles if they are not going to be used */
-
-@media only screen and (max-width: 480px) {
-    .col {
-        margin: 1% 0 1% 0%;
-    }
-}
-
-@media only screen and (max-width: 480px) {
-    .span_2_of_2,
-    .span_1_of_2 {
-        width: 100%;
     }
 }

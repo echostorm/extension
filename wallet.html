@@ -5,12 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <link href="css/toolbar.css" rel="stylesheet" type="text/css">
     <link href="css/wallet.css" rel="stylesheet" type="text/css">
-    <!--you might not need animate.css on the wallet -->
-    <link href="css/animate.css" rel="stylesheet" type="text/css">
-    <!--<script src="js/gun.js"></script>
-    <script src="js/getGun.js"></script>-->
     <script src="js/jquery-2.2.1.min.js"></script>
-    <!--<script src="js/verify.js"></script>-->
+    <script src="js/firebase.js"></script>
+    <script src="js/db.js"></script>
     <script src="js/jsrsasign-latest-all-min.js"></script>
     <script src="js/keys.js"></script>
     <script src="js/tables.js"></script>
@@ -23,8 +20,8 @@
         <ul class="tabs">
             <li class="tab-link current" data-tab="tab-1">Register</li>
             <li class="tab-link" data-tab="tab-2">Login</li>
-            <li class="tab-link" data-tab="tab-3">Account Details</li>
-            <li class="tab-link" data-tab="tab-4">Wallet</li>
+            <li class="tab-link" data-tab="tab-3">Send</li>
+            <li class="tab-link" data-tab="tab-4">Transactions</li>
         </ul>
 
         <div id="tab-1" class="tab-content current">
@@ -48,32 +45,35 @@
         </div>
 
         <div id="tab-2" class="tab-content">
-            <h1>Login</h1>
-            <p>Public Key:</p>
-            <input type="text" class="pubKey" />
-            <p>Private Key:</p>
-            <input type="text" class="prvKey" />
-            <p>
-                <input type="submit" class="submitLogin" value="Login" />
-            </p>
-        </div>
-
-
-        <div id="tab-3" class="tab-content">
-            <h1>Account Details</h1>
-            <h3 class="copyInfoMsg">Please copy these details to a safe location</h3>
-            <div id="keyPair">
-                <h4>Public Key</h4>
-                <div class="newPubKey"></div>
-                <h4>Private Key</h4>
-                <div class="newPrvKey"></div>
-                <h4>GiveMeCredit link</h4>
-                <div class="gmcLink"></div>
+            <div id="loginPage1">
+                <h1>Login</h1>
+                <p>Public Key:</p>
+                <input type="text" class="pubKey" />
+                <p>Private Key:</p>
+                <input type="text" class="prvKey" />
+                <p>
+                    <input type="submit" class="submitLogin" value="Login" />
+                </p>
+            </div>
+            <div id="loginPage2">
+                <h1>Account Details</h1>
+                <h3 class="copyInfoMsg">Please copy these details to a safe location</h3>
+                <div id="keyPair">
+                    <h4>Public Key</h4>
+                    <div class="newPubKey"></div>
+                    <h4>Private Key</h4>
+                    <div class="newPrvKey"></div>
+                    <h4>GiveMeCredit link</h4>
+                    <div class="gmcLink"></div>
+                </div>
+            </div>
+            <div id="loginPage3">
+                <button class="logout">Logout</button>
             </div>
         </div>
 
 
-        <div id="tab-4" class="tab-content">
+        <div id="tab-3" class="tab-content">
             <h1>Send Money</h1>
             <div class="gmc-wallet-balance">Account balance: ©<span>0</span></div>
             <div class="sendError">Sorry, you don't have enough funds to send</div>
@@ -86,9 +86,15 @@
                 <button class="sendCredits">Send</button>
             </p>
         </div>
-    </div>
 
-    <!-- gmc-wallet -->
+        <div id="tab-4" class="tab-content">
+            <h1>Transactions</h1>
+            <ul class="transList">
+                <li><span><strong>From</strong></span><span><strong>To</strong></span><span><strong>Credits</strong></span></li>
+            </ul>
+        </div>
+
+        <!-- gmc-wallet -->
 
 </body>
 

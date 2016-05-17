@@ -10,11 +10,11 @@ var Percentage = {
         var percentage = 0;
         var countMatched = 0;
         var countUpVote = 0;
-
-        riu.on().map(function (data) {
-            if (data.url == window.location.href) {
+        riu.on("child_added", function (snapshot) {
+            var item = snapshot.val();
+            if (item.url == window.location.href) {
                 countMatched++;
-                if (data.isUpVote) {
+                if (item.isUpVote) {
                     countUpVote++;
                 }
             }

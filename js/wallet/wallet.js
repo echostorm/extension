@@ -1,5 +1,14 @@
 $(document).ready(function () {
+
+
+    $('button.logout').on('click', function () {
+        chrome.storage.local.clear();
+        $('#loginPage3').fadeOut('slow');
+        $('#loginPage1').fadeIn('slow');
+    });
+
     var vanity = "";
+    var isNewUser;
     $('button.register').on('click', function () {
         var name = $('#gmc-wallet input.name').val();
         var email = $('#gmc-wallet input.email').val();
@@ -19,22 +28,21 @@ $(document).ready(function () {
         data.about = aboutText;
         data.regDate = new Date().getTime();
         data.userSig = getVanityKeys.getVanitySig(data, vanity.prvkey, 1);
-
-        chrome.tabs.query({
-            active: true,
-            currentWindow: true
-        }, function (tabs) {
-            chrome.tabs.sendMessage(tabs[0].id, {
-                type: "setUserData",
-                data: data,
-                key: vanity.pubkey
-            });
-        });
-        //ud.set(gun.put(data).key(vanity.pubkey));
+        ud.push(data);
         $('ul.tabs li').removeClass('current');
         $('.tab-content').removeClass('current');
         $("li[data-tab='tab-2']").addClass('current');
         $("#tab-2").addClass('current');
+        isNewUser = true;
+    });
+
+    chrome.storage.local.get('user', function (result) {
+        var isEmpty = jQuery.isEmptyObject(result);
+        if (!isEmpty) {
+            $('#loginPage3').fadeIn('slow');
+        } else {
+            $('#loginPage1').fadeIn('slow');
+        }
     });
 
     /* get login details and send to background.js where they will be entered into chrome localstorage */
@@ -49,19 +57,16 @@ $(document).ready(function () {
             prvKey: prvKey,
             date: date
         });
-        chrome.tabs.query({
-            active: true,
-            currentWindow: true
-        }, function (tabs) {
-            chrome.tabs.sendMessage(tabs[0].id, {
-                type: "userIsLoggedIn"
-            });
+
+        $('#loginPage1').fadeOut('fast', function () {
+            if (isNewUser) {
+                $('#loginPage2').fadeIn('slow');
+            } else {
+                $('#loginPage3').fadeIn('slow');
+            }
+
         });
 
-        $('ul.tabs li').removeClass('current');
-        $('.tab-content').removeClass('current');
-        $("li[data-tab='tab-3']").addClass('current');
-        $("#tab-3").addClass('current');
         chrome.tabs.query({
             active: true,
             currentWindow: true
@@ -99,14 +104,45 @@ $(document).ready(function () {
         }
     });
 
-    chrome.storage.local.get('silverCredBalance', function (data) {
-        var isEmpty = jQuery.isEmptyObject(data);
-        if (!isEmpty) {
-            $('.gmc-wallet-balance span').html(data.silverCredBalance.balance);
-        } else {
-            console.log("You have no funds");
-        }
+
+    countGoldCredits(function (count) {
+        $('.gmc-wallet-balance span').html(count);
     });
+
+    function countGoldCredits(cb) {
+        var count = 0;
+        chrome.storage.local.get('user', function (result) {
+            var isEmpty = jQuery.isEmptyObject(result);
+            if (!isEmpty) {
+                ciu.on("child_added", function (snapshot) {
+                    var item = snapshot.val();
+                    //if (item.senderID == result.user.usrPubKey) {
+                    getUserName(item.senderID, function (from) {
+                        var from = from;
+                        getUserName(item.recipientID, function (to) {
+                            var to = to;
+                            $('.transList').append("<li><span>" + from + "</span><span>" + to + "</span><span>" + item.credits + "</span></li>");
+                        });
+                    })
+
+                    count += item.credits;
+                    cb(count);
+                    //}
+                });
+            } else {
+                console.log("You are not logged in");
+            }
+        });
+    }
+
+    function getUserName(id, cb) {
+        ud.on("child_added", function (snapshot) {
+            var item = snapshot.val();
+            if (item.userID == id) {
+                cb(item.name);
+            }
+        });
+    }
 
     $('.sendCredits').on('click', function () {
         // To do: check if senderID has enough funds to send
@@ -132,5 +168,7 @@ $(document).ready(function () {
             verify.verifyTu();
         }
     });
+
+
 
 });

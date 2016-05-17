@@ -1,36 +1,67 @@
 /* This page sets up the profile, which includes :-
-- setting the profile image (it's hard coded at the moment but will be to be dynamic)
-- setting the about page text. Both the profile image and about text is specified in the registration process. It is then written to the 'user_date' gun db instance. 
+- setting the profile image
+- setting the about page text. Both the profile image and about text is specified in the registration process. It is then written to the 'user_data' object. 
 - Its also sets up the url routing 
 
 - NOTE: I have used these dummy profile pictures during the registration process :-
 http://pic.1fotonin.com/data/wallpapers/59/WDF_1048495.jpg
 http://pic.1fotonin.com/data/wallpapers/59/WDF_1048452.jpg
 */
-localStorage.clear();
+
 jQuery(document).ready(function ($) {
     $(".classy-editor").ClassyEdit();
-    window.addEventListener('load', function (data) {
-        chrome.tabs.getSelected(null, function (tab) {
-            var name = getParameterByName('name', tab.url);
-            var about = getParameterByName('about', tab.url);
-            var regDate = getParameterByName('regDate', tab.url);
-            var email = getParameterByName('email', tab.url);
-            var profilePicURL = getParameterByName('profilePicURL', tab.url);
-            $('#name h3').html(name);
-            $('.editor').html(about);
-            $('.regDate span').html(regDate);
-            $('#gmc-footer .email span').html(email);
-            setImage(profilePicURL);
-        });
+    nav.init();
+    nav.mobile();
+    animate.rotateProfilePic();
+    animate.listSlideIn();
+    animate.contentFadeIn();
+    $("#rating").rateYo({
+        starWidth: "20px",
+        rating: 1.6
     });
 
-    /*chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-        if (request.type == 'showComments') {
-            console.log("testing");
-            console.log(request.comment);
-        }
-    });*/
+    window.addEventListener('load', function (data) {
+        chrome.tabs.getSelected(null, function (tab) {
+            var id = getParameterByName('id', tab.url);
+            ud.on("child_added", function (snapshot) {
+                var user = snapshot.val();
+                if (user.userID == id) {
+                    var date = new Date(user.regDate);
+                    var day = date.getDate();
+                    var month = date.getMonth();
+                    var year = date.getFullYear();
+                    var newDate = day + "/" + month + "/" + year;
+                    $('#name h3').html(user.name);
+                    $('.editor').html(user.about);
+                    $('.regDate span').html(newDate);
+                    $('#gmc-footer .email span').html(user.email);
+                    setImage(user.profilePicURL);
+                }
+            });
+            showComments(id, function (totalComments, sumOfRatings) {
+                var averageScore = 0;
+                if (totalComments != 0) {
+                    averageScore = sumOfRatings / totalComments;
+                    averageScore = averageScore.toFixed(1);
+                    $("#profileStars").rateYo("option", "rating", averageScore);
+                }
+            });
+            $('.submitComment').on('click', function () {
+                var newComment = $('textarea.comment').val();
+                var stars = $("#rating").rateYo("option", "rating");
+                var commentsJSON = tables.get_comments_JSON();
+                commentsJSON.recipientID = id;
+                commentsJSON.comment = newComment;
+                commentsJSON.stars = stars;
+                chrome.storage.local.get('user', function (data) {
+                    //check if empty
+                    commentsJSON.senderID = data.user.usrPubKey;
+                    commentsJSON.senderSig = getVanityKeys.getVanitySig(commentsJSON, data.user.usrPrvKey, 1);
+                    comments.push(commentsJSON);
+                });
+            });
+        });
+    });
 
     function getParameterByName(name, url) {
         name = name.replace(/[\[\]]/g, "\\$&");
@@ -53,103 +84,46 @@ jQuery(document).ready(function ($) {
         xhr.send();
     }
 
-    animate.rotateProfilePic();
-    animate.listSlideIn();
-    animate.contentFadeIn();
-
-    $("#profileStars").rateYo({
-        starWidth: "20px",
-        rating: 1.6
-    });
-
     var $textarea = $("textarea.comment");
     $textarea.on('focus', function () {
         $textarea.val('');
     });
 
-    // why doesn't this work on page load????
-    /*  showComments(function (totalComments, sumOfRatings) {
-        var averageScore = 0;
-        if (totalComments != 0) {
-            averageScore = sumOfRatings / totalComments;
-        }
-        $("#profileStars").rateYo({
-            starWidth: "20px",
-            readOnly: true,
-            rating: averageScore
-        });
+    $("#profileStars").rateYo({
+        starWidth: "20px",
+        readOnly: true,
+        rating: 3.5
     });
 
-    function showComments(cb) {
+    function showComments(currentUser, cb) {
         var totalComments = 0;
         var sumOfRatings = 0;
-        comments.on().map(function (data) {
-            totalComments++;
-            sumOfRatings += data.stars;
-
-            chrome.tabs.query({
-                active: true,
-                currentWindow: false
-            }, function (tabs) {
-                chrome.tabs.sendMessage(tabs[0].id, {
-                    type: "getProfilePicURL",
-                    senderID: data.senderID
-                }, function (result) {
-                    console.log(result);
-                    var showComment = '<div class="newComment">\
-    <div class="rating"></div><ul><li class="commentText">' + data.comment + "<br />Sender: " + data.senderID + '</li>\
-    <li class="commentImg"><img src="' + result.profilePicURL + '" /></li><ul>';
-                    $('#profileComments').prepend(showComment);
+        var template = $('#commentTpl').html();
+        comments.on("child_added", function (snapshot) {
+            var comment = snapshot.val();
+            if (comment.recipientID == currentUser) {
+                //get comment.senderID from ud and find profile pic
+                ud.on("child_added", function (data) {
+                    var user = data.val();
+                    if (user.userID == comment.senderID) {
+                        var newComment = {
+                            comment: comment.comment,
+                            commenter: user.name,
+                            img: user.profilePicURL
+                        };
+                        var html = Mustache.to_html(template, newComment);
+                        $('#profileComments').prepend(html);
+                    }
+                    $(".rating").rateYo({
+                        starWidth: "20px",
+                        readOnly: true,
+                        rating: comment.stars
+                    });
+                    totalComments++;
+                    sumOfRatings += comment.stars;
+                    cb(totalComments, sumOfRatings);
                 });
-                $("#profileComments .rating").rateYo({
-                    starWidth: "20px",
-                    readOnly: true,
-                    rating: data.stars
-                });
-                cb(totalComments, sumOfRatings);
-            });
+            }
         });
     }
-*/
-    $('.submitComment').on('click', function () {
-        var newComment = $('textarea.comment').val();
-        var stars = $("#rating").rateYo("option", "rating");
-        /*   
-        I tried sending the query to main.js in order to keep gun call in one place but it was too impractical 
-        chrome.tabs.query({
-            active: true,
-            currentWindow: false
-        }, function (tabs) {
-            chrome.tabs.sendMessage(tabs[0].id, {
-                type: "addComment",
-                newComment: newComment,
-                stars: stars
-            }, function (array) {
-                console.log(array);
-                $('#profileComments').prepend(array[0].comment);
-            });
-        }); */
-        var commentsJSON = tables.get_comments_JSON();
-        commentsJSON.recipientID = '123xyz';
-        commentsJSON.comment = newComment;
-        commentsJSON.stars = stars;
-        chrome.storage.local.get('user', function (data) {
-            commentsJSON.senderID = data.user.usrPubKey;
-            commentsJSON.senderSig = getVanityKeys.getVanitySig(commentsJSON, data.user.usrPrvKey, 1);
-            //comments.set(gun.put(commentsJSON));
-        });
-    });
-
-    // page routing
-
-    $('#col-left ul.tabs li').on('click', function () {
-        var tab_id = $(this).attr('data-tab');
-        $('#col-left ul.tabs li').removeClass('current');
-        $('.tab-content').removeClass('current');
-        $(this).addClass('current');
-        if (tab_id == 'tab-1') {
-            animate.rotateProfilePic();
-        }
-        $("#" + tab_id).addClass('current animated fadeInLeft');
-    });
 });

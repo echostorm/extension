@@ -14,10 +14,11 @@
         "default_title": "Wallet",
         "default_popup": "wallet.html"
     },
-
     "permissions": [
-    "tabs", "<all_urls>", "background", "storage"
+    "tabs", "<all_urls>", "background", "storage",
+    "https://givemecredit.firebaseio.com/*"
   ],
+    "content_security_policy": "script-src 'self' https://*.firebase.com https://*.firebaseio.com; object-src 'self'",
     "web_accessible_resources": [
         "fonts/fontawesome-webfont.woff2",
        "images/plus.png",
@@ -58,8 +59,8 @@
         "css/toolbar.css"
       ],
             "js": [
-        "js/gun.js",
-        "js/getGun.js",
+        "js/firebase.js",
+        "js/db.js",
         "js/jquery-2.2.1.min.js",
         "js/jquery.initialize.js",
         "js/html.js",
@@ -73,12 +74,13 @@
         "js/vote.js",
         "js/percentage.js",
         "js/keys.js",
+        "js/mustache.js",
         "js/wallet/wallet.js",
         "js/wallet/getVanityKeys.js",
         "js/profile/accordion.js",
         "js/profile/animate.js",
         "js/profile/editContent.js",
-        "js/profile/mobileMenu.js",
+        "js/profile/navigation.js",
         "js/profile/jquery.classyedit.js",
         "js/profile/profile.js",
         "js/profile/jquery.rateyo.min.js"

@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <title>Bob Smith</title>
     <script src="js/jquery-2.2.1.min.js"></script>
-    <!--<script src="js/gun.js"></script>
-    <script src="js/getGun.js"></script>
-    <script src="js/verify.js"></script>-->
+    <script src="js/firebase.js"></script>
+    <script src="js/db.js"></script>
     <script src="js/tables.js"></script>
+    <script src="js/profile/profile.js"></script>
+    <script src="js/profile/navigation.js"></script>
+    <script src="js/mustache.js"></script>
     <script src="js/profile/editContent.js"></script>
     <script src="js/profile/animate.js"></script>
     <script src="js/profile/jquery.rateyo.min.js"></script>
-    <script src="js/profile/mobileMenu.js"></script>
     <script src="js/profile/jquery.classyedit.js"></script>
-    <script src="js/profile/profile.js"></script>
     <script src="js/jsrsasign-latest-all-min.js"></script>
     <script src="js/keys.js"></script>
     <script src="js/wallet/getVanityKeys.js"></script>
@@ -32,10 +32,9 @@
     <div id="container">
         <div id="col-left">
             <div id="name">
-                <h3>Glen Simister</h3>
+                <h3>Loading...</h3>
             </div>
             <div id="profileStars"></div>
-            <!--<div id="score"><span>100%</span> Positive Feedback</div>-->
             <div id="col-left-inner">
                 <div id="profile-pic">
                     <!--<a href="home">-->
@@ -81,13 +80,21 @@
                     <h1>Comments / References</h1>
                     <textarea class="comment">Please enter your comment here...
                     </textarea>
-                    <div id="rating"></div>
+                    <div id="rating">
+                    </div>
                     <p>
                         <button class="submitComment">Submit</button>
                     </p>
                     <div id="profileComments">
+                        <script id="commentTpl" type="text/template">
+                            <div class="newComment">
+                                <div class="rating"></div>
+                                <img src="{{img}}" />
+                                <div class="commenter">From: {{commenter}}</div>
+                                <div class="commentText">{{comment}}</div>
+                            </div>
+                        </script>
                     </div>
-
                 </div>
                 <div id="tab-3" class="tab-content">
                     <h1>Items</h1>

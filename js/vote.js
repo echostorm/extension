@@ -4,7 +4,6 @@
 - get JSON object from tables.js and set values
 - write JSON object to gunDB
 */
-
 var vote = {
     vote: function (score) {
         //Toolbar.darken();
@@ -19,7 +18,7 @@ var vote = {
                 //IMPORTANT : the transactionID is the signature
                 data.transactionID = getVanityKeys.getVanitySig(data, result.user.usrPrvKey, 1);
                 console.log("Vanity signature generated. Sending transaction for verification...");
-                riu.set(gun.put(data).key(data.transactionID));
+                riu.push(data);
             } else {
                 console.log("You are not logged in");
             }
