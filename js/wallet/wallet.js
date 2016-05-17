@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-
     $('button.logout').on('click', function () {
         chrome.storage.local.clear();
         $('#loginPage3').fadeOut('slow');

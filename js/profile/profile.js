@@ -1,9 +1,5 @@
-/* This page sets up the profile, which includes :-
-- setting the profile image
-- setting the about page text. Both the profile image and about text is specified in the registration process. It is then written to the 'user_data' object. 
-- Its also sets up the url routing 
-
-- NOTE: I have used these dummy profile pictures during the registration process :-
+/* 
+NOTE: I have used these dummy profile pictures during the registration process :-
 http://pic.1fotonin.com/data/wallpapers/59/WDF_1048495.jpg
 http://pic.1fotonin.com/data/wallpapers/59/WDF_1048452.jpg
 */
@@ -56,6 +52,10 @@ jQuery(document).ready(function ($) {
             });
             $('.submitComment').on('click', function () {
                 cmt.submitComment(id);
+            });
+
+            counter.countGoldCredits(id, function (count) {
+                $('.creditsRecieved span').html(count);
             });
         });
     });

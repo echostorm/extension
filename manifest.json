@@ -74,6 +74,7 @@
         "js/vote.js",
         "js/percentage.js",
         "js/keys.js",
+        "js/count.js",
         "js/mustache.js",
         "js/wallet/wallet.js",
         "js/wallet/getVanityKeys.js",
