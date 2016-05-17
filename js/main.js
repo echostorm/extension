@@ -33,7 +33,7 @@
              if (!isEmpty) {
                  riu.on("child_added", function (snapshot) {
                      var item = snapshot.val();
-                     if (item.senderID == result.user.usrPubKey && item.isUpVote == true) {
+                     if (item.senderID == result.user.usrPubKey) {
                          count++;
                          cb(count);
                      }

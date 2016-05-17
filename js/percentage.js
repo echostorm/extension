@@ -10,18 +10,16 @@ var Percentage = {
         var percentage = 0;
         var countMatched = 0;
         var countUpVote = 0;
-        riu.once("value", function (snapshot) {
-            snapshot.forEach(function (childSnapshot) {
-                var item = childSnapshot.val();
-                if (item.url == window.location.href) {
-                    countMatched++;
-                    if (item.isUpVote) {
-                        countUpVote++;
-                    }
+        riu.on("child_added", function (snapshot) {
+            var item = snapshot.val();
+            if (item.url == window.location.href) {
+                countMatched++;
+                if (item.isUpVote) {
+                    countUpVote++;
                 }
-                percentage = (countUpVote / countMatched) * 100;
-                percentage = Math.round(percentage);
-            });
+            }
+            percentage = (countUpVote / countMatched) * 100;
+            percentage = Math.round(percentage);
             cb(percentage, countMatched);
         });
     },
