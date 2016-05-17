@@ -113,18 +113,20 @@ $(document).ready(function () {
         chrome.storage.local.get('user', function (result) {
             var isEmpty = jQuery.isEmptyObject(result);
             if (!isEmpty) {
-                ciu.on("child_added", function (snapshot) {
-                    var item = snapshot.val();
-                    //if (item.senderID == result.user.usrPubKey) {
-                    getUserName(item.senderID, function (from) {
-                        var from = from;
-                        getUserName(item.recipientID, function (to) {
-                            var to = to;
-                            $('.transList').append("<li><span>" + from + "</span><span>" + to + "</span><span>" + item.credits + "</span></li>");
+                ciu.once("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        var item = childSnapshot.val();
+                        //if (item.senderID == result.user.usrPubKey) {
+                        getUserName(item.senderID, function (from) {
+                            var from = from;
+                            getUserName(item.recipientID, function (to) {
+                                var to = to;
+                                $('.transList').append("<li><span>" + from + "</span><span>" + to + "</span><span>" + item.credits + "</span></li>");
+                            });
                         });
-                    })
 
-                    count += parseInt(item.credits);
+                        count += parseInt(item.credits);
+                    });
                     cb(count);
                     //}
                 });
