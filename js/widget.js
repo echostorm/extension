@@ -9,11 +9,12 @@ var Widget = {
         this.getUrlFromLink = jQuery('a:contains("gmc@")').text();
     },
     getAddress: function () {
-        var address = this.getUrlFromLink.split('@')[1];
+        var start_pos = this.getUrlFromLink.indexOf('@') + 1;
+        var end_pos = this.getUrlFromLink.indexOf('.', start_pos);
+        var address = this.getUrlFromLink.substring(start_pos, end_pos);
         return address;
     },
     createWidget: function () {
-        var addr = this.getAddress();
         this.$linkContainingKey.removeAttr("href");
         this.$linkContainingKey.html("<div id=\"gmc-widget\"><span class=\"gmc\">Give me credit</span><span class=\"gmc-amount\">0</span><div class=\"gmc-arrows\"><span class=\"gmc-arrow-up\"><i class=\"fa fa-angle-up\" aria-hidden=\"true\"></i></span><span class=\"gmc-arrow-down\" ><i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></span></div></div>");
     },
