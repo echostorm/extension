@@ -13,6 +13,7 @@ var cmt = {
                         var newComment = {
                             comment: comment.comment,
                             commenter: user.name,
+                            commenterID: user.userID,
                             img: user.profilePicURL
                         };
                         var html = Mustache.to_html(template, newComment);

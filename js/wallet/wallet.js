@@ -124,7 +124,7 @@ $(document).ready(function () {
                         });
                     })
 
-                    count += item.credits;
+                    count += parseInt(item.credits);
                     cb(count);
                     //}
                 });

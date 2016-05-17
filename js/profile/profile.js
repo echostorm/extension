@@ -57,6 +57,16 @@ jQuery(document).ready(function ($) {
             counter.countGoldCredits(id, function (count) {
                 $('.creditsRecieved span').html(count);
             });
+
+            $(document).on('click', '.commenter a', function (e) {
+                e.preventDefault();
+                var cmntrLnk = $(this).attr('href');
+                chrome.runtime.sendMessage({
+                    type: 'showProfile',
+                    userID: cmntrLnk
+                });
+
+            })
         });
     });
 
