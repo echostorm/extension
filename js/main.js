@@ -22,12 +22,34 @@
          }
      });
 
-     countSilverCredits(function (count) {
+     var scrBal = $('.gmc-scr-value').html()
+     if (scrBal == '0') {
+         getScrBal(function (count) {
+             $('.gmc-scr-value').html(count);
+         });
+     }
+
+     function getScrBal(cb) {
+         chrome.storage.local.get('user', function (result) {
+             var isEmpty = jQuery.isEmptyObject(result);
+             if (!isEmpty) {
+                 scb.on("child_added", function (snapshot) {
+                     var item = snapshot.val();
+                     if (item.userID == result.user.usrPubKey) {
+                         cb(item.balance);
+                     }
+                 });
+             } else {
+                 console.log("You are not logged in");
+             }
+         });
+     }
+
+     onBalChange(function (count) {
          $('.gmc-scr-value').html(count);
      });
 
-     function countSilverCredits(cb) {
-         var count = 0;
+     function onBalChange(cb) {
          chrome.storage.local.get('user', function (result) {
              var isEmpty = jQuery.isEmptyObject(result);
              if (!isEmpty) {

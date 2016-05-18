@@ -19,13 +19,13 @@ var vote = {
                 data.transactionID = getVanityKeys.getVanitySig(data, result.user.usrPrvKey, 1);
                 console.log("Vanity signature generated. Sending transaction for verification...");
                 riu.push(data);
-                vote.balance();
+                vote.balance(true, 1);
             } else {
                 console.log("You are not logged in");
             }
         });
     },
-    balance: function () {
+    balance: function (add, amount) {
         var data = tables.get_scb_JSON();
         chrome.storage.local.get('user', function (result) {
             var isEmpty = jQuery.isEmptyObject(result);
@@ -33,9 +33,16 @@ var vote = {
                 vote.updateBalance(result.user.usrPubKey, function (pushID) {
                     if (pushID != null) {
                         var ref = new Firebase('https://givemecredit.firebaseio.com/silver_credits_balance/' + pushID + '/balance');
-                        ref.transaction(function (current_value) {
-                            return (current_value || 0) + 1;
-                        });
+                        if (add == true) {
+                            ref.transaction(function (current_value) {
+                                return (current_value || 0) + amount;
+                            });
+                        } else {
+                            ref.transaction(function (current_value) {
+                                return (current_value || 0) - amount;
+                            });
+                        }
+
                     } else {
                         data.userID = result.user.usrPubKey;
                         data.balance = 1;

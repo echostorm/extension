@@ -19,6 +19,7 @@ var Give = {
                     console.log("Vanity signature generated. Sending transaction for verification...");
                     ciu.push(trans, function () {
                         $('#gmc-widget .gmc').html("Whoohoo! Thanks!");
+                        vote.balance(false, amount);
                     });
                 });
             }, 400);
