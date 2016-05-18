@@ -2,7 +2,7 @@
 <h2>GiveMeCredit is a cryptocurrency where you must earn trust and contribute value in order for money (credits) to be created.</h2>
 <h3>Please clone the repo and load the extension into chrome by visiting chrome://extensions/ and then click 'Load unpacked extension'. Then, once enabled, open the index.html file in your browser to see a demo + further instructions.</h3>
 
-<p>If it is installed, you should also see the following widget (although the app won't work on https sites without being connect to an endpoint that supports https) :-</p>
+<p>If it is installed, you should also see the following widget :-</p>
 <p><a href="">http://gmc@041764eed69f4bd4481b3b8a465414c76c8729637c8d68dbda9634986ec16f3558184347b66baae7aaa4ecb226a04769517816faa272524aa8327d632b3724f120.com</a></p>
 
 <h4>STEP 1:</h4>
@@ -24,8 +24,9 @@
 
 <h4>STEP 5:</h4>
 
-<p>Give someone credit. For testing purposes, setup a new account but don't login! Instead copy the public key from the login form, go to the index.html file and paste the public key i.e. http://gmc@[paste here]. You can now give credit from your logged in account to the new account.</p>
-<p>NOTE: You can use the following url for the profile picture :- http://pic.1fotonin.com/data/wallpapers/59/WDF_1048452.jpg</p>
+<p>Give someone credit. For testing purposes, setup a new account but don't login! Instead copy the public key from the login form, go to the index.html file and paste the public key i.e. http://gmc@[paste here].com. You can now give credit from your logged in account to the new account.</p>
+<p>NOTE: You can use the following url for the profile picture :- https://openmerchantaccount.com/img2/WDF_1048452.jpg</p>
+<p>NOTE: Profile images must be served over https. You can upload an image to:- httpsimage.com if you want</p>
 
 
 <h4>STEP 6:</h4>
