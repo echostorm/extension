@@ -15,11 +15,8 @@ $(document).ready(function () {
         var aboutText = "<p>Welcome " + name + "! Thanks for registering with GiveMeCredit. Please click on this text and write some information about yourself. You can earn Silver Credits right away by rating content using the toolbar below. If you want to earn Gold Credits, you will need at least three profile references, and each reference will need at least three profile stars.</p><p>NOTE: You don't necessarily need to know them. It's just to verify that you are not planning to throw a can of SPAM at us.</p>";
         vanity = getVanityKeys.getVanityAddr();
         $('#keyPair .newPubKey').html(vanity.pubkey + "/" + vanity.prvkey);
-        //$('#keyPair .newPrvKey').html(vanity.prvkey);
         $('#keyPair .gmcLink').html("http://gmc@" + vanity.pubkey + ".com");
         $('textarea.loginKeys').val((vanity.pubkey + "/" + vanity.prvkey));
-        //$('#tab-2 input.pubKey').val(vanity.pubkey);
-        //$('#tab-2 input.prvKey').val(vanity.prvkey);
         var data = tables.get_user_JSON();
         data.userID = vanity.pubkey;
         data.name = name;
@@ -51,8 +48,6 @@ $(document).ready(function () {
         var loginKeys = $('textarea.loginKeys').val();
         var pubKey = loginKeys.split('/')[0];
         var prvKey = loginKeys.split('/')[1];
-        //var pubKey = $('input.pubKey').val();
-        //var prvKey = $('input.prvKey').val();
         var date = new Date().getTime();
         chrome.runtime.sendMessage({
             type: 'user',
@@ -120,19 +115,20 @@ $(document).ready(function () {
                 ciu.once("value", function (snapshot) {
                     snapshot.forEach(function (childSnapshot) {
                         var item = childSnapshot.val();
-                        //if (item.senderID == result.user.usrPubKey) {
-                        getUserName(item.senderID, function (from) {
-                            var from = from;
-                            getUserName(item.recipientID, function (to) {
-                                var to = to;
-                                $('.transList').append("<li><span>" + from + "</span><span>" + to + "</span><span>" + item.credits + "</span></li>");
+                        if ((item.senderID == result.user.usrPubKey) || (item.recipientID == result.user.usrPubKey)) {
+                            getUserName(item.senderID, function (from) {
+                                var from = from;
+                                getUserName(item.recipientID, function (to) {
+                                    var to = to;
+                                    $('.transList').append("<li><span>" + from + "</span><span>" + to + "</span><span>" + item.credits + "</span></li>");
+                                });
                             });
-                        });
-
-                        count += parseInt(item.credits);
+                        }
+                        if (item.recipientID == result.user.usrPubKey) {
+                            count += parseInt(item.credits);
+                            cb(count);
+                        }
                     });
-                    cb(count);
-                    //}
                 });
             } else {
                 console.log("You are not logged in");
