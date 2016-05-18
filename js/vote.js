@@ -19,9 +19,50 @@ var vote = {
                 data.transactionID = getVanityKeys.getVanitySig(data, result.user.usrPrvKey, 1);
                 console.log("Vanity signature generated. Sending transaction for verification...");
                 riu.push(data);
+                vote.balance();
             } else {
                 console.log("You are not logged in");
             }
+        });
+    },
+    balance: function () {
+        var data = tables.get_scb_JSON();
+        chrome.storage.local.get('user', function (result) {
+            var isEmpty = jQuery.isEmptyObject(result);
+            if (!isEmpty) {
+                vote.updateBalance(result.user.usrPubKey, function (pushID) {
+                    if (pushID != null) {
+                        var ref = new Firebase('https://givemecredit.firebaseio.com/silver_credits_balance/' + pushID + '/balance');
+                        ref.transaction(function (current_value) {
+                            return (current_value || 0) + 1;
+                        });
+                    } else {
+                        data.userID = result.user.usrPubKey;
+                        data.balance = 1;
+                        scb.push(data);
+                        $('.gmc-scr-value').html(1);
+                    }
+                });
+            } else {
+                console.log("You are not logged in");
+            }
+        });
+    },
+    updateBalance: function (userID, cb) {
+        scb.once("value", function (snapshot) {
+            var item = snapshot.val();
+            if (item == null) {
+                cb(null);
+            }
+            snapshot.forEach(function (childSnapshot) {
+                var item = childSnapshot.val();
+                if (item.userID == userID) {
+                    var pushID = childSnapshot.key();
+                    cb(pushID);
+                } else {
+                    cb(null);
+                }
+            });
         });
     }
 }

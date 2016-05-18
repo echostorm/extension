@@ -31,11 +31,10 @@
          chrome.storage.local.get('user', function (result) {
              var isEmpty = jQuery.isEmptyObject(result);
              if (!isEmpty) {
-                 riu.on("child_added", function (snapshot) {
+                 scb.on("child_changed", function (snapshot) {
                      var item = snapshot.val();
-                     if (item.senderID == result.user.usrPubKey) {
-                         count++;
-                         cb(count);
+                     if (item.userID == result.user.usrPubKey) {
+                         cb(item.balance);
                      }
                  });
              } else {
