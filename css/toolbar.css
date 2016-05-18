@@ -229,6 +229,10 @@
     font-size: 12px;
 }
 
+#gmc-toolbar .gmc-item-score span {
+    display: inline-block;
+}
+
 #gmc-toolbar .gmc-scr-value {
     border-right: 1px solid #d9d9d9;
     border-left: 1px solid #d9d9d9;
