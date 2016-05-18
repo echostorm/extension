@@ -48,22 +48,24 @@
         <div id="tab-2" class="tab-content">
             <div id="loginPage1">
                 <h1>Login</h1>
-                <p>Public Key:</p>
-                <input type="text" class="pubKey" />
-                <p>Private Key:</p>
+                <p>Please paste your keys here:</p>
+                <textarea class="loginKeys"></textarea>
+                <!--<input type="text" class="pubKey" />-->
+                <!--<p>Private Key:</p>
                 <input type="text" class="prvKey" />
-                <p>
-                    <input type="submit" class="submitLogin" value="Login" />
+                <p>-->
+                <input type="submit" class="submitLogin" value="Login" />
                 </p>
             </div>
             <div id="loginPage2">
                 <h1>Account Details</h1>
                 <h3 class="copyInfoMsg">Please copy these details to a safe location</h3>
                 <div id="keyPair">
-                    <h4>Public Key</h4>
+                    <p>NOTE: Your keys are separated by "/". It's not important right now, it's just easier than pasting in two separate keys.</p>
+                    <h4>Public/Private Key</h4>
                     <div class="newPubKey"></div>
-                    <h4>Private Key</h4>
-                    <div class="newPrvKey"></div>
+                    <!--<h4>Private Key</h4>
+                    <div class="newPrvKey"></div>-->
                     <h4>GiveMeCredit link</h4>
                     <div class="gmcLink"></div>
                 </div>

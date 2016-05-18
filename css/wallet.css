@@ -46,6 +46,8 @@ ul.transList span {
     box-shadow: inset 0px 3px 8px 0px rgba(0, 0, 0, 0.19);
 }
 
+
+/* Do i need these styles? 
 button.createKeys {
     line-height: 25px;
     padding: 0 25px;
@@ -55,7 +57,7 @@ button.createKeys {
     cursor: pointer;
     border: none;
     border-radius: 5px;
-}
+} */
 
 #gmc-wallet h1 {
     margin: 0;
@@ -68,6 +70,9 @@ button.createKeys {
     color: #fff;
 }
 
+
+/* delete this once new login form is ready */
+
 #gmc-wallet input[type="text"],
 #gmc-wallet input[type="email"],
 #gmc-wallet input[type="url"] {
@@ -75,6 +80,14 @@ button.createKeys {
     border-radius: 5px;
     padding: 5px;
     width: 50%;
+}
+
+#gmc-wallet textarea.loginKeys {
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    padding: 10px;
+    width: 80%;
+    height: 70px;
 }
 
 #gmc-wallet .gmc-wallet-balance {
