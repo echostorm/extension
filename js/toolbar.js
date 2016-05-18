@@ -28,5 +28,8 @@ var Toolbar = {
     },
     showAuthorIcon: function () {
         $('.gmc-profile-author').show('slow');
+    },
+    hideSelfIcon: function () {
+        $('.gmc-profile-self').hide('slow');
     }
 }

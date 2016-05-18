@@ -1,8 +1,4 @@
-/* 
-NOTE: I have used these dummy profile pictures during the registration process :-
-http://pic.1fotonin.com/data/wallpapers/59/WDF_1048495.jpg
-http://pic.1fotonin.com/data/wallpapers/59/WDF_1048452.jpg
-*/
+/* you can use https://openmerchantaccount.com/img2/WDF_1048452.jpg as a dummy profile image. It'stored with httpsimage.com */
 
 jQuery(document).ready(function ($) {
     $(".classy-editor").ClassyEdit();
@@ -38,7 +34,9 @@ jQuery(document).ready(function ($) {
                     $('.editor').html(user.about);
                     $('.regDate span').html(newDate);
                     $('#gmc-footer .email span').html(user.email);
-                    setImage(user.profilePicURL);
+                    images.setImage(user.profilePicURL, function (img) {
+                        $('#profile-pic img').attr("src", img);
+                    });
                 }
             });
             //showComments - comments.js
@@ -77,18 +75,6 @@ jQuery(document).ready(function ($) {
         if (!results) return null;
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, " "));
-    }
-
-    function setImage(imgURL) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', imgURL, true);
-        xhr.responseType = 'blob';
-        xhr.onload = function (e) {
-            var img = document.createElement('img');
-            img.src = window.URL.createObjectURL(this.response);
-            $('#profile-pic img').attr("src", img.src);
-        };
-        xhr.send();
     }
 
     var $textarea = $("textarea.comment");

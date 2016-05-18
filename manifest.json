@@ -71,6 +71,7 @@
         "js/toolbar.js",
         "js/widget.js",
         "js/give.js",
+        "js/images.js",
         "js/vote.js",
         "js/percentage.js",
         "js/keys.js",

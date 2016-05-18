@@ -4,6 +4,7 @@ $(document).ready(function () {
         chrome.storage.local.clear();
         $('#loginPage3').fadeOut('slow');
         $('#loginPage1').fadeIn('slow');
+        Toolbar.hideSelfIcon(); //doesn't this work? 
     });
 
     var vanity = "";

@@ -64,8 +64,10 @@
          ud.on("child_added", function (snapshot) {
              var user = snapshot.val();
              if (user.userID == Widget.getAddress()) {
-                 $('.gmc-profile-author img').attr("src", user.profilePicURL);
-                 Toolbar.showAuthorIcon();
+                 images.setImage(user.profilePicURL, function (img) {
+                     $('.gmc-profile-author img').attr("src", img);
+                     Toolbar.showAuthorIcon();
+                 });
              }
          });
 
@@ -95,7 +97,7 @@
          vote.vote(false);
      });
 
-
+     /* do i need this? */
      chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
          if (request.type == "showSelfIcon") {
              $('.gmc-profile-self img').attr("src", request.profilePicURL);
@@ -109,8 +111,11 @@
              ud.on("child_added", function (snapshot) {
                  var user = snapshot.val();
                  if (result.user.usrPubKey == user.userID) {
-                     $('.gmc-profile-self img').attr("src", user.profilePicURL);
-                     Toolbar.showSelfIcon();
+                     images.setImage(user.profilePicURL, function (img) {
+                         $('.gmc-profile-self img').attr("src", img);
+                         Toolbar.showSelfIcon();
+                     });
+
                  }
              });
          } else {
