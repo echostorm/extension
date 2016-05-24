@@ -48,17 +48,23 @@
                 $('.save').on('click', function () {
                     var aboutText = $('.editor').html();
                     chrome.storage.local.get('user', function (result) {
-                        ud.on("child_added", function (snapshot) {
-                            var user = snapshot.val();
-                            if (user.userID == result.user.usrPubKey) {
-                                var id = snapshot.key();
-                                ud.child(id).update({
-                                    about: aboutText
-                                });
-                            }
+                        getPushID(result.user.usrPubKey, function (key) {
+                            var ref = new Firebase('https://givemecredit.firebaseio.com/user_data/' + key);
+                            ref.update({
+                                about: aboutText
+                            });
                         });
                     });
 
+                    function getPushID(id, cb) {
+                        ud.on("child_added", function (snapshot) {
+                            var user = snapshot.val();
+                            if (user.userID == id) {
+                                var key = snapshot.key();
+                                cb(key);
+                            }
+                        });
+                    }
 
                     $(".edit").remove();
                 });

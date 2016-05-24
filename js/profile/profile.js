@@ -1,4 +1,7 @@
-/* you can use https://openmerchantaccount.com/img2/WDF_1048452.jpg as a dummy profile image. It'stored with httpsimage.com */
+/* you can use https://openmerchantaccount.com/img2/WDF_1048452.jpg as a dummy profile image. It'stored with httpsimage.com 
+
+NOTE: The save/cancel buttons including the code which updates the about text is in jquery.classyedit.js file. This shold be here but i couldn't get it work.
+*/
 
 jQuery(document).ready(function ($) {
     $(".classy-editor").ClassyEdit();
