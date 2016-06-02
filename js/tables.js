@@ -130,15 +130,5 @@ var tables = {
             balance: null
         }
         return gold_credits_balance;
-    },
-    // maybe we don't need this one
-    get_ip_JSON: function () {
-        var item_percentage = {
-            url: null,
-            totalUpVotes: null,
-            totalDownVotes: null,
-            percentage: null
-        }
-        return item_percentage;
     }
 }

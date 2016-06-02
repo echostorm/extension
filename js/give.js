@@ -8,21 +8,21 @@ var Give = {
 
         if (Give.checkBalance(amount)) {
             $('#gmc-widget .gmc').html("Verifying...");
-            setTimeout(function () {
-                var trans = tables.get_ciu_JSON();
-                trans.url = pageURL;
-                trans.credits = amount;
-                trans.recipientID = accountNum;
-                chrome.storage.local.get('user', function (result) {
-                    trans.senderID = result.user.usrPubKey;
-                    trans.transactionID = getVanityKeys.getVanitySig(trans, result.user.usrPrvKey, 2);
-                    console.log("Vanity signature generated. Sending transaction for verification...");
-                    ciu.push(trans, function () {
-                        $('#gmc-widget .gmc').html("Whoohoo! Thanks!");
-                        vote.balance(false, amount);
-                    });
+            var percentage = parseInt(jQuery('.gmc-item-score').text());
+            var credits = (amount * percentage) / 100;
+            var trans = tables.get_ciu_JSON();
+            trans.url = pageURL;
+            trans.credits = credits;
+            trans.recipientID = accountNum;
+            chrome.storage.local.get('user', function (result) {
+                trans.senderID = result.user.usrPubKey;
+                trans.transactionID = getVanityKeys.getVanitySig(trans, result.user.usrPrvKey, 1);
+                console.log("Vanity signature generated. Sending transaction for verification...");
+                ciu.push(trans, function () {
+                    $('#gmc-widget .gmc').html("Whoohoo! Thanks!");
+                    vote.balance(false, amount);
                 });
-            }, 400);
+            });
         }
     },
     checkBalance: function (amount) {
