@@ -5,7 +5,7 @@ var counter = {
             snapshot.forEach(function (childSnapshot) {
                 var item = childSnapshot.val();
                 if (item.recipientID == id) {
-                    count += parseInt(item.credits);
+                    count += parseFloat(item.credits);
                 }
             });
             cb(count);
