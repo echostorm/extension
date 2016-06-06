@@ -17,11 +17,13 @@ var Give = {
             chrome.storage.local.get('user', function (result) {
                 trans.senderID = result.user.usrPubKey;
                 trans.transactionID = getVanityKeys.getVanitySig(trans, result.user.usrPrvKey, 1);
-                console.log("Vanity signature generated. Sending transaction for verification...");
-                ciu.push(trans, function () {
-                    $('#gmc-widget .gmc').html("Whoohoo! Thanks!");
-                    vote.balance(false, amount);
-                });
+                // write the transaction to the database (db.js)
+                $.when(db.sendGoldCredits(trans)).then(
+                    function () {
+                        $('#gmc-widget .gmc').html("Whoohoo! Thanks!");
+                        vote.balance(false, amount);
+                    }
+                );
             });
         }
     },

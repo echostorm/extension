@@ -26,12 +26,17 @@ $(document).ready(function () {
         data.about = aboutText;
         data.regDate = new Date().getTime();
         data.userSig = getVanityKeys.getVanitySig(data, vanity.prvkey, 1);
-        ud.push(data);
-        $('ul.tabs li').removeClass('current');
-        $('.tab-content').removeClass('current');
-        $("li[data-tab='tab-2']").addClass('current');
-        $("#tab-2").addClass('current');
-        isNewUser = true;
+
+        // write user data to db (db.js)
+        $.when(db.writeUserData(data)).then(
+            function () {
+                $('ul.tabs li').removeClass('current');
+                $('.tab-content').removeClass('current');
+                $("li[data-tab='tab-2']").addClass('current');
+                $("#tab-2").addClass('current');
+                isNewUser = true;
+            }
+        );
     });
 
     chrome.storage.local.get('user', function (result) {
@@ -65,14 +70,15 @@ $(document).ready(function () {
             }
 
         });
-
+        // on login, send a message to the content script. Perhaps this could be added to background.js??
         chrome.tabs.query({
             active: true,
             currentWindow: true
         }, function (tabs) {
             chrome.tabs.sendMessage(tabs[0].id, {
                 type: "showSelfIcon",
-                profilePicURL: $('#gmc-wallet input.ppURL').val()
+                pubKey: pubKey
+                    //profilePicURL: $('#gmc-wallet input.ppURL').val()
             });
         });
     });
@@ -103,48 +109,18 @@ $(document).ready(function () {
         }
     });
 
-
-    countGoldCredits(function (count) {
-        $('.gmc-wallet-balance span').html(count);
+    /* list transactions for the currently logged in user and display on default popup */
+    var count = 0;
+    chrome.storage.local.get('user', function (result) {
+        var isEmpty = jQuery.isEmptyObject(result);
+        if (!isEmpty) {
+            db.getTransactionsForUser(result.user.usrPubKey, function (count) {
+                $('.gmc-wallet-balance span').html(count);
+            });
+        } else {
+            console.log("You are not logged in");
+        }
     });
-
-    function countGoldCredits(cb) {
-        var count = 0;
-        chrome.storage.local.get('user', function (result) {
-            var isEmpty = jQuery.isEmptyObject(result);
-            if (!isEmpty) {
-                ciu.once("value", function (snapshot) {
-                    snapshot.forEach(function (childSnapshot) {
-                        var item = childSnapshot.val();
-                        if ((item.senderID == result.user.usrPubKey) || (item.recipientID == result.user.usrPubKey)) {
-                            getUserName(item.senderID, function (from) {
-                                var from = from;
-                                getUserName(item.recipientID, function (to) {
-                                    var to = to;
-                                    $('.transList').append("<li><span>" + from + "</span><span>" + to + "</span><span>" + item.credits + "</span></li>");
-                                });
-                            });
-                        }
-                        if (item.recipientID == result.user.usrPubKey) {
-                            count += parseInt(item.credits);
-                            cb(count);
-                        }
-                    });
-                });
-            } else {
-                console.log("You are not logged in");
-            }
-        });
-    }
-
-    function getUserName(id, cb) {
-        ud.on("child_added", function (snapshot) {
-            var item = snapshot.val();
-            if (item.userID == id) {
-                cb(item.name);
-            }
-        });
-    }
 
     $('.sendCredits').on('click', function () {
         // To do: check if senderID has enough funds to send
@@ -161,13 +137,17 @@ $(document).ready(function () {
             newBalance = (balance - amount);
             $('.gmc-wallet-balance span').html(newBalance);
             var trans = tables.get_tu_JSON();
-            trans.transactionID = "XYZ1234"; //can i get this from the soul?
             trans.recipientID = recipientID;
             trans.amount = amount;
             trans.senderID = vanity.pubkey;
-            trans.senderSig = getVanityKeys.getVanitySig(trans, vanity.prvkey, 1);
-            tu.put(trans).key(trans.transactionID);
-            verify.verifyTu();
+            trans.transactionID = getVanityKeys.getVanitySig(trans, vanity.prvkey, 1);
+
+            // send transaction
+            $.when(db.sendTransaction(trans)).then(
+                function () {
+                    console.log("transaction has been sent");
+                }
+            );
         }
     });
 

@@ -12,7 +12,7 @@
     "browser_action": {
         "default_icon": "icons/icon19.png",
         "default_title": "Wallet",
-        "default_popup": "wallet.html"
+        "default_popup": "html/wallet.html"
     },
     "permissions": [
     "tabs", "<all_urls>", "background", "storage",

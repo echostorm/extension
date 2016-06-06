@@ -17,33 +17,12 @@ var vote = {
                 data.senderID = result.user.usrPubKey;
                 //IMPORTANT : the transactionID is the signature
                 data.transactionID = getVanityKeys.getVanitySig(data, result.user.usrPrvKey, 1);
-                console.log("Vanity signature generated. Sending transaction for verification...");
-                riu.push(data);
-                /* setnet */
-                var filePath = data.transactionID;
-
-                Safe.nfs.createFile(filePath, {
-                    metadata: 'rated_item',
-                    isVersioned: false,
-                    isPathShared: true
-                }).then(function () {
-                    console.log('Created file. Now go add content!');
-                    Safe.nfs.updateFile(filePath, data, {
-                        isPathShared: true,
-                    }).then(function () {
-                        console.log('Updated file. Fetching now...');
-                        options = {
-                            isPathShared: true
-                        };
-                        Safe.nfs.getFile(filePath, options).then(function (file) {
-                            console.log(file);
-                        });
-                    });
-
-                });
-
-                /* end safenet */
-                vote.balance(true, 1);
+                // write the transaction to the database (db.js)
+                $.when(db.sendVote(data)).then(
+                    function () {
+                        vote.balance(true, 1);
+                    }
+                );
             } else {
                 console.log("You are not logged in");
             }

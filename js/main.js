@@ -11,31 +11,6 @@
      - if link matches criteria replace it with widget and show profile tab
      */
 
-     function addError(element, error) {
-         console.log(error.toString());
-     }
-
-     Safe = new SafeApp({
-         id: "123",
-         name: "GiveMeCredit",
-         vendor: "Glen Simister",
-         version: "1",
-     }, ['SAFE_DRIVE_ACCESS']); // include SAFEDrive access
-     console.log('Initialized a new Safe instance. You can authenticate now.');
-
-     Safe.auth.authenticate().then(function () {
-         console.log('Authorized successfully.');
-     });
-
-     /*Safe.nfs.createDirectory('rated_items', {
-         isPrivate: false,
-         metadata: 'Rated Items Directory',
-         isVersioned: true,
-         isPathShared: true
-     }).then(function () {
-         console.log('Created directory.');
-     });*/
-
      Percentage.getProfilePercentage(function (totalComments, sumOfRatings) {
          var averageScore = 0;
          if (totalComments != 0) {
@@ -146,8 +121,10 @@
      /* do i need this? */
      chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
          if (request.type == "showSelfIcon") {
-             $('.gmc-profile-self img').attr("src", request.profilePicURL);
-             Toolbar.showSelfIcon();
+             db.getProfilePicForUser(request.pubKey, function (profilePicURL) {
+                 $('.gmc-profile-self img').attr("src", profilePicURL);
+                 Toolbar.showSelfIcon();
+             })
          }
      });
 
