@@ -33,46 +33,22 @@ var vote = {
         chrome.storage.local.get('user', function (result) {
             var isEmpty = jQuery.isEmptyObject(result);
             if (!isEmpty) {
-                vote.updateBalance(result.user.usrPubKey, function (pushID) {
+                db.updateBalance(result.user.usrPubKey, function (pushID) {
                     if (pushID != null) {
-                        var ref = new Firebase('https://givemecredit.firebaseio.com/silver_credits_balance/' + pushID + '/balance');
-                        if (add == true) {
-                            ref.transaction(function (current_value) {
-                                return (current_value || 0) + amount;
-                            });
-                        } else {
-                            ref.transaction(function (current_value) {
-                                return (current_value || 0) - amount;
-                            });
-                        }
-
+                        db.writeBalance(add, pushID, amount);
                     } else {
                         data.userID = result.user.usrPubKey;
                         data.balance = 1;
-                        scb.push(data);
-                        $('.gmc-scr-value').html(1);
+                        $.when(db.createNewBalance(data)).then(
+                            function () {
+                                $('.gmc-scr-value').html(1);
+                            }
+                        );
                     }
                 });
             } else {
                 console.log("You are not logged in");
             }
-        });
-    },
-    updateBalance: function (userID, cb) {
-        scb.once("value", function (snapshot) {
-            var item = snapshot.val();
-            if (item == null) {
-                cb(null);
-            }
-            snapshot.forEach(function (childSnapshot) {
-                var item = childSnapshot.val();
-                if (item.userID == userID) {
-                    var pushID = childSnapshot.key();
-                    cb(pushID);
-                } else {
-                    cb(null);
-                }
-            });
         });
     }
 }

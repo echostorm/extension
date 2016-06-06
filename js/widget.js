@@ -16,7 +16,7 @@ var Widget = {
     },
     createWidget: function () {
         this.$linkContainingKey.removeAttr("href");
-        this.$linkContainingKey.html("<div id=\"gmc-widget\"><span class=\"gmc\">Give me credit</span><span class=\"gmc-amount\">0</span><div class=\"gmc-arrows\"><span class=\"gmc-arrow-up\"><i class=\"fa fa-angle-up\" aria-hidden=\"true\"></i></span><span class=\"gmc-arrow-down\" ><i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></span></div></div>");
+        this.$linkContainingKey.html("<div id=\"gmc-widget\"><span class=\"gmc\">Give Me Credit</span><span class=\"gmc-amount\">0</span><div class=\"gmc-arrows\"><span class=\"gmc-arrow-up\"><i class=\"fa fa-angle-up\" aria-hidden=\"true\"></i></span><span class=\"gmc-arrow-down\" ><i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></span></div></div>");
     },
     onArrowUpClick: function () {
         var amount = parseInt(jQuery('.gmc-amount').text());

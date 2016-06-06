@@ -25,25 +25,8 @@ jQuery(document).ready(function ($) {
     window.addEventListener('load', function (data) {
         chrome.tabs.getSelected(null, function (tab) {
             var id = getParameterByName('id', tab.url);
-            ud.on("child_added", function (snapshot) {
-                var user = snapshot.val();
-                if (user.userID == id) {
-                    var date = new Date(user.regDate);
-                    var day = date.getDate();
-                    var month = date.getMonth();
-                    var year = date.getFullYear();
-                    var newDate = day + "/" + month + "/" + year;
-                    $('#name h3').html(user.name);
-                    $('.editor').html(user.about);
-                    $('.regDate span').html(newDate);
-                    $('#gmc-footer .email span').html(user.email);
-                    images.setImage(user.profilePicURL, function (img) {
-                        $('#profile-pic img').attr("src", img);
-                    });
-                }
-            });
-            //showComments - comments.js
-            cmt.showComments(id, function (totalComments, sumOfRatings) {
+            db.getUserData(id);
+            db.showComments(id, function (totalComments, sumOfRatings) {
                 var averageScore = 0;
                 if (totalComments != 0) {
                     averageScore = sumOfRatings / totalComments;
@@ -55,7 +38,7 @@ jQuery(document).ready(function ($) {
                 cmt.submitComment(id);
             });
 
-            counter.countGoldCredits(id, function (count) {
+            db.countGoldCredits(id, function (count) {
                 $('.creditsRecieved span').html(count);
             });
 

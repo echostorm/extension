@@ -46,7 +46,7 @@
         "scripts": [
         "background.js"
         ],
-        "persistent": true
+        "persistent": false
     },
     "content_scripts": [
         {
@@ -59,7 +59,6 @@
         "css/toolbar.css"
       ],
             "js": [
-        "js/lib/safenet.js",
         "js/lib/firebase.js",
         "js/lib/jquery-2.2.1.min.js",
         "js/lib/jquery.initialize.js",
@@ -71,15 +70,13 @@
         "js/db.js",
         "js/tables.js",
         "js/main.js",
-        "js/verify.js",
         "js/toolbar.js",
         "js/widget.js",
         "js/give.js",
         "js/images.js",
         "js/vote.js",
-        "js/percentage.js",
         "js/keys.js",
-        "js/count.js"
+        "js/getVanityKeys.js"
       ]
     }
     ]
