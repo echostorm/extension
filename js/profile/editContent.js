@@ -1,3 +1,5 @@
+/* This page isn't currently being used. Maybe delete it */
+
 function edit() {
     var saveAndCancel = "<div class='edit'><span class='save'>Save</span><span class='cancel'>Cancel</span></div>";
     var enterImgURL = "<div class='enterImageURL'><p>Enter Image URL:</p><input type='text' /></div>";

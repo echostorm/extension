@@ -1,3 +1,5 @@
+/* This page isn't currently being used. Maybe delete it */
+
 (function ($) {
     jQuery('#accordion > li > a').on("click", function () {
         if (jQuery(this).attr('class') != 'active') {
