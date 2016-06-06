@@ -42,7 +42,7 @@ chrome.runtime.onMessage.addListener(function (request, sendResponse) {
 
     if (request.type === 'showProfile') {
         chrome.tabs.create({
-                url: chrome.extension.getURL('profile.html?id=' + request.userID),
+                url: chrome.extension.getURL('/html/profile.html?id=' + request.userID),
                 active: false
             },
             function (tab) {
@@ -63,7 +63,7 @@ chrome.runtime.onMessage.addListener(function (request, sendResponse) {
     if (request.type === 'author') {
         profileKey = request.userID;
         chrome.tabs.create({
-            url: chrome.extension.getURL('profile.html'),
+            url: chrome.extension.getURL('/html/profile.html'),
             active: false
         }, function (tab) {
             var w = 851;

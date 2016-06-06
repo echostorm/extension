@@ -59,12 +59,16 @@
         "css/toolbar.css"
       ],
             "js": [
-        "js/firebase.js",
-        "js/db.js",
-        "js/jquery-2.2.1.min.js",
-        "js/jquery.initialize.js",
+        "js/lib/safenet.js",
+        "js/lib/firebase.js",
+        "js/lib/jquery-2.2.1.min.js",
+        "js/lib/jquery.initialize.js",
+        "js/lib/jsrsasign-latest-all-min.js",
+        "js/lib/jquery.rateyo.min.js",
+        "js/lib/jquery.classyedit.js",
+        "js/lib/mustache.js",
         "js/html.js",
-        "js/jsrsasign-latest-all-min.js",
+        "js/db.js",
         "js/tables.js",
         "js/main.js",
         "js/verify.js",
@@ -76,17 +80,14 @@
         "js/percentage.js",
         "js/keys.js",
         "js/count.js",
-        "js/mustache.js",
         "js/wallet/wallet.js",
         "js/wallet/getVanityKeys.js",
         "js/profile/accordion.js",
         "js/profile/animate.js",
         "js/profile/editContent.js",
         "js/profile/navigation.js",
-        "js/profile/jquery.classyedit.js",
         "js/profile/profile.js",
-        "js/profile/comments.js",
-        "js/profile/jquery.rateyo.min.js"
+        "js/profile/comments.js"
       ]
     }
     ]
