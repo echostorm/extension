@@ -42,6 +42,7 @@ var db = {
                         var from = from;
                         db.getUserName(item.recipientID, function (to) {
                             var to = to;
+                            //this should not be here
                             $('.transList').append("<li><span>" + from + "</span><span>" + to + "</span><span>" + item.credits + "</span></li>");
                         });
                     });
