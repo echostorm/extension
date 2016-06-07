@@ -1,18 +1,10 @@
  $(document).ready(function () {
-     /*
-     - get current page score
-     - count authors gold credits (to do)
-     - grab the content authors details
-     - if link matches criteria replace it with widget and show profile tab
-     */
-
      /* initialize and display the toolbar */
      Toolbar.init();
 
      $('.gmc-vote-up').on('click', function () {
          vote.vote(true);
      });
-
      $('.gmc-vote-down').on('click', function () {
          vote.vote(false);
      });
@@ -31,7 +23,6 @@
              } else {
                  console.log("you are not logged in");
              }
-
          });
      });
 
@@ -39,12 +30,12 @@
      open the authors profile in a popup window */
 
      $('.gmc-profile-author').on('click', function () {
+         var key = $('#gmc-widget').attr('data-key');
          chrome.runtime.sendMessage({
              type: 'showProfile',
-             userID: Widget.getAddress()
+             userID: key
          });
      });
-
 
      /* check if link exists on current page that matches the criteria */
      var $authorsKey = $('a:contains("gmc@")');
