@@ -230,5 +230,21 @@ var db = {
             });
             cb(totalComments, sumOfRatings);
         });
+    },
+    getUserPushID: function (id, cb) {
+        ud.on("child_added", function (snapshot) {
+            var user = snapshot.val();
+            if (user.userID == id) {
+                var key = snapshot.key();
+                cb(key);
+            }
+        });
+    },
+    updateAboutText: function (key, aboutText) {
+        var url = 'https://givemecredit.firebaseio.com/user_data/' + key;
+        var ref = new Firebase(url);
+        ref.update({
+            about: aboutText
+        });
     }
 }

@@ -36,11 +36,8 @@ jQuery(document).ready(function ($) {
                 if (result.user.usrPubKey == id) {
                     $('body').on('click', '.save', function () {
                         var aboutText = $('.editor').html();
-                        getPushID(result.user.usrPubKey, function (key) {
-                            var ref = new Firebase('https://givemecredit.firebaseio.com/user_data/' + key);
-                            ref.update({
-                                about: aboutText
-                            });
+                        db.getUserPushID(result.user.usrPubKey, function (key) {
+                            db.updateAboutText(key, aboutText);
                             $(".edit").remove();
                         });
                     });
@@ -48,17 +45,6 @@ jQuery(document).ready(function ($) {
                     $('body').on('click', '.cancel', function () {
                         $(".edit").remove();
                     });
-
-                    function getPushID(id, cb) {
-                        ud.on("child_added", function (snapshot) {
-                            var user = snapshot.val();
-                            if (user.userID == id) {
-                                var key = snapshot.key();
-                                cb(key);
-                            }
-                        });
-                    }
-                    $(".edit").remove();
                 } else {
                     $('body').on('click', '.save', function () {
                         alert("Sorry, you can't edit this users profile");
