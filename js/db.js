@@ -55,22 +55,26 @@ var db = {
         });
     },
     getTransactionsForUser: function (usrPubKey, cb) {
+        var transList = {
+            to: null,
+            from: null,
+            credits: null,
+            count: null
+        }
         ciu.once("value", function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
                 var item = childSnapshot.val();
-                if ((item.senderID == usrPubKey) || (item.recipientID == usrPubKey)) {
+                if ((item.senderID == usrPubKey) ||
+                    (item.recipientID == usrPubKey)) {
                     db.getUserName(item.senderID, function (from) {
-                        var from = from;
+                        transList.from = from;
                         db.getUserName(item.recipientID, function (to) {
-                            var to = to;
-                            //this should not be here
-                            $('.transList').append("<li><span>" + from + "</span><span>" + to + "</span><span>" + item.credits + "</span></li>");
+                            transList.to = to;
+                            transList.credits = item.credits;
                         });
+                        transList.count += parseInt(item.credits);
+                        cb(transList);
                     });
-                }
-                if (item.recipientID == usrPubKey) {
-                    count += parseInt(item.credits);
-                    cb(count);
                 }
             });
         });
