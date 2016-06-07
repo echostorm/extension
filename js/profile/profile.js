@@ -29,9 +29,9 @@ jQuery(document).ready(function ($) {
             var id = getParameterByName('id', tab.url);
 
             /* check if profile page belongs to the logged in user. 
-            If it does, then enable the text editor. 
-            NOTE: Remember to put the db calls in db.js
-            */
+            If it does, allow them to edit the content
+            NOTE: Remember to put the db calls in db.js */
+
             chrome.storage.local.get('user', function (result) {
                 if (result.user.usrPubKey == id) {
                     $('body').on('click', '.save', function () {
@@ -41,7 +41,6 @@ jQuery(document).ready(function ($) {
                             $(".edit").remove();
                         });
                     });
-
                     $('body').on('click', '.cancel', function () {
                         $(".edit").remove();
                     });
