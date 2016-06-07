@@ -33,7 +33,7 @@ var db = {
             }
         });
     },
-    getUserData: function (id) {
+    getUserData: function (id, cb) {
         ud.on("child_added", function (snapshot) {
             var user = snapshot.val();
             if (user.userID == id) {
@@ -43,14 +43,14 @@ var db = {
                 var year = date.getFullYear();
                 var newDate = day + "/" + month + "/" + year;
 
-                // don't mix the views. return a json obj
-                $('#name h3').html(user.name);
-                $('.editor').html(user.about);
-                $('.regDate span').html(newDate);
-                $('#gmc-footer .email span').html(user.email);
-                images.setImage(user.profilePicURL, function (img) {
-                    $('#profile-pic img').attr("src", img);
-                });
+                var userData = {
+                    newDate: newDate,
+                    name: user.name,
+                    about: user.about,
+                    email: user.email,
+                    profilePicURL: user.profilePicURL
+                }
+                cb(userData);
             }
         });
     },

@@ -25,7 +25,17 @@ jQuery(document).ready(function ($) {
     window.addEventListener('load', function (data) {
         chrome.tabs.getSelected(null, function (tab) {
             var id = getParameterByName('id', tab.url);
-            db.getUserData(id);
+
+            db.getUserData(id, function (result) {
+                $('#name h3').html(result.name);
+                $('.editor').html(result.about);
+                $('.regDate span').html(result.newDate);
+                $('#gmc-footer .email span').html(result.email);
+                images.setImage(result.profilePicURL, function (img) {
+                    $('#profile-pic img').attr("src", img);
+                });
+            });
+
             db.showComments(id, function (totalComments, sumOfRatings) {
                 var averageScore = 0;
                 if (totalComments != 0) {
