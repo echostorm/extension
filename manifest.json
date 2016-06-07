@@ -56,7 +56,8 @@
             "css": [
         "css/reset.css",
         "css/font-awesome.min.css",
-        "css/toolbar.css"
+        "css/toolbar.css",
+        "css/widget.css"
       ],
             "js": [
         "js/lib/firebase.js",
@@ -66,7 +67,6 @@
         "js/lib/jquery.rateyo.min.js",
         "js/lib/jquery.classyedit.js",
         "js/lib/mustache.js",
-        "js/html.js",
         "js/db.js",
         "js/tables.js",
         "js/main.js",
