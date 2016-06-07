@@ -47,13 +47,10 @@
 
 
      /* check if link exists on current page that matches the criteria */
-     Widget.checkLink();
-
-     if (Widget.$linkContainingKey.length) {
-         Widget.author();
-         Widget.createWidget();
+     var $authorsKey = $('a:contains("gmc@")');
+     if ($authorsKey.length) {
          var addr = Widget.getAddress();
-
+         Widget.createWidget($authorsKey);
          /* get the profile picture associated with content 
          author and display it on the toolbar */
          db.getProfilePicForUser(addr, function (profilePic) {
