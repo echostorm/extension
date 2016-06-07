@@ -40,11 +40,11 @@
      /* check if link exists on current page that matches the criteria */
      var $authorsKey = $('a:contains("gmc@")');
      if ($authorsKey.length) {
-         var addr = Widget.getAddress();
          Widget.createWidget($authorsKey);
          /* get the profile picture associated with content 
          author and display it on the toolbar */
-         db.getProfilePicForUser(addr, function (profilePic) {
+         var key = $('#gmc-widget').attr('data-key');
+         db.getProfilePicForUser(key, function (profilePic) {
              images.setImage(profilePic, function (img) {
                  $('.gmc-profile-author img').attr("src", img);
                  Toolbar.showAuthorIcon();
@@ -122,8 +122,7 @@
 
      /**** end if ****/
 
-     /* Toolbar buttons */
-
+     /* Widget */
 
      $('.gmc-arrow-up').on('click', function () {
          Widget.onArrowUpClick();
