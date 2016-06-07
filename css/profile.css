@@ -200,16 +200,19 @@ a.home {
     height: 145px;
     overflow: hidden;
     margin: 20px auto 0 auto;
+    border: 7px solid #d9d9d9;
+    border-radius: 50%;
+    background: #fff url(../images/default.gif) no-repeat center center;
 }
 
 #profile-pic img {
     border-radius: 50%;
     display: block;
     height: auto;
-    border: 7px solid #d9d9d9;
-    width: -moz-calc(100% - 14px);
+    width: 100%;
+    /*width: -moz-calc(100% - 14px);
     width: -webkit-calc(100% - 14px);
-    width: calc(100% - 14px);
+    width: calc(100% - 14px);*/
 }
 
 a.btn {

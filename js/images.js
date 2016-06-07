@@ -7,7 +7,6 @@ var images = {
             var img = document.createElement('img');
             img.src = window.URL.createObjectURL(this.response);
             cb(img.src);
-            //$('#profile-pic img').attr("src", img.src);
         };
         xhr.send();
     }

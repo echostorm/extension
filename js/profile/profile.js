@@ -7,7 +7,7 @@ jQuery(document).ready(function ($) {
 
     nav.init();
     nav.mobile();
-    animate.rotateProfilePic();
+    //animate.rotateProfilePic();
     animate.listSlideIn();
     animate.contentFadeIn();
 
