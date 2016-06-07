@@ -4,7 +4,7 @@ NOTE: The save/cancel buttons including the code which updates the about text is
 */
 
 jQuery(document).ready(function ($) {
-    $(".classy-editor").ClassyEdit();
+
     nav.init();
     nav.mobile();
     animate.rotateProfilePic();
@@ -22,9 +22,49 @@ jQuery(document).ready(function ($) {
         rating: 3.5
     });
 
+    $(".classy-editor").ClassyEdit();
+
     window.addEventListener('load', function (data) {
         chrome.tabs.getSelected(null, function (tab) {
             var id = getParameterByName('id', tab.url);
+
+            /* check if profile page belongs to the logged in user. 
+            If it does, then enable the text editor. 
+            NOTE: Remember to put the db calls in db.js
+            */
+            chrome.storage.local.get('user', function (result) {
+                if (result.user.usrPubKey == id) {
+                    $('body').on('click', '.save', function () {
+                        var aboutText = $('.editor').html();
+                        getPushID(result.user.usrPubKey, function (key) {
+                            var ref = new Firebase('https://givemecredit.firebaseio.com/user_data/' + key);
+                            ref.update({
+                                about: aboutText
+                            });
+                            $(".edit").remove();
+                        });
+                    });
+
+                    $('body').on('click', '.cancel', function () {
+                        $(".edit").remove();
+                    });
+
+                    function getPushID(id, cb) {
+                        ud.on("child_added", function (snapshot) {
+                            var user = snapshot.val();
+                            if (user.userID == id) {
+                                var key = snapshot.key();
+                                cb(key);
+                            }
+                        });
+                    }
+                    $(".edit").remove();
+                } else {
+                    $('body').on('click', '.save', function () {
+                        alert("Sorry, you can't edit this users profile");
+                    });
+                }
+            });
 
             db.getUserData(id, function (result) {
                 $('#name h3').html(result.name);

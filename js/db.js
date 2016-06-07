@@ -12,6 +12,10 @@ var tu = new Firebase('https://givemecredit.firebaseio.com/transaction_unconfirm
 var comments = new Firebase('https://givemecredit.firebaseio.com/comments');
 
 
+/* All database transactions go here. 
+Firebase will only be used until i can 
+find a suitable, decentralised alternative */
+
 var db = {
     sendGoldCredits: function (trans) {
         ciu.push(trans);
