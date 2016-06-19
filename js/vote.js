@@ -17,6 +17,14 @@ var vote = {
                 data.senderID = result.user.usrPubKey;
                 //IMPORTANT : the transactionID is the signature
                 data.transactionID = getVanityKeys.getVanitySig(data, result.user.usrPrvKey, 1);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data,
+                    success: success,
+                    dataType: dataType
+                });
+
                 // write the transaction to the database (db.js)
                 $.when(db.sendVote(data)).then(
                     function () {

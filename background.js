@@ -57,24 +57,4 @@ chrome.runtime.onMessage.addListener(function (request, sendResponse) {
                 });
             });
     }
-
-    /* This request is sent by main.js when you click on the profile icon that shows the authors profile. I need to find out how to pass a message to the popup with the authors account number so that i can retreive the correct record from gunDB */
-
-    /*   if (request.type === 'author') {
-           profileKey = request.userID;
-           chrome.tabs.create({
-               url: chrome.extension.getURL('/html/profile.html'),
-               active: false
-           }, function (tab) {
-               var w = 851;
-               var h = 500;
-               chrome.windows.create({
-                   tabId: tab.id,
-                   type: 'popup',
-                   focused: true,
-                   width: w,
-                   height: h
-               });
-           });
-       }*/
 });

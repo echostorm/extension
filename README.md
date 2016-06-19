@@ -1,4 +1,9 @@
 <h1>Welcome!</h1>
+<h2>NOTE: The demo doesn't currently work as i've closed my firebase account. I setup an alterntaive soon.</h2>
+
+![screen shot 2016-05-16 at 08 18 31](https://cloud.githubusercontent.com/assets/4425844/16179331/2b68b3d6-365a-11e6-8ba6-ebc07e56c0f6.png)
+
+
 <h2>GiveMeCredit is a cryptocurrency where you must earn trust and contribute value in order for money (credits) to be created.</h2>
 <h3>Please clone the repo and load the extension into chrome by visiting chrome://extensions/ and then click 'Load unpacked extension'. Then, once enabled, open the index.html file in your browser to see a demo + further instructions.</h3>
 
