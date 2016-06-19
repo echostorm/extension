@@ -1,5 +1,5 @@
 <h1>Welcome!</h1>
-<h2>NOTE: The demo doesn't currently work as i've closed my firebase account. I setup an alterntaive soon.</h2>
+<p>NOTE: The demo doesn't currently work as i've closed my firebase account. I'll setup an alternative soon.</p>
 
 ![screen shot 2016-05-16 at 08 18 31](https://cloud.githubusercontent.com/assets/4425844/16179331/2b68b3d6-365a-11e6-8ba6-ebc07e56c0f6.png)
 
