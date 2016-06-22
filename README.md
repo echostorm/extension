@@ -17,7 +17,7 @@ GiveMeCredit has three main features:-
 A toolbar for rating content
 </li>
 <li>
-A GiveMeCredit widget. You simple paste your link somewhere (i.e. http://gmc@0481f1010a5b0147e764aa59741ef923396322e.com). This is converted into a widget by the extension and allows you to receive credits.
+A GiveMeCredit widget. You simply paste your link somewhere (i.e. http://gmc@0481f1010a5b0147e764aa59741ef923396322e.com). This is converted into a widget by the extension and allows you to receive credits.
 </li>
 <li>
 A profile-based trust network
@@ -34,9 +34,9 @@ A profile-based trust network
 <li>You need a profile score of >=3.5 to receive credits (and maybe take into account the scores of those who assigned you that score).</li>
 <li>I would like each user to use a custom vanity address that can be checked</li>
 <li>I would like it if users could only sync data with other users who have a profile score of >=3.5. If a user is lobbying for credit somewhere, an introduction can be made.</li>
-
-<p>I'm currently rebuilding the demo using PouchDB. However, the final implementation will most likely require a blockchain of sorts. I would like the application to function like a social network whereby users only sync data with trusted peers, thus forming a trust network. A trusted user is one who has a positive feedback score of 3.5 stars or above (out of 5 stars). You could check that the users who have provided the feedback have 3.5 stars and above. Of course, this alone is not sufficient in preventing sybil attacks (i.e. users creating lots of fake profiles). However, if it is required that users have a custom 'vanity' address that can be checked (i.e. the first x characters match the last x characters), then it will take time for a user to create an account.</p><p>I'm interested in using CouchDB as a database. A CouchDB database can replicate data to other peers, and the integrity of that data can be verified inside the database itself.</p><p>
-As also mentioned, i'd like silver credits to expire. There will also be a limit on how many silver credits a person can hold at any one time and a limit to how many silver credits that can be earned in a given timeframe. This would make sense since silver credits are not meant to have any value. They are used to assign value to items and to impose an extra layer of disipline to the money creation process. Also, the data provided by rating content could be very useful for developing a search engine. By allowing silver credits to expire it ensures a turnover of fresh content, thus preventing monopolys. 
+<hr />
+<p>I'm currently rebuilding the demo using PouchDB. However, the final implementation will most likely require a blockchain of sorts. I would like the application to function like a social network whereby users only sync data with trusted peers, thus forming a trust network. A trusted peer is a user who has a positive feedback score of 3.5 stars or above (out of 5 stars). You could also check that the users who have provided the feedback have 3.5 stars and above. Of course, this alone is not sufficient in preventing sybil attacks (i.e. users creating lots of fake profiles). However, if it is required that users have a custom 'vanity' address that can be checked (i.e. the first x characters match the last x characters), then it will take time for a user to create an account.</p><p>I'm interested in using CouchDB as a database. A CouchDB database can replicate data to other peers, and the integrity of that data can be verified inside the database itself.</p><p>
+As also mentioned, i'd like silver credits to expire. There will also be a limit on how many silver credits a person can hold at any one time and a limit to how many silver credits that can be earned in a given timeframe. This would make sense since silver credits are not meant to have any value. They are used to assign value to items and to impose an extra layer of disipline to the money creation process. Also, the data provided by rating content could be very useful for developing a search engine. By allowing silver credits to expire it ensures a turnover of fresh content, thus preventing monopolies. 
 </p>
 </ul>
 <hr />
