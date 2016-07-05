@@ -1,6 +1,39 @@
  $(document).ready(function () {
+
+
      /* initialize and display the toolbar */
      Toolbar.init();
+
+     goldCredits.load(function (err, tableStats, metaStats) {
+         if (!err) {
+             console.log("Loading gold_credits was successful");
+         }
+     });
+
+     ratedItems.load(function (err, tableStats, metaStats) {
+         if (!err) {
+             console.log("Load was successful");
+             /* get the current page percentage and display it on the toolbar */
+             db.getPagePercentage(function (percentage, numRecords) {
+                 var $itemScore = jQuery('.gmc-item-score span');
+                 if (numRecords != 0) {
+                     $itemScore.html(percentage.toFixed(0));
+                 }
+             });
+             /* get the total number silver credits earned by currently logged in user */
+             var $scrBal = $('.gmc-scr-value');
+             chrome.storage.local.get('user', function (result) {
+                 var isEmpty = $.isEmptyObject(result);
+                 if (!isEmpty) {
+                     db.getScrBal(result.user.usrPubKey, function (count) {
+                         $scrBal.html(count);
+                     });
+                 } else {
+                     console.log("you are not logged in");
+                 }
+             });
+         }
+     });
 
      $('.gmc-vote-up').on('click', function () {
          vote.vote(true);
@@ -51,13 +84,53 @@
              });
          });
 
+
+         chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+             if (request.type == "userData") {
+                 db.writeUserData(request.data);
+             }
+         });
+
+         chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+             if (request.type == "getUserData") {
+                 db.getUserData(request.id, function (result) {
+                     var data = {
+                         name: result.name,
+                         about: result.about,
+                         newDate: result.newDate,
+                         email: result.email,
+                         profilePicURL: result.profilePicURL
+                     }
+                     sendResponse(data);
+                 });
+                 return true;
+             }
+         });
+
+         chrome.runtime.onMessage.addListener(function (request) {
+             if (request.type == "updateAboutText") {
+                 db.updateAboutText(request.id, request.about);
+             }
+         });
+
+         chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+             if (request.type == "countGoldCredits") {
+                 db.countGoldCredits(request.id, function (count) {
+                     sendResponse(count);
+                 });
+                 return true;
+             }
+         });
+
          /* If a user logs in, display the users profile picture on the toolbar */
          chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
              if (request.type == "showSelfIcon") {
                  db.getProfilePicForUser(request.pubKey, function (profilePicURL) {
-                     $('.gmc-profile-self img').attr("src", profilePicURL);
-                     Toolbar.showSelfIcon();
-                 })
+                     images.setImage(profilePicURL, function (img) {
+                         $('.gmc-profile-self img').attr("src", img);
+                         Toolbar.showSelfIcon();
+                     });
+                 });
              }
          });
 
@@ -77,24 +150,9 @@
              }
          });
 
-         /* get the total number silver credits earned by currently logged in user */
-         var $scrBal = $('.gmc-scr-value');
-
-         db.getScrBal(function (count) {
-             $scrBal.html(count);
-         });
-
          /* update the number silver credits if it changes */
          db.onBalChange(function (newBal) {
              $scrBal.html(newBal);
-         });
-
-         /* get the current page percentage and display it on the toolbar */
-         db.getPagePercentage(function (percentage, numRecords) {
-             var $itemScore = jQuery('.gmc-item-score span');
-             if (numRecords != 0) {
-                 $itemScore.html(percentage);
-             }
          });
 
          /*
@@ -116,7 +174,7 @@
 
          chrome.runtime.sendMessage({
              type: 'recipient',
-             recipientID: Widget.getAddress()
+             recipientID: $('#gmc-widget').attr('data-key')
          });
      }
 
@@ -136,28 +194,3 @@
          Give.giveCredit();
      });
  });
-
- /* TO DO: Before someone can receive Gold Credits, they must have a profile score of 3.5 or above. Also, they must have at least 3 comments on their profile, each commenter must also have profile scores of 3.5 or above. This is not done yet I can't read this data  without connecint to an endpoint  
-
- function checkProfileScore(userID) {
-     var averageScore = 0;
-     var totalComments = 0;
-     var sumOfRatings = 0;
-
-     comments.on().map(function (data) {
-         if (data.recipientID == userID) {
-             totalComments++;
-             sumOfRatings += data.stars;
-             averageScore = sumOfRatings / totalComments;
-         }
-         if (totalComments >= 3) {
-             if (averageScore < 3.5) {
-                 //user cannot recieve credits
-                 jQuery('.gmc').off('click').css("opacity", "0.5").text("PROFILE INACTIVE");
-             }
-         } else {
-             //user cannot recieve credits
-             jQuery('.gmc').off('click').css("opacity", "0.5").text("PROFILE INACTIVE");
-         }
-     });
- }*/

@@ -29,17 +29,23 @@ jQuery(document).ready(function ($) {
             var id = getParameterByName('id', tab.url);
 
             /* check if profile page belongs to the logged in user. 
-            If it does, allow them to edit the content
-            NOTE: Remember to put the db calls in db.js */
+             If it does, allow them to edit the content */
 
             chrome.storage.local.get('user', function (result) {
                 if (result.user.usrPubKey == id) {
                     $('body').on('click', '.save', function () {
                         var aboutText = $('.editor').html();
-                        db.getUserPushID(result.user.usrPubKey, function (key) {
-                            db.updateAboutText(key, aboutText);
-                            $(".edit").remove();
+                        chrome.tabs.query({
+                            active: true,
+                            currentWindow: false
+                        }, function (tabs) {
+                            chrome.tabs.sendMessage(tabs[0].id, {
+                                type: "updateAboutText",
+                                id: id,
+                                about: aboutText
+                            });
                         });
+                        $(".edit").remove();
                     });
                     $('body').on('click', '.cancel', function () {
                         $(".edit").remove();
@@ -51,31 +57,76 @@ jQuery(document).ready(function ($) {
                 }
             });
 
-            db.getUserData(id, function (result) {
-                $('#name h3').html(result.name);
-                $('.editor').html(result.about);
-                $('.regDate span').html(result.newDate);
-                $('#gmc-footer .email span').html(result.email);
-                images.setImage(result.profilePicURL, function (img) {
-                    $('#profile-pic img').attr("src", img);
+            chrome.tabs.query({
+                active: true,
+                currentWindow: false
+            }, function (tabs) {
+                chrome.tabs.sendMessage(tabs[0].id, {
+                    type: "getUserData",
+                    id: id
+                }, function (result) {
+                    $('#name h3').html(result.name);
+                    $('.editor').html(result.about);
+                    $('.regDate span').html(result.newDate);
+                    $('#gmc-footer .email span').html(result.email);
+                    images.setImage(result.profilePicURL, function (img) {
+                        $('#profile-pic img').attr("src", img);
+                    });
                 });
             });
 
-            db.showComments(id, function (totalComments, sumOfRatings) {
-                var averageScore = 0;
-                if (totalComments != 0) {
-                    averageScore = sumOfRatings / totalComments;
-                    averageScore = averageScore.toFixed(1);
-                    $("#profileStars").rateYo("option", "rating", averageScore);
-                }
-            });
-            $('.submitComment').on('click', function () {
-                cmt.submitComment(id);
+            chrome.tabs.query({
+                active: true,
+                currentWindow: false
+            }, function (tabs) {
+                chrome.tabs.sendMessage(tabs[0].id, {
+                    type: "countGoldCredits",
+                    id: id
+                }, function (count) {
+                    $('.creditsRecieved span').html(count);
+                });
             });
 
-            db.countGoldCredits(id, function (count) {
-                $('.creditsRecieved span').html(count);
+            cmnts.displayComments(id);
+
+            $('.submitComment').on('click', function () {
+                getCommentersNameAndPic(function (result) {
+                    console.log(result);
+                    submitComment(result);
+                });
             });
+
+            function getCommentersNameAndPic(cb) {
+                chrome.storage.local.get('user', function (data) {
+                    chrome.tabs.query({
+                        active: true,
+                        currentWindow: false
+                    }, function (tabs) {
+                        chrome.tabs.sendMessage(tabs[0].id, {
+                            type: "getUserData",
+                            id: data.user.usrPubKey
+                        }, function (result) {
+                            cb(result);
+                        });
+                    });
+                });
+            }
+
+            function submitComment(result) {
+                chrome.storage.local.get('user', function (data) {
+                    var data = {
+                        recipientID: id,
+                        senderName: result.name,
+                        senderPicURL: result.profilePicURL,
+                        senderPubKey: data.user.usrPubKey,
+                        senderPrvKey: data.user.usrPrvKey
+                    }
+                    cmnts.submitComment(data, function () {
+                        cmnts.displayComments(id);
+                    });
+                });
+            }
+
 
             $(document).on('click', '.commenter a', function (e) {
                 e.preventDefault();
@@ -85,7 +136,7 @@ jQuery(document).ready(function ($) {
                     userID: cmntrLnk
                 });
 
-            })
+            });
         });
     });
 

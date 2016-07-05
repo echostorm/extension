@@ -17,18 +17,24 @@ $(document).ready(function () {
         data.profilePicURL = profilePicURL;
         data.about = aboutText;
         data.regDate = new Date().getTime();
-        data.userSig = getVanityKeys.getVanitySig(data, vanity.prvkey, 1);
+        data.userSig = keys.sign(vanity.prvkey, data);
 
-        // write user data to db (db.js)
-        $.when(db.writeUserData(data)).then(
-            function () {
-                $('ul.tabs li').removeClass('current');
-                $('.tab-content').removeClass('current');
-                $("li[data-tab='tab-2']").addClass('current');
-                $("#tab-2").addClass('current');
-                isNewUser = true;
-                $('#loginPage2').fadeIn('slow');
-            }
-        );
+        chrome.tabs.query({
+            active: true,
+            currentWindow: true
+        }, function (tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {
+                type: "userData",
+                data: data
+            });
+        });
+
+        $('ul.tabs li').removeClass('current');
+        $('.tab-content').removeClass('current');
+        $("li[data-tab='tab-2']").addClass('current');
+        $("#tab-2").addClass('current');
+        isNewUser = true;
+        $('#loginPage2').fadeIn('slow');
+
     });
 });

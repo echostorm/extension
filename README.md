@@ -1,15 +1,12 @@
 <h1>Welcome!</h1>
-<p>NOTE: The demo doesn't currently work as i've closed my firebase account. I'll setup an alternative soon.</p>
+
+<h2>GiveMeCredit is a cryptocurrency where you must earn trust and contribute value in order for money (credits) to be created.</h2>
 
 ![screen shot 2016-05-16 at 08 18 31](https://cloud.githubusercontent.com/assets/4425844/16179331/2b68b3d6-365a-11e6-8ba6-ebc07e56c0f6.png)
 
-
-<h2>GiveMeCredit is a cryptocurrency where you must earn trust and contribute value in order for money (credits) to be created.</h2>
 <h3>Please clone the repo and load the extension into chrome by visiting chrome://extensions/ and then click 'Load unpacked extension'. Then, once enabled, open the index.html file in your browser to see a demo + further instructions.</h3>
 
-<p>If it is installed, you should also see the following widget :-</p>
-<p><a href="">http://gmc@0481f1010a5b0147e764aa59741ef923396322e211bb5decf3fbc493821245e6df74494fd11a4bfbb8a594cbd5a31015d8601b748fd34d70dfa20830f33c62be40.com</a></p>
-
+<p>NOTE: The demo currently uses ForerunnerDB.</p>
 <hr />
 GiveMeCredit has three main features:-
 <ul>

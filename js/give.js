@@ -2,28 +2,27 @@
 
 var Give = {
     giveCredit: function () {
-        var accountNum = Widget.getAddress();
-        var pageURL = window.location.href;
         var amount = jQuery('.gmc-amount').text();
 
         if (Give.checkBalance(amount)) {
-            $('#gmc-widget .gmc').html("Verifying...");
             var percentage = parseInt(jQuery('.gmc-item-score').text());
             var credits = (amount * percentage) / 100;
-            var trans = tables.get_ciu_JSON();
-            trans.url = pageURL;
-            trans.credits = credits;
-            trans.recipientID = accountNum;
+
+            var trans = {
+                url: window.location.href,
+                credits: credits,
+                recipientID: $('#gmc-widget').attr('data-key'),
+                senderID: null,
+                senderSig: null
+            }
+
             chrome.storage.local.get('user', function (result) {
                 trans.senderID = result.user.usrPubKey;
-                trans.transactionID = getVanityKeys.getVanitySig(trans, result.user.usrPrvKey, 1);
+                trans.senderSig = keys.sign(result.user.usrPrvKey, trans);
                 // write the transaction to the database (db.js)
-                $.when(db.sendGoldCredits(trans)).then(
-                    function () {
-                        $('#gmc-widget .gmc').html("Whoohoo! Thanks!");
-                        vote.balance(false, amount);
-                    }
-                );
+                db.sendGoldCredits(trans);
+                $('#gmc-widget .gmc').html("Whoohoo! Thanks!");
+                vote.balance(false, amount);
             });
         }
     },

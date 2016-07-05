@@ -1,21 +1,193 @@
-/* create a reference to the root of Firebase database */
-var riu = new Firebase('https://givemecredit.firebaseio.com/rated_item_unconfirmed');
-var ric = new Firebase('https://givemecredit.firebaseio.com/rated_item_confirmed');
-var vri = new Firebase('https://givemecredit.firebaseio.com/valid_rated_item');
-var ud = new Firebase('https://givemecredit.firebaseio.com/user_data');
-var pd = new Firebase('https://givemecredit.firebaseio.com/profile_data');
-var scb = new Firebase('https://givemecredit.firebaseio.com/silver_credits_balance');
-var ciu = new Firebase('https://givemecredit.firebaseio.com/credited_item_unconfirmed');
-var cic = new Firebase('https://givemecredit.firebaseio.com/credited_item_confirmed');
-var vci = new Firebase('https://givemecredit.firebaseio.com/valid_credited_item');
-var tu = new Firebase('https://givemecredit.firebaseio.com/transaction_unconfirmed');
-var comments = new Firebase('https://givemecredit.firebaseio.com/comments');
+var fdb = new ForerunnerDB();
+var gmc = fdb.db("give_me_credit_DB");
+var ratedItems = gmc.collection("rated_items");
+var goldCredits = gmc.collection("gold_credits");
+var userData = gmc.collection("user_data");
+var comments = gmc.collection("comments");
+
+var db = {
+    sendVote: function (trans, cb) {
+        ratedItems.insert(trans);
+        var balance = ratedItems.find({
+            senderID: {
+                $eq: trans.senderID
+            }
+        });
+        ratedItems.save(function (err) {
+            if (!err) {
+                console.log("rated_items save was successful");
+                db.getPagePercentage(function (percentage, numRecords) {
+                    var $itemScore = jQuery('.gmc-item-score span');
+                    if (numRecords != 0) {
+                        $itemScore.html(percentage.toFixed(0));
+                    }
+                });
+            }
+        });
+        cb(balance.length);
+    },
+    getPagePercentage: function (cb) {
+        var totRecs = ratedItems.find({
+            url: {
+                $eeq: window.location.href
+            }
+        });
+        var upVotes = ratedItems.find({
+            $and: [{
+                url: window.location.href
+    }, {
+                isUpVote: {
+                    $eeq: true
+                }
+    }]
+        });
+        score = (upVotes.length / totRecs.length) * 100;
+        cb(score, totRecs.length);
+    },
+    getScrBal: function (senderID, cb) {
+        var silverBal = ratedItems.find({
+            senderID: {
+                $eq: senderID
+            }
+        });
+        var creditsGiven = goldCredits.find({
+            senderID: {
+                $eq: senderID
+            }
+        });
+        cb(silverBal.length - creditsGiven.length);
+    },
+    sendGoldCredits: function (trans) {
+        goldCredits.insert(trans);
+        var creditsGiven = goldCredits.find({
+            senderID: {
+                $eq: trans.senderID
+            }
+        });
+        goldCredits.save(function (err) {
+            if (!err) {
+                console.log("gold credits save was successful");
+            }
+        });
+    },
+    writeUserData: function (trans) {
+        userData.insert(trans);
+        userData.save(function (err) {
+            if (!err) {
+                console.log("user data save was successful");
+            }
+        });
+    },
+    getUserData: function (id, cb) {
+        userData.load(function (err, tableStats, metaStats) {
+            if (!err) {
+                var result = userData.find({
+                    userID: {
+                        $eq: id
+                    }
+                });
+                var date = new Date(result[0].regDate);
+                var day = date.getDate();
+                var month = date.getMonth();
+                var year = date.getFullYear();
+                var newDate = day + "/" + month + "/" + year;
+
+                var ud = {
+                    newDate: newDate,
+                    name: result[0].name,
+                    about: result[0].about,
+                    email: result[0].email,
+                    profilePicURL: result[0].profilePicURL
+                }
+                cb(ud);
+            }
+        });
+    },
+    getProfilePicForUser: function (pubKey, cb) {
+        userData.load(function (err, tableStats, metaStats) {
+            if (!err) {
+                var result = userData.find({
+                    userID: {
+                        $eq: pubKey
+                    }
+                });
+                cb(result[0].profilePicURL);
+            }
+        });
+    },
+    writeComment: function (trans) {
+        comments.insert(trans);
+        comments.save(function (err) {
+            if (!err) {
+                console.log("comments save was successful");
+            }
+        });
+    },
+    getComments: function (currentUser, cb) {
+        comments.load(function (err, tableStats, metaStats) {
+            if (!err) {
+                var result = comments.find({
+                    recipientID: {
+                        $eq: currentUser
+                    }
+                });
+                cb(result);
+            }
+        });
+    },
+    getCommenterInfo: function (commenter, cb) {
+        userData.load(function (err, tableStats, metaStats) {
+            if (!err) {
+                var result = userData.find({
+                    userID: {
+                        $eq: commenter
+                    }
+                });
+                cb(result);
+            }
+        });
+    },
+    countGoldCredits: function (id, cb) {
+        goldCredits.load(function (err, tableStats, metaStats) {
+            if (!err) {
+                var result = goldCredits.find({
+                    recipientID: {
+                        $eq: id
+                    }
+                });
+                cb(result.length);
+            }
+        });
+    },
+    updateAboutText: function (id, aboutText) {
+        userData.update({
+            userID: {
+                $eq: id
+            }
+        }, {
+            about: aboutText
+        });
+
+        userData.save(function (err) {
+            if (!err) {
+                console.log("user data save was successful");
+            }
+        });
+    },
+    onBalChange: function (cb) {},
+    updateBalance: function (userID, cb) {},
+    writeBalance: function (add, pushID, amount) {},
+    createNewBalance: function (trans) {},
+    getProfilePercentage: function (cb) {},
+    getUserPushID: function (id, cb) {},
+    sendTransaction: function (trans) {},
+    getUserName: function (id, cb) {},
+    getTransactionsForUser: function (usrPubKey, cb) {},
+
+}
 
 
-/* All database transactions go here. 
-Firebase will only be used until i can 
-find a suitable, decentralised alternative */
-
+/*
 var db = {
     sendGoldCredits: function (trans) {
         ciu.push(trans);
@@ -247,4 +419,4 @@ var db = {
             about: aboutText
         });
     }
-}
+}*/

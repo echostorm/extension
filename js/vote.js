@@ -8,29 +8,31 @@ var vote = {
     vote: function (score) {
         //Toolbar.darken();
         var pageURL = window.location.href;
-        var data = tables.get_riu_JSON();
-        data.url = pageURL;
-        data.isUpVote = score;
+
+        var newVote = {
+            //_id: new Date().toISOString(),
+            url: pageURL,
+            isUpVote: score,
+            senderID: null,
+            senderSig: null
+        }
+
         chrome.storage.local.get('user', function (result) {
             var isEmpty = jQuery.isEmptyObject(result);
             if (!isEmpty) {
-                data.senderID = result.user.usrPubKey;
-                //IMPORTANT : the transactionID is the signature
-                data.transactionID = getVanityKeys.getVanitySig(data, result.user.usrPrvKey, 1);
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: data,
-                    success: success,
-                    dataType: dataType
-                });
-
+                newVote.senderID = result.user.usrPubKey;
+                newVote.senderSig = keys.sign(result.user.usrPrvKey, newVote);
                 // write the transaction to the database (db.js)
-                $.when(db.sendVote(data)).then(
-                    function () {
-                        vote.balance(true, 1);
-                    }
-                );
+
+                db.sendVote(newVote, function (bal) {
+                    $('.gmc-scr-value').html(bal);
+                });
+                /* $.when(db.sendVote(newVote)).then(
+                     function (balance) {
+                         $('.gmc-scr-value').html(balance);
+                         vote.balance(true, 1);
+                     }
+                 );*/
             } else {
                 console.log("You are not logged in");
             }
