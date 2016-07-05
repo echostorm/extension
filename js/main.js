@@ -134,6 +134,13 @@
              }
          });
 
+         /* If a user logs out, hide the users profile picture on the toolbar */
+         chrome.runtime.onMessage.addListener(function (request) {
+             if (request.type == "hideSelfIcon") {
+                 Toolbar.hideSelfIcon();
+             }
+         });
+
          /* If the user is already logged in when the page is loaded, 
          display profile picture on toolbar */
          chrome.storage.local.get('user', function (result) {
