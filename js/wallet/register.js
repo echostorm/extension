@@ -33,8 +33,8 @@ $(document).ready(function () {
         $('.tab-content').removeClass('current');
         $("li[data-tab='tab-2']").addClass('current');
         $("#tab-2").addClass('current');
-        isNewUser = true;
-        $('#loginPage2').fadeIn('slow');
+        //isNewUser = true;
+        $('#loginPage1').fadeIn('slow');
 
     });
 });

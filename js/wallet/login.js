@@ -1,4 +1,3 @@
-   /* get login details and send to background.js where they will be entered into chrome localstorage */
    $(document).ready(function () {
 
        chrome.storage.local.get('user', function (result) {
@@ -15,10 +14,13 @@
 
        $('button.logout').on('click', function () {
            chrome.storage.local.clear();
-           $('#loginPage3').fadeOut('slow');
+           $('#loginPage3').hide();
+           $('#loginPage2').hide();
            $('#loginPage1').fadeIn('slow');
            Toolbar.hideSelfIcon(); //why doesn't this work? 
        });
+
+       /* get login details and send to background.js where they will be entered into chrome localstorage */
 
        $('.submitLogin').on('click', function () {
            var loginKeys = $('textarea.loginKeys').val();
@@ -33,7 +35,8 @@
            });
 
            $('#loginPage1').fadeOut('fast', function () {
-               $('#loginPage3').fadeIn('slow');
+               $('#loginPage2').fadeIn('slow');
+
                /*if (isNewUser) {
                    $('#loginPage2').fadeIn('slow');
                } else {

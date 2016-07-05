@@ -4,15 +4,11 @@ var ratedItems = gmc.collection("rated_items");
 var goldCredits = gmc.collection("gold_credits");
 var userData = gmc.collection("user_data");
 var comments = gmc.collection("comments");
+var transactions = gmc.collection("transactions");
 
 var db = {
     sendVote: function (trans, cb) {
         ratedItems.insert(trans);
-        var balance = ratedItems.find({
-            senderID: {
-                $eq: trans.senderID
-            }
-        });
         ratedItems.save(function (err) {
             if (!err) {
                 console.log("rated_items save was successful");
@@ -22,6 +18,11 @@ var db = {
                         $itemScore.html(percentage.toFixed(0));
                     }
                 });
+            }
+        });
+        var balance = ratedItems.find({
+            senderID: {
+                $eq: trans.senderID
             }
         });
         cb(balance.length);
@@ -174,13 +175,27 @@ var db = {
             }
         });
     },
+    sendTransaction: function (trans) {
+        transactions.insert(trans);
+        transactions.save(function (err) {
+            if (!err) {
+                console.log("transaction save was successful");
+            }
+        });
+        var transList = ratedItems.find({
+            $and: [{
+                senderID: trans.senderID
+    }, {
+                recipientID: trans.senderID
+    }]
+        });
+        console.log(transList);
+    },
     onBalChange: function (cb) {},
     updateBalance: function (userID, cb) {},
     writeBalance: function (add, pushID, amount) {},
     createNewBalance: function (trans) {},
     getProfilePercentage: function (cb) {},
-    getUserPushID: function (id, cb) {},
-    sendTransaction: function (trans) {},
     getUserName: function (id, cb) {},
     getTransactionsForUser: function (usrPubKey, cb) {},
 
