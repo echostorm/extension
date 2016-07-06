@@ -6,7 +6,7 @@ body {
 }
 
 #container {
-    width: 100%;
+    padding: 30px;
 }
 
 b {
@@ -159,41 +159,50 @@ h4 .fa:before {
     padding: 20px;
 }
 
-#col-right ul.tabs {
+#container ul.tabs {
     margin: 0px;
     padding: 0px;
     list-style: none;
+    background: #0077b4;
+    color: #fff;
 }
 
-#col-right ul.tabs li {
+#container ul.tabs li {
     background: none;
-    color: #222;
     display: inline-block;
     padding: 10px 15px;
     cursor: pointer;
 }
 
-#col-right ul.tabs li.current {
+#container ul.tabs li.current {
     background: #ededed;
-    color: #222;
+    color: #0077b4;
+}
+
+#container .fa-thumbs-o-up {
+    color: #ff0000;
+}
+
+#container .fa-thumbs-o-down {
+    color: #1f77b4;
 }
 
 .tab-content {
     display: none;
-    background: #ededed;
-    padding: 15px;
+    /*background: #ededed;
+    padding: 15px;*/
 }
 
 .tab-content.current {
     display: inherit;
 }
 
-#col-right ul {
+#container ul {
     margin: 20px 0;
     list-style-type: square;
 }
 
-#col-right ul li {
+#containerul li {
     display: block;
     padding: 5px;
 }

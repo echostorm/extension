@@ -21,6 +21,8 @@
     "content_security_policy": "script-src 'self' https://*.firebase.com https://*.firebaseio.com; object-src 'self'",
     "web_accessible_resources": [
         "fonts/fontawesome-webfont.woff2",
+       "images/sort_asc.png",
+       "images/sort_both.png",
        "images/close.png",
        "images/profileicon.png",
        "images/profile.png",
@@ -64,6 +66,7 @@
         "js/lib/jquery.classyedit.js",
         "js/lib/mustache.js",
         "js/db.js",
+        "js/index.js",
         "js/tables.js",
         "js/main.js",
         "js/toolbar.js",

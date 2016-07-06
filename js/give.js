@@ -9,6 +9,7 @@ var Give = {
             var credits = (amount * percentage) / 100;
 
             var trans = {
+                _id: new Date().toISOString(),
                 url: window.location.href,
                 credits: credits,
                 recipientID: $('#gmc-widget').attr('data-key'),

@@ -28,6 +28,22 @@ var db = {
         console.log(balance[0]);
         cb(balance.length);
     },
+    getRatedItems: function (cb) {
+        ratedItems.load(function (err, tableStats, metaStats) {
+            if (!err) {
+                var all = ratedItems.find();
+                cb(all);
+            }
+        });
+    },
+    getCreditedItems: function (cb) {
+        goldCredits.load(function (err, tableStats, metaStats) {
+            if (!err) {
+                var all = goldCredits.find();
+                cb(all);
+            }
+        });
+    },
     getPagePercentage: function (cb) {
         var totRecs = ratedItems.find({
             url: {

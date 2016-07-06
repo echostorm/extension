@@ -10,7 +10,7 @@ var vote = {
         var pageURL = window.location.href;
 
         var newVote = {
-            //_id: new Date().toISOString(),
+            _id: new Date().toISOString(),
             url: pageURL,
             isUpVote: score,
             senderID: null,
