@@ -6,7 +6,7 @@
 */
 var vote = {
     vote: function (score) {
-        //Toolbar.darken();
+        Toolbar.darken();
         var pageURL = window.location.href;
 
         var newVote = {

@@ -11,7 +11,7 @@ var db = {
         ratedItems.insert(trans);
         ratedItems.save(function (err) {
             if (!err) {
-                console.log("rated_items save was successful");
+                //console.log("rated_items save was successful");
                 db.getPagePercentage(function (percentage, numRecords) {
                     var $itemScore = jQuery('.gmc-item-score span');
                     if (numRecords != 0) {
@@ -25,6 +25,7 @@ var db = {
                 $eq: trans.senderID
             }
         });
+        console.log(balance[0]);
         cb(balance.length);
     },
     getPagePercentage: function (cb) {
@@ -60,22 +61,23 @@ var db = {
     },
     sendGoldCredits: function (trans) {
         goldCredits.insert(trans);
+        goldCredits.save(function (err) {
+            if (!err) {
+                //console.log("gold credits save was successful");
+            }
+        });
         var creditsGiven = goldCredits.find({
             senderID: {
                 $eq: trans.senderID
             }
         });
-        goldCredits.save(function (err) {
-            if (!err) {
-                console.log("gold credits save was successful");
-            }
-        });
+        console.log(creditsGiven[0]);
     },
     writeUserData: function (trans) {
         userData.insert(trans);
         userData.save(function (err) {
             if (!err) {
-                console.log("user data save was successful");
+                //console.log("user data save was successful");
             }
         });
     },
@@ -120,7 +122,7 @@ var db = {
         comments.insert(trans);
         comments.save(function (err) {
             if (!err) {
-                console.log("comments save was successful");
+                //console.log("comments save was successful");
             }
         });
     },
@@ -171,7 +173,7 @@ var db = {
 
         userData.save(function (err) {
             if (!err) {
-                console.log("user data save was successful");
+                //console.log("user data save was successful");
             }
         });
     },
@@ -179,7 +181,7 @@ var db = {
         transactions.insert(trans);
         transactions.save(function (err) {
             if (!err) {
-                console.log("transaction save was successful");
+                //console.log("transaction save was successful");
             }
         });
         var transList = ratedItems.find({

@@ -6,13 +6,13 @@
 
      goldCredits.load(function (err, tableStats, metaStats) {
          if (!err) {
-             console.log("Loading gold_credits was successful");
+             //console.log("Loading gold_credits was successful");
          }
      });
 
      ratedItems.load(function (err, tableStats, metaStats) {
          if (!err) {
-             console.log("Load was successful");
+             //console.log("Load was successful");
              /* get the current page percentage and display it on the toolbar */
              db.getPagePercentage(function (percentage, numRecords) {
                  var $itemScore = jQuery('.gmc-item-score span');
