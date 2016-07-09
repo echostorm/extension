@@ -4,33 +4,34 @@
 
 ![screen shot 2016-05-16 at 08 18 31](https://cloud.githubusercontent.com/assets/4425844/16179331/2b68b3d6-365a-11e6-8ba6-ebc07e56c0f6.png)
 
-<h3>Please clone the repo and load the extension into chrome by visiting chrome://extensions/ and then click 'Load unpacked extension'. Then, once enabled, open the index.html file in your browser to see a demo + further instructions.</h3>
+<p>If you have installed the extension, you should see the widget here...</p>
+<p><a href="">http://gmc@[your_unique_id].com</a></p>
 
 <p>NOTE: The demo currently uses ForerunnerDB.</p>
 <hr />
 GiveMeCredit has three main features:-
 <ul>
 <li>
-A toolbar for rating content
+- A toolbar for rating content
 </li>
 <li>
-A GiveMeCredit widget. You simply paste your link somewhere (i.e. http://gmc@0481f1010a5b0147e764aa59741ef923396322e.com). This is converted into a widget by the extension and allows you to receive credits.
+- A GiveMeCredit widget. You simply paste your link somewhere (i.e. http://gmc@0481f1010a5b0147e764aa59741ef923396322e.com). This is converted into a widget by the extension and allows you to receive credits.
 </li>
 <li>
-A profile-based trust network
+- A profile-based trust network
 </li>
 </ul>
 <p>So basically, when you rate content, you earn silver credits. And when you donate those silver credits to someone else, they become gold credits. There are lots of rules but here are a few to give you an idea :-</p>
 <ul>
-<li>The value of a gold credit is relative to the current page score. For example, if your page/content has a score of 75%, then the value of the credit that you receive will be ©0.75.</li>
-<li>Silver credits will expire after a set period of time.</li>
+<li>- The value of a gold credit is relative to the current page score. For example, if your page/content has a score of 75%, then the value of the credit that you receive will be ©0.75.</li>
+<li>- Silver credits will expire after a set period of time.</li>
 </ul>
 <p>And to help prevent sybil attacks...</p>
 
 <ul>
-<li>You need a profile score of >=3.5 to receive credits (and maybe take into account the scores of those who assigned you that score).</li>
-<li>I would like each user to use a custom vanity address that can be checked</li>
-<li>I would like it if users could only sync data with other users who have a profile score of >=3.5. If a user is lobbying for credit somewhere, an introduction can be made.</li>
+<li>- You need a profile score of >=3.5 to receive credits (and maybe take into account the scores of those who assigned you that score).</li>
+<li>- I would like each user to use a custom vanity address that can be checked</li>
+<li>- I would like it if users could only sync data with other users who have a profile score of >=3.5. If a user is lobbying for credit somewhere, an introduction can be made.</li>
 <hr />
 <p>I'm currently rebuilding the demo using PouchDB. However, the final implementation will most likely require a blockchain of sorts. I would like the application to function like a social network whereby users only sync data with trusted peers, thus forming a trust network. A trusted peer is a user who has a positive feedback score of 3.5 stars or above (out of 5 stars). You could also check that the users who have provided the feedback have 3.5 stars and above. Of course, this alone is not sufficient in preventing sybil attacks (i.e. users creating lots of fake profiles). However, if it is required that users have a custom 'vanity' address that can be checked (i.e. the first x characters match the last x characters), then it will take time for a user to create an account.</p><p>I'm interested in using CouchDB as a database. A CouchDB database can replicate data to other peers, and the integrity of that data can be verified inside the database itself.</p><p>
 As also mentioned, i'd like silver credits to expire. There will also be a limit on how many silver credits a person can hold at any one time and a limit to how many silver credits that can be earned in a given timeframe. This would make sense since silver credits are not meant to have any value. They are used to assign value to items and to impose an extra layer of disipline to the money creation process. Also, the data provided by rating content could be very useful for developing a search engine. By allowing silver credits to expire it ensures a turnover of fresh content, thus preventing monopolies. 
