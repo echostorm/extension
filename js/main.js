@@ -114,6 +114,15 @@
          });
 
          chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+             if (request.type == "getCreditsRecieved") {
+                 db.getCreditedItems(request.id, function (result) {
+                     sendResponse(result);
+                 });
+                 return true;
+             }
+         });
+
+         chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
              if (request.type == "countGoldCredits") {
                  db.countGoldCredits(request.id, function (count) {
                      sendResponse(count);

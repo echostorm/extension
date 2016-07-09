@@ -20,6 +20,7 @@
     <script src="../js/lib/jquery.classyedit.js"></script>
     <script src="../js/lib/jsrsasign-latest-all-min.js"></script>
     <script src="../js/keys.js"></script>
+    <script src="../js/lib/jquery.dataTables.min.js"></script>
     <script src="../js/getVanityKeys.js"></script>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/profile.css">
@@ -28,6 +29,7 @@
     <link rel="stylesheet" href="../css/mediaqueries.css">
     <link rel="stylesheet" type="text/css" href="../css/jquery.classyedit.css" />
     <link rel="stylesheet" href="../css/jquery.rateyo.css">
+    <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
 </head>
 
 <body>
@@ -51,21 +53,8 @@
                     <li class="tab-link" data-tab="tab-2">
                         <i class="fa fa-commenting-o"></i>Comments</li>
                     <li class="tab-link" data-tab="tab-3">
-                        <i class="fa fa-file-text-o"></i>Items</li>
+                        <i class="fa fa-copyright"></i>Credits Recieved</li>
                 </ul>
-
-                <!--
-                <ul>
-                    <li>
-                        <a href="about" class="active"><i class="fa fa-home"></i>About</a>
-                    </li>
-                    <li>
-                        <a href="comments"><i class="fa fa-commenting-o"></i>Comments</a>
-                    </li>
-                    <li>
-                        <a href="items"><i class="fa fa-file-text-o"></i>Items</a>
-                    </li>
-                </ul> -->
             </div>
             <!--col-left-inner-->
         </div>
@@ -99,20 +88,25 @@
                     </div>
                 </div>
                 <div id="tab-3" class="tab-content">
-                    <h1>Items</h1>
-                    <p>These are the items which this user has been given credits for:-</p>
-                    <ul>
-                        <li>
-                            <a href="http:www.givemecredit.org">GiveMeCredit.org</a> - Some description here
-                            <p>Item score: 100%
-                                <br />Credits received: 5</p>
-                        </li>
-                        <li>
-                            <a href="http:www.anotherwebsite.org">Anothersite.com</a> - Some description here
-                            <p>Item score: 100%
-                                <br />Credits received: 5</p>
-                        </li>
-                    </ul>
+                    <h1>Credits Recieved</h1>
+                    <table id="creditsRecieved" class="display" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>URL</th>
+                                <th>Credits</th>
+                                <th>Sender</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <script id="creditsRecievedTpl" type="text/template">
+                                <tr>
+                                    <td><a href="{{urlLink}}">{{url}}</a></td>
+                                    <td>{{credits}}</td>
+                                    <td><span>{{senderID}}</span></td>
+                                </tr>
+                            </script>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <!--pages-container-->

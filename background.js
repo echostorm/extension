@@ -3,6 +3,13 @@
 
 chrome.runtime.onMessage.addListener(function (request, sendResponse) {
 
+    if (request.type == 'openIndex') {
+        chrome.tabs.create({
+            'url': 'https://github.com/GiveMeCredit/extension',
+            active: true
+        });
+    }
+
     if (request.type == 'balance') {
         var silverCredBalance = {
             'balance': request.balance

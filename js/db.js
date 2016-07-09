@@ -36,11 +36,15 @@ var db = {
             }
         });
     },
-    getCreditedItems: function (cb) {
+    getCreditedItems: function (id, cb) {
         goldCredits.load(function (err, tableStats, metaStats) {
             if (!err) {
-                var all = goldCredits.find();
-                cb(all);
+                var recieved = goldCredits.find({
+                    recipientID: {
+                        $eq: id
+                    }
+                });
+                cb(recieved);
             }
         });
     },

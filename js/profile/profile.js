@@ -87,6 +87,37 @@ jQuery(document).ready(function ($) {
                 });
             });
 
+            function truncate(string) {
+                if (string.length > 30)
+                    return string.substring(0, 30) + '...';
+                else
+                    return string;
+            };
+
+            chrome.tabs.query({
+                active: true,
+                currentWindow: false
+            }, function (tabs) {
+                chrome.tabs.sendMessage(tabs[0].id, {
+                    type: "getCreditsRecieved",
+                    id: id
+                }, function (result) {
+                    var creditsRecievedTpl = $('#creditsRecievedTpl').html();
+                    for (var i = 0; i < result.length; i++) {
+                        var recCredited = {
+                            urlLink: result[i].url,
+                            url: truncate(result[i].url),
+                            credits: result[i].credits,
+                            senderID: truncate(result[i].senderID)
+                        };
+                        console.log(recCredited);
+                        var html = Mustache.to_html(creditsRecievedTpl, recCredited);
+                        $('#tab-3 table#creditsRecieved tbody').prepend(html);
+                    }
+                    $('#creditsRecieved').DataTable();
+                });
+            });
+
             cmnts.displayComments(id);
 
             $('.submitComment').on('click', function () {

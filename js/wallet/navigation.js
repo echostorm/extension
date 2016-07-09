@@ -8,4 +8,11 @@ $(document).ready(function () {
         $(this).addClass('current');
         $("#" + tab_id).addClass('current');
     });
+
+    $('a.docs').click(function (e) {
+        e.preventDefault;
+        chrome.runtime.sendMessage({
+            type: 'openIndex'
+        });
+    });
 });

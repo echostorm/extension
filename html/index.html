@@ -2,6 +2,9 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Documentation and Transaction Explorer</title>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/font-awesome.min.css">
@@ -19,9 +22,8 @@
         <ul class="tabs">
             <li class="tab-link current" data-tab="tab-1">Intro</li>
             <li class="tab-link" data-tab="tab-2">Rated Items</li>
-            <li class="tab-link" data-tab="tab-3">Credits Given</li>
-            <li class="tab-link" data-tab="tab-4">Transactions</li>
-            <li class="tab-link" data-tab="tab-5">Search Engine</li>
+            <li class="tab-link" data-tab="tab-3">Transactions</li>
+            <li class="tab-link" data-tab="tab-4">Search Engine</li>
         </ul>
 
         <div id="pages-container">
@@ -40,7 +42,6 @@
                             <th>URL</th>
                             <th>Vote</th>
                             <th>Sender ID</th>
-                            <th>Sender Signature</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,7 +51,6 @@
                                 <td>{{url}}</td>
                                 <td><i class="fa" aria-hidden="true"></i></td>
                                 <td><span>{{senderID}}</span></td>
-                                <td><span>{{senderSig}}</span></td>
                             </tr>
                         </script>
                     </tbody>
@@ -58,38 +58,12 @@
             </div>
             <! ---------------- tab ---------------->
             <div id="tab-3" class="tab-content">
-                <h1>Credits Given</h1>
-                <table id="creditedItems" class="display" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Transaction ID</th>
-                            <th>URL</th>
-                            <th>Credits</th>
-                            <th>Sender</th>
-                            <th>Recipient</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <script id="creditedItemsTpl" type="text/template">
-                            <tr>
-                                <td>{{transID}}</td>
-                                <td>{{url}}</td>
-                                <td>{{credits}}</td>
-                                <td><span>{{senderID}}</span></td>
-                                <td><span>{{recipientID}}</span></td>
-                            </tr>
-                        </script>
-                    </tbody>
-                </table>
-            </div>
-            <! ---------------- tab ---------------->
-            <div id="tab-4" class="tab-content">
                 <h1>Transactions</h1>
                 <p>Table here</p>
             </div>
 
             <! ---------------- tab ---------------->
-            <div id="tab-5" class="tab-content">
+            <div id="tab-4" class="tab-content">
                 <h1>Search</h1>
                 <p>
                     <input type="text" class="search" />

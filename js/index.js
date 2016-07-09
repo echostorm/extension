@@ -27,31 +27,14 @@ $(document).ready(function () {
             } else {
                 $('#ratedItems td i').addClass('fa-thumbs-o-down');
             }
-            var rec = {
+            var recRated = {
                 transID: result[i]._id,
                 url: truncate(result[i].url),
                 senderID: truncate(result[i].senderID),
-                senderSig: truncate(result[i].senderSig)
             };
-            var html = Mustache.to_html(template, rec);
+            var html = Mustache.to_html(template, recRated);
             $('#ratedItems tbody').prepend(html);
         }
         $('#ratedItems').DataTable();
-    });
-
-    var creditedItemsTpl = $('#creditedItemsTpl').html();
-    db.getCreditedItems(function (result) {
-        for (var i = 0; i < result.length; i++) {
-            var rec = {
-                transID: result[i]._id,
-                url: truncate(result[i].url),
-                credits: result[i].credits,
-                senderID: truncate(result[i].senderID),
-                senderSig: truncate(result[i].recipientID)
-            };
-            var html = Mustache.to_html(template, rec);
-            $('#creditedItems tbody').prepend(html);
-        }
-        $('#creditedItems').DataTable();
     });
 });

@@ -14,7 +14,6 @@ var cmnts = {
     },
     displayComments: function (id) {
         db.getComments(id, function (comments) {
-            console.log(comments);
             var template = $('#commentTpl').html();
             var score = 0;
             var averageScore = 0;
