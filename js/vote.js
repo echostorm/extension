@@ -13,25 +13,22 @@ var vote = {
                     //if (hasVoted) {
                     //alert("You cannot rate the same item more than once.");
                     //return;
-                    //} else { commented out for testing
+                    //} else { ...commented out for testing
 
                     Toolbar.darken();
                     var newVote = {
                         _id: new Date().toISOString(),
                         url: pageURL,
                         isUpVote: score,
-                        senderID: null,
+                        senderID: result.user.usrPubKey,
                         senderSig: null
                     }
-
-                    newVote.senderID = result.user.usrPubKey;
                     newVote.senderSig = keys.sign(result.user.usrPrvKey, newVote);
                     // write the transaction to the database (db.js)
-
                     db.sendVote(newVote, function (bal) {
                         $('.gmc-scr-value').html(bal);
                     });
-                    //} commented out for testing
+                    //} ...commented out for testing
                 });
             } else {
                 console.log("You are not logged in");
