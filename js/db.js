@@ -178,7 +178,12 @@ var db = {
                         $eq: id
                     }
                 });
-                cb(result.length);
+                var total = 0;
+                for (var i = 0; i < result.length; i++) {
+                    total += parseFloat(result[i].credits);
+                    console.log(total);
+                }
+                cb(total);
             }
         });
     },
