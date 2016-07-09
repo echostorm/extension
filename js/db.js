@@ -217,12 +217,25 @@ var db = {
         });
         console.log(transList);
     },
-    onBalChange: function (cb) {},
-    updateBalance: function (userID, cb) {},
-    writeBalance: function (add, pushID, amount) {},
-    createNewBalance: function (trans) {},
-    getProfilePercentage: function (cb) {},
-    getUserName: function (id, cb) {},
-    getTransactionsForUser: function (usrPubKey, cb) {},
+    hasVotedAlready: function (url, id, cb) {
+        ratedItems.load(function (err, tableStats, metaStats) {
+            if (!err) {
+                var items = ratedItems.find({
+                    $and: [{
+                        url: url
+    }, {
+                        senderID: id
+    }]
+                });
+                if (items.length > 0) {
+                    cb(true);
+                } else {
+                    cb(false);
+                }
+            }
+        });
 
+    },
+    getProfilePercentage: function (cb) {},
+    getUserName: function (id, cb) {}
 }

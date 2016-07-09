@@ -3,29 +3,32 @@
 var Give = {
     giveCredit: function () {
         var amount = jQuery('.gmc-amount').text();
-
-        if (Give.checkBalance(amount)) {
-            var percentage = parseInt(jQuery('.gmc-item-score').text());
-            var credits = (amount * percentage) / 100;
-
-            var trans = {
-                _id: new Date().toISOString(),
-                url: window.location.href,
-                credits: credits,
-                recipientID: $('#gmc-widget').attr('data-key'),
-                senderID: null,
-                senderSig: null
+        chrome.storage.local.get('user', function (result) {
+            var recipientID = $('#gmc-widget').attr('data-key');
+            if (result.user.usrPubKey == recipientID) {
+                alert("You cannot give credit to yourself");
+                return;
             }
+            if (Give.checkBalance(amount)) {
+                var percentage = parseInt(jQuery('.gmc-item-score').text());
+                var credits = (amount * percentage) / 100;
 
-            chrome.storage.local.get('user', function (result) {
-                trans.senderID = result.user.usrPubKey;
+                var trans = {
+                    _id: new Date().toISOString(),
+                    url: window.location.href,
+                    credits: credits,
+                    recipientID: recipientID,
+                    senderID: result.user.usrPubKey,
+                    senderSig: null
+                }
+
                 trans.senderSig = keys.sign(result.user.usrPrvKey, trans);
                 // write the transaction to the database (db.js)
                 db.sendGoldCredits(trans);
                 $('#gmc-widget .gmc').html("Whoohoo! Thanks!");
                 vote.balance(false, amount);
-            });
-        }
+            }
+        });
     },
     checkBalance: function (amount) {
         var balance = jQuery('.gmc-scr-value').text();
