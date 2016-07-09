@@ -180,11 +180,6 @@
              }
          });
 
-         /* update the number silver credits if it changes */
-         db.onBalChange(function (newBal) {
-             $scrBal.html(newBal);
-         });
-
          /*
      Get the rating score for the author of the content (from the gmc address on the page). If the score is less than 3.5 then the author cannot lobby for credits. 
      */

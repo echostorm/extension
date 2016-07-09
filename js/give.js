@@ -26,7 +26,7 @@ var Give = {
                 // write the transaction to the database (db.js)
                 db.sendGoldCredits(trans);
                 $('#gmc-widget .gmc').html("Whoohoo! Thanks!");
-                vote.balance(false, amount);
+                //vote.balance(false, amount);
             }
         });
     },
