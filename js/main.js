@@ -36,10 +36,24 @@
      });
 
      $('.gmc-vote-up').on('click', function () {
-         vote.vote(true);
+         chrome.storage.local.get('user', function (result) {
+             var isEmpty = $.isEmptyObject(result);
+             if (!isEmpty) {
+                 vote.vote(true);
+             } else {
+                 alert("Please login to vote");
+             }
+         });
      });
      $('.gmc-vote-down').on('click', function () {
-         vote.vote(false);
+         chrome.storage.local.get('user', function (result) {
+             var isEmpty = $.isEmptyObject(result);
+             if (!isEmpty) {
+                 vote.vote(false);
+             } else {
+                 alert("Please login to vote");
+             }
+         });
      });
 
      /* send a message to the background script to 
@@ -207,6 +221,13 @@
      });
 
      $('.gmc').on('click', function () {
-         Give.giveCredit();
+         chrome.storage.local.get('user', function (result) {
+             var isEmpty = $.isEmptyObject(result);
+             if (!isEmpty) {
+                 Give.giveCredit();
+             } else {
+                 alert("Please login to give credit");
+             }
+         });
      });
  });
