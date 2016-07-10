@@ -110,7 +110,6 @@ jQuery(document).ready(function ($) {
                             credits: result[i].credits,
                             senderID: truncate(result[i].senderID)
                         };
-                        console.log(recCredited);
                         var html = Mustache.to_html(creditsRecievedTpl, recCredited);
                         $('#tab-3 table#creditsRecieved tbody').prepend(html);
                     }
@@ -122,7 +121,6 @@ jQuery(document).ready(function ($) {
 
             $('.submitComment').on('click', function () {
                 getCommentersNameAndPic(function (result) {
-                    console.log(result);
                     submitComment(result);
                 });
             });
@@ -152,9 +150,7 @@ jQuery(document).ready(function ($) {
                         senderPubKey: data.user.usrPubKey,
                         senderPrvKey: data.user.usrPrvKey
                     }
-                    cmnts.submitComment(data, function () {
-                        cmnts.displayComments(id);
-                    });
+                    cmnts.submitComment(data);
                 });
             }
 

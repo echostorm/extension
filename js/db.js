@@ -138,11 +138,11 @@ var db = {
             }
         });
     },
-    writeComment: function (trans) {
+    writeComment: function (trans, cb) {
         comments.insert(trans);
         comments.save(function (err) {
             if (!err) {
-                //console.log("comments save was successful");
+                cb(trans.recipientID);
             }
         });
     },

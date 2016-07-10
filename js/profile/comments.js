@@ -10,7 +10,9 @@ var cmnts = {
             senderSig: null
         }
         comment.senderSig = keys.sign(data.senderPrvKey, comment);
-        db.writeComment(comment);
+        db.writeComment(comment, function (id) {
+            cmnts.displayComments(id);
+        });
     },
     displayComments: function (id) {
         db.getComments(id, function (comments) {
