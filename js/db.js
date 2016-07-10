@@ -1,9 +1,11 @@
 var fdb = new ForerunnerDB();
 var gmc = fdb.db("give_me_credit_DB");
 var ratedItems = gmc.collection("rated_items");
+//should maybe rename gold_credits to credits_given
 var goldCredits = gmc.collection("gold_credits");
 var userData = gmc.collection("user_data");
 var comments = gmc.collection("comments");
+var goldCreditsBal = gmc.collection("gold_credits_balance");
 var transactions = gmc.collection("transactions");
 
 var db = {
@@ -201,6 +203,28 @@ var db = {
                     total += parseFloat(result[i].credits);
                 }
                 cb(total);
+            }
+        });
+    },
+    /* TO DO: The two functions below will be needed to update the balance of a users gold credits when sending transactions. */
+    updateGoldCreditsBal: function (userID, credits) {
+        goldCreditsBal.update({
+            userID: {
+                $eq: userID
+            }
+        }, {
+            credits: credits
+        });
+    },
+    getGoldCreditsBal: function (id) {
+        goldCreditsBal.load(function (err, tableStats, metaStats) {
+            if (!err) {
+                var result = goldCreditsBal.find({
+                    userID: {
+                        $eq: id
+                    }
+                });
+                console.log(result);
             }
         });
     },
