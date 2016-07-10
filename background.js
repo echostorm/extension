@@ -10,14 +10,14 @@ chrome.runtime.onMessage.addListener(function (request, sendResponse) {
         });
     }
 
-    if (request.type == 'balance') {
-        var silverCredBalance = {
-            'balance': request.balance
-        }
-        chrome.storage.local.set({
-            'silverCredBalance': silverCredBalance
-        });
-    }
+    /* if (request.type == 'balance') {
+         var silverCredBalance = {
+             'balance': request.balance
+         }
+         chrome.storage.local.set({
+             'silverCredBalance': silverCredBalance
+         });
+     }*/
 
     /* This request is sent by js/wallet/wallet.js. 
     When the user clicks on the login button (2nd tab on the top right popup), the user details are stored to chrome local storage. These details should be stored temporarily (to do). They will be accessed mainly be the profile js files. */

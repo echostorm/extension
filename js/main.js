@@ -4,36 +4,28 @@
      /* initialize and display the toolbar */
      Toolbar.init();
 
-     goldCredits.load(function (err, tableStats, metaStats) {
-         if (!err) {
-             //console.log("Loading gold_credits was successful");
+
+     //console.log("Load was successful");
+     /* get the current page percentage and display it on the toolbar */
+     db.getPagePercentage(function (percentage, numRecords) {
+         var $itemScore = jQuery('.gmc-item-score span');
+         if (numRecords != 0) {
+             $itemScore.html(percentage.toFixed(0));
+         }
+     });
+     /* get the total number silver credits earned by currently logged in user */
+     var $scrBal = $('.gmc-scr-value');
+     chrome.storage.local.get('user', function (result) {
+         var isEmpty = $.isEmptyObject(result);
+         if (!isEmpty) {
+             db.getScrBal(result.user.usrPubKey, function (count) {
+                 $scrBal.html(count);
+             });
+         } else {
+             console.log("you are not logged in");
          }
      });
 
-     ratedItems.load(function (err, tableStats, metaStats) {
-         if (!err) {
-             //console.log("Load was successful");
-             /* get the current page percentage and display it on the toolbar */
-             db.getPagePercentage(function (percentage, numRecords) {
-                 var $itemScore = jQuery('.gmc-item-score span');
-                 if (numRecords != 0) {
-                     $itemScore.html(percentage.toFixed(0));
-                 }
-             });
-             /* get the total number silver credits earned by currently logged in user */
-             var $scrBal = $('.gmc-scr-value');
-             chrome.storage.local.get('user', function (result) {
-                 var isEmpty = $.isEmptyObject(result);
-                 if (!isEmpty) {
-                     db.getScrBal(result.user.usrPubKey, function (count) {
-                         $scrBal.html(count);
-                     });
-                 } else {
-                     console.log("you are not logged in");
-                 }
-             });
-         }
-     });
 
      $('.gmc-vote-up').on('click', function () {
          chrome.storage.local.get('user', function (result) {

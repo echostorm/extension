@@ -20,13 +20,14 @@ var db = {
                 });
             }
         });
-        var balance = ratedItems.find({
+        var silverBal = ratedItems.find({
             senderID: {
                 $eq: trans.senderID
             }
         });
-        console.log(balance[0]);
-        cb(balance.length);
+        db.creditsGiven(trans.senderID, function (credits) {
+            cb(silverBal.length - credits);
+        });
     },
     getRatedItems: function (cb) {
         ratedItems.load(function (err, tableStats, metaStats) {
@@ -49,35 +50,52 @@ var db = {
         });
     },
     getPagePercentage: function (cb) {
-        var totRecs = ratedItems.find({
-            url: {
-                $eeq: window.location.href
+        ratedItems.load(function (err, tableStats, metaStats) {
+            if (!err) {
+                var totRecs = ratedItems.find({
+                    url: {
+                        $eeq: window.location.href
+                    }
+                });
+                var upVotes = ratedItems.find({
+                    $and: [{
+                        url: window.location.href
+    }, {
+                        isUpVote: {
+                            $eeq: true
+                        }
+    }]
+                });
+                score = (upVotes.length / totRecs.length) * 100;
+                cb(score, totRecs.length);
             }
         });
-        var upVotes = ratedItems.find({
-            $and: [{
-                url: window.location.href
-    }, {
-                isUpVote: {
-                    $eeq: true
-                }
-    }]
-        });
-        score = (upVotes.length / totRecs.length) * 100;
-        cb(score, totRecs.length);
     },
     getScrBal: function (senderID, cb) {
-        var silverBal = ratedItems.find({
-            senderID: {
-                $eq: senderID
+        ratedItems.load(function (err, tableStats, metaStats) {
+            if (!err) {
+                var silverBal = ratedItems.find({
+                    senderID: {
+                        $eq: senderID
+                    }
+                });
+                db.creditsGiven(senderID, function (credits) {
+                    cb(silverBal.length - credits);
+                });
             }
         });
-        var creditsGiven = goldCredits.find({
-            senderID: {
-                $eq: senderID
+    },
+    creditsGiven: function (id, cb) {
+        goldCredits.load(function (err, tableStats, metaStats) {
+            if (!err) {
+                var creditsGiven = goldCredits.find({
+                    senderID: {
+                        $eq: id
+                    }
+                });
+                cb(creditsGiven.length);
             }
         });
-        cb(silverBal.length - creditsGiven.length);
     },
     sendGoldCredits: function (trans) {
         goldCredits.insert(trans);
