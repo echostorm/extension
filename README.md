@@ -32,11 +32,8 @@ GiveMeCredit has three main features:-
 <li>A Gold credit will expire after 3 years</li>
 <li>You need a profile score greater than 3.5 in order to receive gold credits (and maybe take into account the scores of those who assigned you that score).</li>
 <li>Each user must have a custom vanity address</li>
-<hr />
-<p>The final implementation will most likely require a blockchain of sorts. I would like the application to function like a social network whereby users only sync data with trusted peers, thus forming a trust network. A trusted peer is a user who has a positive feedback score of 3.5 stars or above (out of 5 stars). You could also check that the users who have provided the feedback have 3.5 stars and above. Of course, this alone is not sufficient in preventing sybil attacks (i.e. users creating lots of fake profiles). However, if it is required that users have a custom 'vanity' address that can be checked (i.e. the first x characters match the last x characters), then it will take time for a user to create an account.</p><p>I'm interested in using CouchDB as a database. A CouchDB database can replicate data to other peers, and the integrity of that data can be verified inside the database itself.</p><p>
-As also mentioned, i'd like silver credits to expire. There will also be a limit on how many silver credits a person can hold at any one time and a limit to how many silver credits that can be earned in a given timeframe. This would make sense since silver credits are not meant to have any value. They are used to assign value to items and to impose an extra layer of disipline to the money creation process. Also, the data provided by rating content could be very useful for developing a search engine. By allowing silver credits to expire it ensures a turnover of fresh content, thus preventing monopolies. 
-</p>
 </ul>
+
 <hr />
 <h4>STEP 1:</h4>
 <p>Click on the icon (top right) and register.</p>
@@ -51,7 +48,7 @@ As also mentioned, i'd like silver credits to expire. There will also be a limit
 
 <h4>STEP 4:</h4>
 
-<p>Earn a Silver Credit by rating this page using the toolbar below.</p>
+<p>Earn a Silver Credit by rating this page using the toolbar below. NOTE: Normally you would needs at least 10 silver credits in order to give 1 gold credit but for testing purposes this check has been omitted.</p>
 <p>You can check the console to see the verification process. Each time you do anything such as setup an account, vote or give credit to someone, a new signature is created. However, for transactions, this signature will be the transactionID. I did it this way in order to reduce the transaction size. It may take a few seconds to create the signature. It's sort of like a 'proof-of-work' as it must find a signature where the last x number of characters must match the first x number of characters.</p>
 
 
