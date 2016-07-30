@@ -14,13 +14,13 @@
 GiveMeCredit has three main features:-
 <ul>
 <li>
-- A toolbar for rating content
+A toolbar for rating content
 </li>
 <li>
-- A GiveMeCredit widget. You simply paste your link somewhere (i.e. http://gmc@0481f1010a5b0147e764aa59741ef923396322e.com). This is converted into a widget by the extension and allows you to receive credits.
+A GiveMeCredit widget. You simply paste your link somewhere (i.e. http://gmc@0481f1010a5b0147e764aa59741ef923396322e.com), which is converted into a widget by the extension and allows you to receive credits.
 </li>
 <li>
-- A profile-based trust network
+A public profile
 </li>
 </ul>
 <p>So basically, when you rate content, you earn silver credits. And when you donate those silver credits to someone else, they become gold credits. There are lots of rules but here are a few to give you an idea :-</p>
