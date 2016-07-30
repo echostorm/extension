@@ -23,8 +23,11 @@ GiveMeCredit has three main features:-
 </ul>
 <p>So basically, when you rate content, you earn silver credits. And when you donate those silver credits to someone else, they become gold credits. There are lots of rules but here are a few to give you an idea :-</p>
 <ul>
-<li>- The value of a gold credit is relative to the current page score. For example, if your page/content has a score of 75%, then the value of the credit that you receive will be ©0.75.</li>
-<li>- Silver credits will expire after a set period of time.</li>
+<li>You will need to earn 10 silver credits in order to give 1 gold credit</li>
+<li>The value of a gold credit is relative to the current page score. For example, if your page/content has a score of 75%, then the value of the credit that you receive will be ©0.75.</li>
+<li>Your item will need at least 20 up votes in order to receive gold credits</li>
+<li>A Silver credit will expire after 3 months</li>
+<li>A Gold credit will expire after 3 years</li>
 </ul>
 <p>And to help prevent sybil attacks...</p>
 
