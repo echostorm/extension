@@ -27,6 +27,7 @@ A public profile
 <ul>
 <li>You will need to earn 10 silver credits in order to give 1 gold credit</li>
 <li>The value of a gold credit is relative to the current page score. For example, if your page/content has a score of 75%, then the value of the credit that you receive will be ©0.75.</li>
+<li>Likewise, the value of credits you give will be relative to your user profile score. For example, let's say that the item has a score of 90% and your user profile has a score of 100%. If you give 1 silver credit, then the value of the gold credit the item receives is 0.90. However, if you have a user score of 90%, then the value of the credit the item receives will be 0.81</li>
 <li>Your item will need at least 20 up votes in order to receive gold credits</li>
 <li>A Silver credit will expire after 3 months</li>
 <li>A Gold credit will expire after 3 years</li>
